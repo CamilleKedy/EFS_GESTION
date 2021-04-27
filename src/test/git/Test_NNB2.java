@@ -1,17 +1,17 @@
 package test.git;
 
-public class Test_NNB {
+public class Test_NNB2 {
 	
 	
 	public void bonjour() {
-		System.out.println( "Le max ultime" );
+		System.out.println( "Bonjoour" );
 	}
 	
 	
 	private String[] adresses = {
 			"14 Rue Mozart, Paris",
-			"43 Rue Sainte Anne, Limoges", 
-			"16 Rue Jean Antoine de Baïf, Limoges",
+			"77 Rue Picasso, Toulouse", 
+			"53 Rue des fleurs, Limoges",
 	};
 
 	
