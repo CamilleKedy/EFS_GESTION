@@ -3,6 +3,7 @@ SET search_path TO projet;
 
 -- Schéma
 
+
 DROP SCHEMA IF EXISTS efsGestion CASCADE;
 CREATE SCHEMA efsGestion AUTHORIZATION projet;
 GRANT ALL PRIVILEGES ON SCHEMA efsGestion TO projet;
