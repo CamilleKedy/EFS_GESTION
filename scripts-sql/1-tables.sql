@@ -4,9 +4,9 @@ SET search_path TO projet;
 -- Schéma
 
 
-DROP SCHEMA IF EXISTS efsGestion CASCADE;
-CREATE SCHEMA efsGestion AUTHORIZATION projet;
-GRANT ALL PRIVILEGES ON SCHEMA efsGestion TO projet;
+DROP SCHEMA IF EXISTS projet CASCADE;
+CREATE SCHEMA projet AUTHORIZATION projet;
+GRANT ALL PRIVILEGES ON SCHEMA projet TO projet;
 
 
 -- Tables
@@ -116,10 +116,4 @@ CREATE TABLE materielDeCollecte(
 );
 
 
--- Vues
 
-CREATE VIEW v_compte_avec_roles AS
-	SELECT c.*, ARRAY_AGG( r.role ) AS roles
-	FROM compte c
-	LEFT JOIN role r ON c.idcompte = r.idcompte
-	GROUP BY c.idcompte;
