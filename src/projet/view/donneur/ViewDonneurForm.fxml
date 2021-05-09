@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="569.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.donneur.ControllerDonneurForm">
+   <center>
+      <TabPane prefHeight="272.0" prefWidth="415.0" style="-fx-background-color: #FFFAAA;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Général">
+               <content>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="299.0" prefWidth="124.0" spacing="16.0">
+                           <children>
+                              <Label text="Id :" />
+                              <Label layoutX="10.0" layoutY="10.0" text="Nom: " />
+                              <Label layoutX="10.0" layoutY="27.0" text="Prenom :" />
+                              <Label layoutX="10.0" layoutY="61.0" text="Ville :" />
+                              <Label layoutX="10.0" layoutY="78.0" text="Adresse :" />
+                              <Label text="Date de naissance :" />
+                              <Label layoutX="10.0" layoutY="95.0" text="Demande de Carte :" />
+                           </children>
+                           <HBox.margin>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="6.0" />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                           </padding>
+                        </VBox>
+                        <VBox prefHeight="267.0" prefWidth="284.0" spacing="8.0">
+                           <children>
+                              <TextField fx:id="textFieldId" />
+                              <TextField fx:id="textFieldNom" layoutX="10.0" layoutY="10.0" />
+                              <TextField fx:id="textFieldPrenom" layoutX="10.0" layoutY="35.0" />
+                              <TextField fx:id="textFieldVille" layoutX="10.0" layoutY="60.0" />
+                              <TextField fx:id="textFieldAdresse" layoutX="10.0" layoutY="85.0" prefHeight="25.0" prefWidth="263.0" />
+                              <DatePicker fx:id="datePickerDdn" />
+                              <ComboBox fx:id="comboBoxCarte" layoutX="20.0" layoutY="158.0" prefHeight="25.0" prefWidth="84.0" />
+                              <HBox alignment="BOTTOM_CENTER" prefHeight="66.0" prefWidth="243.0" spacing="40.0">
+                                 <children>
+                                    <Button fx:id="buttonEnregistrerDonneur" mnemonicParsing="false" text="Enregistrer" />
+                                    <Button fx:id="buttonAnnulerE1" mnemonicParsing="false" text="Annuler" />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="3.0" left="10.0" right="30.0" top="3.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </content>
+          </Tab>
+          <Tab text="Dossier Medical">
+               <content>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="299.0" prefWidth="124.0" spacing="16.0">
+                           <children>
+                              <Label text="Id_donneur :" />
+                              <Label layoutX="10.0" layoutY="10.0" text="Poids :" />
+                              <Label layoutX="10.0" layoutY="27.0" text="Groupe sanguin :" />
+                              <Label layoutX="10.0" layoutY="61.0" text="Rhésus :" />
+                              <Label layoutX="10.0" layoutY="78.0" text="Inaptiude : " />
+                              <Label />
+                           </children>
+                           <HBox.margin>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="6.0" />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                           </padding>
+                        </VBox>
+                        <VBox prefHeight="267.0" prefWidth="284.0" spacing="8.0">
+                           <children>
+                              <TextField fx:id="textFieldID1" />
+                              <TextField fx:id="textFieldPoids" layoutX="10.0" layoutY="10.0" />
+                              <ComboBox fx:id="comboBoxGSanguin" prefHeight="25.0" prefWidth="81.0" />
+                              <ComboBox fx:id="comboBoxRhesus" prefHeight="25.0" prefWidth="81.0" />
+                              <CheckBox fx:id="checkBoxAptitude" mnemonicParsing="false" />
+                              <TextArea fx:id="textAreaInaptitude" prefHeight="200.0" prefWidth="200.0" />
+                              <HBox alignment="BOTTOM_CENTER" prefHeight="66.0" prefWidth="243.0" spacing="40.0">
+                                 <children>
+                                    <Button fx:id="buttonEnregistrerDossier" mnemonicParsing="false" text="Enregistrer" />
+                                    <Button fx:id="buttonAnnulerE2" mnemonicParsing="false" text="Annuler" />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="3.0" left="10.0" right="30.0" top="3.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+   <bottom>
+      <VBox prefHeight="50.0" prefWidth="569.0" BorderPane.alignment="CENTER" />
+   </bottom>
+   <left>
+      <VBox prefHeight="272.0" prefWidth="79.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <VBox prefHeight="272.0" prefWidth="76.0" BorderPane.alignment="CENTER" />
+   </right>
+   <top>
+      <HBox prefHeight="80.0" prefWidth="565.0">
+         <children>
+            <ImageView fitHeight="72.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/Logo-ESF_Gestion%20blanc.png" />
+               </image>
+            </ImageView>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </padding>
+      </HBox>
+   </top>
+</BorderPane>

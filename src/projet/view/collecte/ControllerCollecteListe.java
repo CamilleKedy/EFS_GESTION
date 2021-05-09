@@ -44,7 +44,7 @@ public class ControllerCollecteListe extends Controller {
 		listView.setItems( modelMemo.getListe() );
 		
 		// Cell factory
-		UtilFX.setCellFactory( listView, item -> item.getTitre() );
+		UtilFX.setCellFactory( listView, item -> ((Memo) item).getTitre() );
 		
 		// Configuraiton des boutons
 		listView.getSelectionModel().selectedItemProperty().addListener(
