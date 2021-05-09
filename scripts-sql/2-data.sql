@@ -73,9 +73,9 @@ INSERT INTO dossierMedical (id_dossier, groupe_sanguin, rhesus, poids, inaptitud
 -- Materiel
   
 INSERT INTO Materiel (id_materiel, quantite) VALUES 
-  (1,   '100' ),
-  (2,   '25'),
-  (3,   '39');
+  (1,   100 ),
+  (2,   25),
+  (3,   39);
 
 --ALTER TABLE Materiel ALTER COLUMN id_materiel RESTART WITH 4;
 
