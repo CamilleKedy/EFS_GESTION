@@ -1,4 +1,4 @@
-SET search_path TO projet;
+/*SET search_path TO projet;
 
 
 -- Supprime toutes les fonctions du schéma
@@ -127,4 +127,4 @@ BEGIN
     WHERE pseudo = p_pseudo
       AND idcompte <> P_idcompte;
 END;
-$code$ LANGUAGE plpgsql;
+$code$ LANGUAGE plpgsql;*/
