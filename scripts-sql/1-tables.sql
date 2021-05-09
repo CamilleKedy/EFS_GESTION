@@ -116,5 +116,4 @@ CREATE TABLE materielDeCollecte(
 );
 
 
--- Vues
 
