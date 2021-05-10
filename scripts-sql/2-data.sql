@@ -51,50 +51,50 @@ INSERT INTO Site_de_collecte (id_site, ville, nbr_lits, adresse ) VALUES
 
 -- Connexion
 
-INSERT INTO Connexion (IdConnexion, login,  motDePasse, role/*, id_personnel*/) VALUES 
-  ( 1, 'cardinal',  'cardinal',   'Gestionnaire'/*, 2*/ ),
-  ( 2, 'nawel', 'nawel',  'Sécrétaire'/*, 3 */);
+INSERT INTO Connexion (IdConnexion, login,  motDePasse, role, id_personnel) VALUES 
+  ( 1, 'cardinal',  'cardinal',   'Gestionnaire', 2 ),
+  ( 2, 'nawel', 'nawel',  'Sécrétaire', 3 );
 
 --ALTER TABLE Connexion ALTER COLUMN IdConnexion RESTART WITH 3;
 
 
 -- dossierMedical
 
-INSERT INTO dossierMedical (id_dossier, groupe_sanguin, rhesus, poids, inaptitude_temporaire/*, id_donneur*/ ) VALUES 
-  ( 1, 'A',   'positif',  85,   'A fait un don il y''a 6 jours.'/*, 1*/ ),
-  ( 2, 'AB',  'negatif',  57,   NULL/*, 2*/ ),
-  ( 3, 'O',   'negatif',  89,   'A fait un don il y''a 3 semaines.'/*, 3*/ ),
-  ( 4, 'O',   NULL,       44,   NULL/*, 4 */),
-  ( 5, 'B',   'positif',  60,   NULL/*, 5*/ );
+INSERT INTO dossierMedical (id_dossier, groupe_sanguin, rhesus, poids, inaptitude_temporaire, id_donneur ) VALUES 
+  ( 1, 'A',   'positif',  85,   'A fait un don il y''a 6 jours.', 1 ),
+  ( 2, 'AB',  'negatif',  57,   NULL, 2 ),
+  ( 3, 'O',   'negatif',  89,   'A fait un don il y''a 3 semaines.', 3 ),
+  ( 4, 'O',   NULL,       44,   NULL, 4 ),
+  ( 5, 'B',   'positif',  60,   NULL, 5 );
 
 --ALTER TABLE dossierMedical ALTER COLUMN id_dossier RESTART WITH 6;
 
 
 -- Materiel
   
-INSERT INTO Materiel (id_materiel, quantite) VALUES 
-  (1,   100 ),
-  (2,   25),
-  (3,   39);
+INSERT INTO Materiel (id_materiel, nom_materiel) VALUES 
+  (1,   'SERINGUE' ),
+  (2,   'Gants'),
+  (3,   'cache nez');
 
 --ALTER TABLE Materiel ALTER COLUMN id_materiel RESTART WITH 4;
 
 
 -- Collecte
 
-INSERT INTO Collecte (id_collecte, qte_collation, date_debut, date_fin, nbre_infirmiers, nbre_medecins, nbre_secretaire, nbre_agents_collation, horaire_debut, horaire_fin/*, id_site*/) VALUES 
-  ( 1, 100, {d '2022-01-03'}, {d '2022-01-31'}, 1, 1, 1, 1, '8:00:00', '17:30:00'/*, 1 */);
+INSERT INTO Collecte (id_collecte, qte_collation, date_debut, date_fin, nbre_infirmiers, nbre_medecins, nbre_secretaire, nbre_agents_collation, horaire_debut, horaire_fin, id_site) VALUES 
+  ( 1, 100, {d '2022-01-03'}, {d '2022-01-31'}, 1, 1, 1, 1, '8:00:00', '17:30:00', 1 );
 
 --ALTER TABLE Collecte ALTER COLUMN id_collecte RESTART WITH 2;
 
 
 -- RDV
 
-INSERT INTO RDV ( id_rdv, heure_rdv, prise_de_sang, date_rdv, qte_sang_donnee/*, id_collecte, id_donneur*/ ) VALUES 
-  ( 1, '08:00:00', 'oui', {d '2022-01-04' }, 450/*, 1, 1*/),
-  ( 2, '09:00:00', 'oui', {d '2022-01-04' }, 420/*, 1, 2*/),
-  ( 3, '15:00:00', 'non', {d '2022-01-13' }, NULL/*, 1, 5*/),
-  ( 4, '08:00:00', 'oui', {d '2022-01-05' }, 480/*, 1, 3*/);
+INSERT INTO RDV ( id_rdv, heure_rdv, prise_de_sang, date_rdv, qte_sang_donnee, id_collecte, id_donneur ) VALUES 
+  ( 1, '08:00:00', 'oui', {d '2022-01-04' }, 450, 1, 1),
+  ( 2, '09:00:00', 'oui', {d '2022-01-04' }, 420, 1, 2),
+  ( 3, '15:00:00', 'non', {d '2022-01-13' }, NULL, 1, 5),
+  ( 4, '08:00:00', 'oui', {d '2022-01-05' }, 480, 1, 3);
 
 ALTER TABLE RDV ALTER COLUMN id_rdv RESTART WITH 5;
 
