@@ -9,6 +9,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -16,24 +17,26 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.memo.ControllerMemoForm">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.memo.ControllerMemoForm">
    <children>
-      <Label alignment="CENTER" styleClass="titre-vue" text="Mémo" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
-      <HBox alignment="CENTER" layoutX="59.0" layoutY="125.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="125.0">
+      <HBox alignment="CENTER" layoutX="59.0" layoutY="118.0" prefHeight="412.0" prefWidth="600.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="118.0">
          <children>
-            <TabPane style="-fx-border-color: lightgray;">
+            <TabPane prefHeight="412.0" prefWidth="538.0" style="-fx-border-color: lightgray;">
                <tabs>
-                  <Tab closable="false" text="Infos">
+                  <Tab closable="false" text="Détails">
                      <content>
                         <HBox alignment="CENTER" fillHeight="false" prefHeight="374.0" prefWidth="456.0">
                            <children>
-                              <GridPane maxWidth="1.7976931348623157E308" prefHeight="155.0" prefWidth="351.0">
+                              <GridPane maxWidth="1.7976931348623157E308" prefHeight="316.0" prefWidth="416.0">
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.0" minWidth="100.0" prefWidth="127.0" />
                                     <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="168.0" />
                                  </columnConstraints>
                                  <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -49,6 +52,10 @@
                                     <TextField prefHeight="31.0" prefWidth="68.0" GridPane.columnIndex="1" />
                                     <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField prefHeight="31.0" prefWidth="70.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField prefHeight="31.0" prefWidth="70.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label text="Lieu de collecte" GridPane.rowIndex="5" />
+                                    <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                  </children>
                                  <padding>
                                     <Insets left="5.0" />
@@ -58,54 +65,95 @@
                         </HBox>
                      </content>
                   </Tab>
-                  <Tab closable="false" text="Affectation">
+                  <Tab closable="false" text="Personnel">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="522.0">
                            <children>
-                              <GridPane layoutX="8.0" layoutY="6.0" prefHeight="150.0" prefWidth="271.0">
+                              <GridPane alignment="CENTER" layoutX="22.0" layoutY="6.0" prefHeight="352.0" prefWidth="494.0">
                                 <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="83.0" minWidth="10.0" prefWidth="61.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.0" minWidth="10.0" prefWidth="149.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.0" minWidth="10.0" prefWidth="61.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="112.0" minWidth="10.0" prefWidth="96.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.0" minWidth="10.0" prefWidth="208.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="221.0" minWidth="10.0" prefWidth="175.0" />
                                 </columnConstraints>
                                 <rowConstraints>
                                   <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
-                                  <RowConstraints maxHeight="124.0" minHeight="10.0" prefHeight="112.0" valignment="TOP" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="112.0" valignment="TOP" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
                                     <Label text="Catégorie :" />
-                                    <ComboBox fx:id="comboBoxCategorie" prefWidth="150.0" GridPane.columnIndex="1" />
-                                    <Button mnemonicParsing="false" onAction="#doSupprimerCategorie" text="Suppr." GridPane.columnIndex="2">
-                                       <GridPane.margin>
-                                          <Insets left="10.0" />
-                                       </GridPane.margin>
-                                    </Button>
-                                    <Label text="Personnes :" GridPane.rowIndex="1" />
-                                    <ListView fx:id="listViewPersonnes" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                    <ComboBox prefWidth="150.0" GridPane.columnIndex="1" />
+                                    <HBox prefHeight="219.0" prefWidth="462.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
                                        <children>
-                                          <Button mnemonicParsing="false" onAction="#doAjouterPersonnes" text="Ajout." />
-                                          <Button mnemonicParsing="false" onAction="#doSupprimerPersonnes" text="Suppr." />
+                                          <GridPane prefHeight="253.0" prefWidth="486.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.0" minWidth="10.0" prefWidth="179.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="134.0" minWidth="10.0" prefWidth="84.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.0" minWidth="10.0" prefWidth="179.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <ListView prefHeight="200.0" prefWidth="200.0" />
+                                                <ListView prefHeight="219.0" prefWidth="180.0" GridPane.columnIndex="2" />
+                                                <VBox alignment="CENTER" prefHeight="245.0" prefWidth="128.0" spacing="10.0" GridPane.columnIndex="1">
+                                                   <children>
+                                                      <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" text="Ajouter" />
+                                                      <Button mnemonicParsing="false" text="Supprimer" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </GridPane>
                                        </children>
-                                    </VBox>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.columnIndex="2">
+                                       <children>
+                                          <Label text="Quantité :" />
+                                          <TextField prefHeight="31.0" prefWidth="70.0" />
+                                       </children>
+                                    </HBox>
                                  </children>
                               </GridPane>
                            </children>
                         </AnchorPane>
                     </content>
                   </Tab>
-                  <Tab closable="false" text="Schéma">
+                  <Tab closable="false" text="Matériel">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <ImageView fx:id="imageViewSchema" fitHeight="156.0" fitWidth="210.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                              <VBox alignment="CENTER" layoutX="214.0" layoutY="5.0" prefHeight="157.0" prefWidth="66.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="214.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <HBox layoutX="22.0" layoutY="25.0" prefHeight="267.0" prefWidth="504.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#doChoisirSchema" text="Choisir" />
-                                    <Button fx:id="buttonOuvrirSchema" mnemonicParsing="false" onAction="#doOuvrirSchema" text="Ouvrir" />
-                                    <Button mnemonicParsing="false" onAction="#doSupprimerSchema" text="Suppr." />
+                                    <GridPane prefHeight="267.0" prefWidth="501.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.0" minWidth="10.0" prefWidth="179.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="134.0" minWidth="10.0" prefWidth="84.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.0" minWidth="10.0" prefWidth="179.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <ListView prefHeight="200.0" prefWidth="200.0" />
+                                          <ListView prefHeight="219.0" prefWidth="180.0" GridPane.columnIndex="2" />
+                                          <VBox alignment="CENTER" prefHeight="245.0" prefWidth="128.0" spacing="10.0" GridPane.columnIndex="1">
+                                             <children>
+                                                <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" text="Ajouter" />
+                                                <Button mnemonicParsing="false" text="Supprimer" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </GridPane>
                                  </children>
-                              </VBox>
+                              </HBox>
+                              <HBox layoutX="20.0" layoutY="320.0" prefHeight="44.0" prefWidth="493.0" spacing="30.0">
+                                 <children>
+                                    <Label text="Quantité à ajouter" />
+                                    <TextField prefHeight="31.0" prefWidth="75.0" />
+                                    <Label text="Quantité restante" />
+                                    <TextField prefHeight="31.0" prefWidth="75.0" />
+                                 </children>
+                              </HBox>
                            </children>
                         </AnchorPane>
                     </content>
@@ -117,10 +165,39 @@
             </TabPane>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="60.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <HBox alignment="CENTER" prefHeight="71.0" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Button defaultButton="true" mnemonicParsing="false" onAction="#doValider" prefHeight="25.0" prefWidth="60.0" text="OK" />
-            <Button fx:id="buttonAnnuler" cancelButton="true" mnemonicParsing="false" onAction="#doAnnuler" text="Annuler" />
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#doValider" prefHeight="38.0" prefWidth="75.0" style="-fx-background-color: #162c53;" text="OK" textFill="WHITE" />
+            <Button fx:id="buttonAnnuler" cancelButton="true" mnemonicParsing="false" onAction="#doAnnuler" prefHeight="38.0" prefWidth="90.0" style="-fx-background-color: #ea302b;" text="Annuler" textFill="WHITE" />
+         </children>
+      </HBox>
+      <HBox layoutX="-1.0" layoutY="1.0" prefHeight="108.0" prefWidth="600.0">
+         <children>
+            <ImageView fitHeight="112.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/Logo-ESF_Gestion%20blanc.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin>
+            </ImageView>
+            <VBox alignment="CENTER_RIGHT" prefHeight="112.0" prefWidth="422.0">
+               <children>
+                  <Label text="COLLECTES" textFill="#162c53">
+                     <font>
+                        <Font name="Rockwell Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <Line endX="100.0" startX="-335.54705810546875" startY="1.0001716613769531" stroke="#ea302b" strokeWidth="5.0">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Line>
+               </children>
+               <padding>
+                  <Insets top="40.0" />
+               </padding>
+            </VBox>
          </children>
       </HBox>
    </children>
