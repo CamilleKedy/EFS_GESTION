@@ -23,7 +23,7 @@ INSERT INTO Personnel (id_personnel, nom, prenom, adresse, profession ) VALUES
   (4, 'TCHAMGOUE', 'Yvana', '21 rue JFK', 'Sécrétaire' ),
   (5, 'NGABMEN', 'Benjamin', '16 rue JAB', 'Médecin' );
 
---ALTER TABLE Personnel ALTER COLUMN id_personnel RESTART WITH 6;
+ALTER TABLE Personnel ALTER COLUMN id_personnel RESTART WITH 6;
 
 
 -- Donneur
@@ -35,7 +35,7 @@ INSERT INTO Donneur (id_donneur, nom_donneur, prenom_donneur, date_naissance, vi
   ( 4, 'FONDRAT',   'Karin',      {d '1990-06-17' }, 'Paris',       '20 rue ALG',     'non' ),
   ( 5, 'TRUDEAU',   'Blandine',   {d '1985-11-16' }, 'Brest',       '32 rue RR',      'oui' );
 
---ALTER TABLE Donneur ALTER COLUMN id_donneur RESTART WITH 6;
+ALTER TABLE Donneur ALTER COLUMN id_donneur RESTART WITH 6;
 
 -- Site_de_collecte
   
@@ -46,7 +46,7 @@ INSERT INTO Site_de_collecte (id_site, ville, nbr_lits, adresse ) VALUES
   (4, 'Paris',    29,   '92 avenue KKT' ),
   (5, 'Toulouse', 18,   '17 impasse StA' );
 
---ALTER TABLE Site_de_collecte ALTER COLUMN id_site RESTART WITH 6;
+ALTER TABLE Site_de_collecte ALTER COLUMN id_site RESTART WITH 6;
 
 
 -- Connexion
@@ -55,7 +55,7 @@ INSERT INTO Connexion (IdConnexion, login,  motDePasse, role, id_personnel) VALU
   ( 1, 'cardinal',  'cardinal',   'Gestionnaire', 2 ),
   ( 2, 'nawel', 'nawel',  'Sécrétaire', 3 );
 
---ALTER TABLE Connexion ALTER COLUMN IdConnexion RESTART WITH 3;
+ALTER TABLE Connexion ALTER COLUMN IdConnexion RESTART WITH 3;
 
 
 -- dossierMedical
@@ -67,7 +67,7 @@ INSERT INTO dossierMedical (id_dossier, groupe_sanguin, rhesus, poids, inaptitud
   ( 4, 'O',   NULL,       44,   NULL, 4 ),
   ( 5, 'B',   'positif',  60,   NULL, 5 );
 
---ALTER TABLE dossierMedical ALTER COLUMN id_dossier RESTART WITH 6;
+ALTER TABLE dossierMedical ALTER COLUMN id_dossier RESTART WITH 6;
 
 
 -- Materiel
@@ -77,7 +77,7 @@ INSERT INTO Materiel (id_materiel, nom_materiel) VALUES
   (2,   'Gants'),
   (3,   'cache nez');
 
---ALTER TABLE Materiel ALTER COLUMN id_materiel RESTART WITH 4;
+ALTER TABLE Materiel ALTER COLUMN id_materiel RESTART WITH 4;
 
 
 -- Collecte
@@ -85,7 +85,7 @@ INSERT INTO Materiel (id_materiel, nom_materiel) VALUES
 INSERT INTO Collecte (id_collecte, qte_collation, date_debut, date_fin, nbre_infirmiers, nbre_medecins, nbre_secretaire, nbre_agents_collation, horaire_debut, horaire_fin, id_site) VALUES 
   ( 1, 100, {d '2022-01-03'}, {d '2022-01-31'}, 1, 1, 1, 1, '8:00:00', '17:30:00', 1 );
 
---ALTER TABLE Collecte ALTER COLUMN id_collecte RESTART WITH 2;
+ALTER TABLE Collecte ALTER COLUMN id_collecte RESTART WITH 2;
 
 
 -- RDV
@@ -100,14 +100,20 @@ ALTER TABLE RDV ALTER COLUMN id_rdv RESTART WITH 5;
 
 
 -- personnelDeCollecte
- /* INSERT INTO personnelDeCollecte (id_personnel, id_collecte) VALUES 
-  (1, '100' ),
-  (2, '25'),
-  (3, '39');*/
+
+ INSERT INTO personnelDeCollecte (id_personnel, id_collecte) VALUES 
+  (2, 1 ),
+  (3, 1),
+  (4, 1),
+  (5, 1);
+
+
 
 -- materielDeCollecte
  
---INSERT INTO materielDeCollecte (/*id_collecte, id_materiel, */quantite) VALUES 
---  (10);
+INSERT INTO materielDeCollecte (id_collecte, id_materiel, quantite) VALUES 
+  (1, 2, 100),
+  (1, 1, 125),
+  (1, 3, 200);
   
 
