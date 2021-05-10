@@ -108,7 +108,7 @@ public class DaoCollecte {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "DELETE FROM collecte WHERE idcollecte = ? ";
+			sql = "DELETE FROM collecte WHERE id_collecte = ? ";
 			stmt = cn.prepareStatement( sql );
 			stmt.setObject( 1, id_collecte );
 			stmt.executeUpdate();
@@ -163,7 +163,7 @@ public class DaoCollecte {
 
 			List<Collecte> collectes = new ArrayList<>();
 			while (rs.next()) {
-				collectes.add( construireCollecte( rs, false ) );
+				collectes.add( construireCollecte( rs, true ) );
 			}
 			return collectes;
 
@@ -214,6 +214,10 @@ public class DaoCollecte {
 		collecte.setHoraire_fin(rs.getObject("horaire_fin", LocalTime.class ) );
 		if ( flagComplet ) {
 			collecte.setSite_de_collecte( daoSite_de_collecte.retrouver( rs.getObject("id_site", Integer.class) ) );
+		}
+		else
+		{
+			System.out.println("Flag incomplet");
 		}
 
 		return collecte;

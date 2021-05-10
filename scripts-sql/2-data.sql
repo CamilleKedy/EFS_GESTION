@@ -83,9 +83,10 @@ ALTER TABLE Materiel ALTER COLUMN id_materiel RESTART WITH 4;
 -- Collecte
 
 INSERT INTO Collecte (id_collecte, qte_collation, date_debut, date_fin, nbre_infirmiers, nbre_medecins, nbre_secretaire, nbre_agents_collation, horaire_debut, horaire_fin, id_site) VALUES 
-  ( 1, 100, {d '2022-01-03'}, {d '2022-01-31'}, 1, 1, 1, 1, '8:00:00', '17:30:00', 1 );
+  ( 1, 100, {d '2022-01-03'}, {d '2022-01-31'}, 1, 1, 1, 1, '8:00:00', '17:30:00', 1 ),
+  ( 2, 200, {d '2022-04-07'}, {d '2022-05-10'}, 5, 2, 4, 2, '9:00:00', '17:30:00', 3 );
 
-ALTER TABLE Collecte ALTER COLUMN id_collecte RESTART WITH 2;
+ALTER TABLE Collecte ALTER COLUMN id_collecte RESTART WITH 3;
 
 
 -- RDV

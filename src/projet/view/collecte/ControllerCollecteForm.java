@@ -32,7 +32,7 @@ import projet.view.EnumView;
 import projet.view.personne.ModelCategorie;
 
 
-public class ControllerCollecteForm extends Controller {
+/*public class ControllerCollecteForm extends Controller {
 
 	
 	// Composants de la vue
@@ -197,3 +197,4 @@ public class ControllerCollecteForm extends Controller {
 	}	
 
 }
+*/

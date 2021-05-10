@@ -64,7 +64,7 @@ public class DaoSite_de_collecte {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "UPDATE site_de_collecte SET ville = ?, nbr_lits= ?, adresse= ? WHERE idsite_de_collecte =  ?";
+			sql = "UPDATE site_de_collecte SET ville = ?, nbr_lits= ?, adresse= ? WHERE id_site =  ?";
 			stmt = cn.prepareStatement( sql );
 			stmt.setObject( 1, site_de_collecte.getVille() );
 			stmt.setObject( 2, site_de_collecte.getNbr_lits());
@@ -88,7 +88,7 @@ public class DaoSite_de_collecte {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "DELETE FROM site_de_collecte WHERE idsite_de_collecte = ? ";
+			sql = "DELETE FROM site_de_collecte WHERE id_site = ? ";
 			stmt = cn.prepareStatement( sql );
 			stmt.setObject( 1, idSite_de_collecte );
 			stmt.executeUpdate();
@@ -110,7 +110,7 @@ public class DaoSite_de_collecte {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "SELECT * FROM site_de_collecte WHERE idsite_de_collecte = ?";
+			sql = "SELECT * FROM site_de_collecte WHERE id_site = ?";
 			stmt = cn.prepareStatement( sql );
 			stmt.setObject(1, idSite_de_collecte);
 			rs = stmt.executeQuery();
@@ -159,7 +159,7 @@ public class DaoSite_de_collecte {
 	
 	private Site_de_collecte construireSite_de_collecte( ResultSet rs ) throws SQLException {
 		Site_de_collecte site_de_collecte = new Site_de_collecte();
-		site_de_collecte.setId_site_de_collecte( rs.getObject( "idsite_de_collecte", Integer.class ) );
+		site_de_collecte.setId_site_de_collecte( rs.getObject( "id_site", Integer.class ) );
 		site_de_collecte.setVille( rs.getObject( "ville", String.class ) );
 		site_de_collecte.setNbr_lits( rs.getObject( "nbr_lits", Integer.class ) );
 		site_de_collecte.setAdresse( rs.getObject( "adresse", String.class ) );
