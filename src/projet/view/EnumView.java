@@ -20,6 +20,8 @@ public enum EnumView implements IEnumView {
 	PersonneEtatParCategorie( "personne/ViewPersonneEtatParCategorie.fxml" ),
 	MemoListe			( "memo/ViewMemoListe.fxml" ),
 	MemoForm			( "memo/ViewMemoForm.fxml" ),
+	CollecteListe		( "collecte/ViewCollecteListe.fxml" ),
+	CollecteForm		( "collecte/ViewCollecteForm.fxml" ),
 	MemoAjoutPersonnes	( "memo/ViewMemoAjoutPersonnes.fxml" ),
 	ServiceListe		( "service/ViewServiceListe.fxml" ),
 	ServiceForm			( "service/ViewServiceForm.fxml" ),

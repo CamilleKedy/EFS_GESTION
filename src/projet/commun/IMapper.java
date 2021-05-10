@@ -6,6 +6,7 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 import projet.data.Categorie;
+import projet.data.Collecte;
 import projet.data.Compte;
 import projet.data.Donneur;
 import projet.data.DossierMedical;
@@ -34,5 +35,7 @@ public interface IMapper {
 	Service update( @MappingTarget Service target, Service source );
 
 	DossierMedical update(@MappingTarget DossierMedical target, DossierMedical source);
+	
+	Collecte update( @MappingTarget Collecte target, Collecte source  );
 	
 }

@@ -18,9 +18,11 @@ import javafx.scene.image.Image;
 import jfox.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
-import projet.dao.DaoMemo;
+import projet.dao.DaoCollecte;
 import projet.dao.DaoPersonne;
-import projet.data.Memo;
+import projet.dao.DaoSite_de_collecte;
+import projet.data.Collecte;
+import projet.data.Collecte;
 import projet.data.Personne;
 import projet.view.systeme.ModelConfig;
 
@@ -30,94 +32,72 @@ public class ModelCollecte  {
 	
 	// Données observables 
 	
-	private final ObservableList<Memo> liste = FXCollections.observableArrayList(); 
+	private final ObservableList<Collecte> liste = FXCollections.observableArrayList(); 
 	
-	private final Memo	courant = new Memo();
+	private final Collecte	courant = new Collecte();
 	
-	private final ObservableList<Personne> personnesPourDialogAjout = FXCollections.observableArrayList();
-	
-	private final Property<Image>	schema = new SimpleObjectProperty<>();
+	/*private final ObservableList<Personne> personnesPourDialogAjout = FXCollections.observableArrayList();
+	*/
 
 	
 	// Autres champs
 	
-	private Memo		selection;
+	private Collecte		selection;
 
 	@Inject
 	private IMapper		mapper;
     @Inject
-	private DaoMemo		daoMemo;
-    @Inject
+	private DaoCollecte		daoCollecte;
+
+    /*@Inject
     private DaoPersonne	daoPersonne;
     @Inject
     private ModelConfig	modelConfig;
     
-	private boolean flagModifSchema;
+	private boolean flagModifSchema;*/
     
 	
 	// Initialisations
 	
-	@PostConstruct
-	public void init() {
-		schema.addListener( obs -> flagModifSchema = true );
-	}
-	
 	
 	// Getters & Setters
 	
-	public ObservableList<Memo> getListe() {
+	public ObservableList<Collecte> getListe() {
 		return liste;
 	}
 	
-	public Memo getCourant() {
+	public Collecte getCourant() {
 		return courant;
 	}
 	
-	public ObservableList<Personne> getPersonnesPourDialogAjout() {
+	/*public ObservableList<Personne> getPersonnesPourDialogAjout() {
 		return personnesPourDialogAjout;
-	}
+	}*/
 	
-	public Memo getSelection() {
+	public Collecte getSelection() {
 		return selection;
 	}
 	
-	public void setSelection( Memo selection ) {
+	public void setSelection( Collecte selection ) {
 		if ( selection == null ) {
-			this.selection = new Memo();
+			this.selection = new Collecte();
 		} else {
-			this.selection = daoMemo.retrouver( selection.getId() );
+			this.selection = daoCollecte.retrouver( selection.getId_collecte() );
 		}
 	}
-	
-	public Property<Image> schemaPropert() {
-		return schema;
-	}
-	
 	
 	// Actions
 	
 	public void actualiserListe() {
-		liste.setAll( daoMemo.listerTout() );
+		liste.setAll( daoCollecte.listerTout() );
  	}
 	
-	public void actualiserListePersonnesPourDialogAjout() {
-		personnesPourDialogAjout.setAll( daoPersonne.listerTout() );
-		personnesPourDialogAjout.removeAll( courant.getPersonnes() );
- 	}
-
 	
 	public void actualiserCourant() {
 		mapper.update( courant, selection );
-		File chemin = getCheminSchemaCourant();
-		if ( chemin.exists() ) {
-		    schema.setValue( new Image( chemin.toURI().toString() ) );
-		} else {
-		    schema.setValue( null );
-		}
-		flagModifSchema = false;
 	}
 	
-	
+	/*
 	public void validerMiseAJour() {
 
 		// Vérifie la validité des données
@@ -162,10 +142,10 @@ public class ModelCollecte  {
 		
 		if ( courant.getId() == null ) {
 			// Insertion
-			selection.setId( daoMemo.inserer( courant ) );
+			selection.setId( daoCollecte.inserer( courant ) );
 		} else {
 			// modficiation
-			daoMemo.modifier( courant );
+			daoCollecte.modifier( courant );
 		}
 		
 		if ( flagModifSchema ) {
@@ -181,13 +161,12 @@ public class ModelCollecte  {
 		}
 	}
 	
-	
-	public void supprimer( Memo item ) {
-		daoMemo.supprimer( item.getId() );
+	*/
+	public void supprimer( Collecte item ) {
+		daoCollecte.supprimer( item.getId_collecte() );
 		selection = UtilFX.findNext( liste, item );
-		getCheminSchemaCourant().delete();
 	}
-	
+	/*
 	
 	public void supprimerPersonnes( List<Personne> items ) {
 		courant.getPersonnes().removeAll( items );
@@ -197,13 +176,9 @@ public class ModelCollecte  {
 	public void ajouterPersonnes( List<Personne> items ) {
 		courant.getPersonnes().addAll( items );
 	}
-	
+	*/
 	
 	// Métodes auxiliaires
 	
-	public File getCheminSchemaCourant() {
-		String nomFichier = String.format( "%06d.jpg", courant.getId() );
-		File dossierSchemas = modelConfig.getDossierSchemas();
-		return new File( dossierSchemas, nomFichier );
-	}
+	
 }
