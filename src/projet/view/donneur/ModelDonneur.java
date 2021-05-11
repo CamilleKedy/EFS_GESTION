@@ -21,8 +21,8 @@ public class ModelDonneur {
 	
 	// Données observables 
 	
-	private Property<String> niveau = new SimpleObjectProperty<>("non");
-	private final ObservableList<String> listeChoixCarte = FXCollections.observableArrayList();
+//	private Property<String> niveau = new SimpleObjectProperty<>("non");
+//	private final ObservableList<String> listeChoixCarte = FXCollections.observableArrayList();
 	private final ObservableList<Donneur> liste = FXCollections.observableArrayList();
 	
 	private final Donneur	courant = new Donneur();
@@ -37,12 +37,12 @@ public class ModelDonneur {
     @Inject
 	private DaoDonneur		daoDonneur;
 	
-	
+/*	
     @PostConstruct
 	public void init() {
     	listeChoixCarte.addAll("oui", "non");
     }
-    
+*/    
     
 	// Getters & Setters
 	
@@ -66,7 +66,7 @@ public class ModelDonneur {
 		}
 	}
 	
-	
+/*	
 	public final Property<String> niveauProperty() {
 		return this.niveau;
 	}
@@ -79,7 +79,7 @@ public class ModelDonneur {
 	public final void setNiveau(final String niveau) {
 		this.niveauProperty().setValue(niveau);
 	}
-
+*/
 	
 	// Actions
 	

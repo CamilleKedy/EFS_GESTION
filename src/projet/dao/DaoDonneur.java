@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 
 import jfox.jdbc.UtilJdbc;
 import projet.data.Donneur;
+import projet.data.DossierMedical;
 
 
 public class DaoDonneur {
@@ -38,15 +39,15 @@ public class DaoDonneur {
 			cn = dataSource.getConnection();
 
 			// Insère le donneur
-			sql = "INSERT INTO Donneur (id_donneur, nom_donneur, prenom_donneur, date_naissance, ville_donneur, adresse_donneur, demande_carte) VALUES ( ?, ?, ?, ?, ?, ?, ? )";
+			sql = "INSERT INTO Donneur ( nom_donneur, prenom_donneur, date_naissance, ville_donneur, adresse_donneur, demande_carte) VALUES ( ?, ?, ?, ?, ?, ?)";
 			stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS  );
-			stmt.setObject(	1, donneur.getId() );
-			stmt.setObject(	2, donneur.getNom() );
-			stmt.setObject(	3, donneur.getPrenom() );
-			stmt.setObject(	4, donneur.getDateNaissance() );
-			stmt.setObject(	5, donneur.getVille() );
-			stmt.setObject(	6, donneur.getAdresse() );
-			stmt.setObject(	7, donneur.getDemandeCarte() );
+//			stmt.setObject(	1, donneur.getId() );
+			stmt.setObject(	1, donneur.getNom() );
+			stmt.setObject(	2, donneur.getPrenom() );
+			stmt.setObject(	3, donneur.getDateNaissance() );
+			stmt.setObject(	4, donneur.getVille() );
+			stmt.setObject(	5, donneur.getAdresse() );
+			stmt.setObject(	6, donneur.getDemandeCarte() );
 			stmt.executeUpdate();
 
 			// Récupère l'identifiant généré par le SGBD
@@ -176,8 +177,8 @@ public class DaoDonneur {
 		}
 	}
 
-/*
-	public List<Donneur> listerPourMemo( int idMemo )   {
+
+	public List<String> listerGroupeSanguinPourDossierMedical( DossierMedical dossierMedical )   {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -187,14 +188,14 @@ public class DaoDonneur {
 		try {
 			cn = dataSource.getConnection();
 
-			sql = "SELECT * FROM donneur p INNER JOIN concerner c ON p.id_donneur = c.id_donneur WHERE c.idmemo = ? ORDER BY nom, prenom";
+			sql = "SELECT * FROM donneur WHERE id_dossier = ? ORDER BY groupe_sanguin";
 			stmt = cn.prepareStatement(sql);
-            stmt.setObject( 1, idMemo );
+            stmt.setObject( 1, dossierMedical.getId() );
 			rs = stmt.executeQuery();
 			
-			List<Donneur> donneurs = new ArrayList<>();
+			List<String> donneurs = new ArrayList<>();
 			while (rs.next()) {
-				donneurs.add( construireDonneur(rs, false) );
+				donneurs.add( rs.getObject("groupe_sanguin", String.class) );
 			}
 			return donneurs;
 
@@ -204,7 +205,36 @@ public class DaoDonneur {
 			UtilJdbc.close( rs, stmt, cn );
 		}
 	}
-*/
+
+	
+	public List<String> listerRhesusPourDossierMedical( DossierMedical dossierMedical )   {
+
+		Connection			cn		= null;
+		PreparedStatement	stmt	= null;
+		ResultSet 			rs 		= null;
+		String				sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			sql = "SELECT * FROM donneur WHERE id_dossier = ? ORDER BY rhesus";
+			stmt = cn.prepareStatement(sql);
+            stmt.setObject( 1, dossierMedical.getId() );
+			rs = stmt.executeQuery();
+			
+			List<String> rhesus = new ArrayList<>();
+			while (rs.next()) {
+				rhesus.add( rs.getObject("rhesus", String.class) );
+			}
+			return rhesus;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( rs, stmt, cn );
+		}
+	}
+	
     
     public int compterPourCategorie( int idCategorie ) {
     	
