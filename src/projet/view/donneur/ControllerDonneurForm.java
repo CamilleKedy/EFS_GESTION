@@ -1,9 +1,5 @@
 package projet.view.donneur;
 
-import java.awt.Desktop;
-import java.io.File;
-import java.io.IOException;
-
 import javax.inject.Inject;
 
 import javafx.fxml.FXML;
@@ -11,25 +7,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
-import jfox.javafx.util.ConverterDouble;
 import jfox.javafx.util.ConverterInteger;
 import jfox.javafx.util.ConverterLocalDate;
 import jfox.javafx.view.Controller;
 import jfox.javafx.view.IManagerGui;
-import projet.data.Categorie;
-import projet.data.Memo;
-import projet.data.Personne;
+import projet.data.Donneur;
 import projet.view.EnumView;
-import projet.view.personne.ModelCategorie;
 
 
 public class ControllerDonneurForm extends Controller {
@@ -78,64 +63,48 @@ public class ControllerDonneurForm extends Controller {
 	
 	@Inject
 	private IManagerGui		managerGui;
-	/*
-	 * @Inject private ModelCollecte modelMemo;
-	 * 
-	 * @Inject private ModelCategorie modelCategorie;
-	 */
+	
+	@Inject
+	private ModelDonneur modelDonneur;
+	  
+	@Inject
+	private ModelDossierMedical modelDossierMedical;
+	 
 
 
 	// Initialisation du Controller
-/*
+
 	@FXML
 	private void initialize() {
 		
-		//Memo courant = modelMemo.getCourant();
+		Donneur courant = modelDonneur.getCourant();
 
 		// Data binding
 
 		bindBidirectional( textFieldId, courant.idProperty(), new ConverterInteger() );
-		bindBidirectional( textFieldTitre, courant.titreProperty() );
-		bindBidirectional( textAreaDescription, courant.descriptionProperty() );
-		bindBidirectional( checkBoxUrgent, courant.flagUrgentProperty() );
-
-		//comboBoxCategorie.setItems( modelCategorie.getListe() );
-		bindBidirectional( comboBoxCategorie, courant.categorieProperty() );
+		bindBidirectional( textFieldNom, courant.nomProperty() );
+		bindBidirectional( textFieldPrenom, courant.prenomProperty() );
+		bindBidirectional( textFieldVille, courant.villeProperty() );
+		bindBidirectional( textFieldAdresse, courant.adresseProperty() );
 		
-		
-		// Statut
-		toggleGroupStatut.selectedToggleProperty().addListener( 
-				obs -> actualiserStatutDansModele() );
-		courant.statutProperty().addListener( obs -> actualiserStatutDansVue() );
-		actualiserStatutDansVue();
-		
-		// Effectif
-		bindBidirectional( textFieldEffectif, courant.effectifProperty(), new ConverterInteger() );
-
-		// Budget
-		bindBidirectional( textFieldBudget, courant.budgetProperty(), new ConverterDouble("#,##0.00", "Valeur incorrecte pour le budget !" ) );
-
 		// Date d'échéance
-		bindBidirectional( datePickerEcheance, courant.echeanceProperty(), new ConverterLocalDate() );
+				bindBidirectional( datePickerDdn, courant.dateNaissanceProperty(), new ConverterLocalDate() );
+
+		comboBoxCarte.setItems( modelDonneur.getListeChoixCarte() );
+		bindBidirectional( comboBoxCarte, courant.demandeCarteProperty() );
 		
-		// Liste des personnes
-		listViewPersonnes.setItems( courant.getPersonnes() );
-		listViewPersonnes.getSelectionModel().setSelectionMode( SelectionMode.MULTIPLE );
 		
-		// Schéma
-		bindBidirectional(imageViewSchema, modelMemo.schemaPropert() );
-		
+		/*
+		 * // Liste des personnes listViewPersonnes.setItems( courant.getPersonnes() );
+		 * listViewPersonnes.getSelectionModel().setSelectionMode(
+		 * SelectionMode.MULTIPLE );
+		 */
 	}
 	
 	
 	public void refresh() {
-		modelMemo.actualiserCourant();
-		modelCategorie.actualiserListe();
-		if ( modelMemo.getCheminSchemaCourant().exists() ) {
-			buttonOuvrirSchema.setDisable( false );
-		} else {
-			buttonOuvrirSchema.setDisable( true );
-		}		
+		modelDonneur.actualiserCourant();
+		modelDossierMedical.actualiserListe();		
 	}
 	
 	
@@ -143,69 +112,44 @@ public class ControllerDonneurForm extends Controller {
 	
 	@FXML
 	private void doSupprimerCategorie() {
-		comboBoxCategorie.setValue( null );
+		comboBoxCarte.setValue( null );
 	}
 	
 	@FXML
 	private void doSupprimerPersonnes() {
-	//	modelMemo.supprimerPersonnes( listViewPersonnes.getSelectionModel().getSelectedItems() );
+	//	modelDonneur.supprimerPersonnes( listViewPersonnes.getSelectionModel().getSelectedItems() );
 	}
 	
 	@FXML
 	private void doAjouterPersonnes() {
-		managerGui.showDialog( EnumView.MemoAjoutPersonnes );
+		managerGui.showDialog( EnumView.DonneurForm );
 	}
-	
-	@FXML
-	private void doChoisirSchema() {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Choisissez un fichier image");
-		File chemin = fileChooser.showOpenDialog( managerGui.getStage() );
-		if ( chemin != null ) {
-			imageViewSchema.setImage( new Image( chemin.toURI().toString() ) );
-		}
-	}
-		
-	@FXML
-	private void doOuvrirSchema() {
-		try {
-			Desktop.getDesktop().open( modelMemo.getCheminSchemaCourant() );
-		} catch (IOException e) {
-			throw new RuntimeException( e );
-		}
-	}
-		
-	@FXML
-	private void doSupprimerSchema() {
-		imageViewSchema.setImage( null );
-	}	
 	
 	@FXML
 	private void doAnnuler() {
-		managerGui.showView( EnumView.MemoListe );
+		managerGui.showView( EnumView.DonneurListe );
 	}
 	
 	@FXML
 	private void doValider() {
-		//modelMemo.validerMiseAJour();
-		managerGui.showView( EnumView.MemoListe );
+		modelDonneur.validerMiseAJour();
+		managerGui.showView( EnumView.DonneurListe );
 	}
 	
 	
 	// Méthodes auxiliaires
 	
-	private void actualiserStatutDansModele() {
-		// Modifie le statut en fonction du bouton radio sélectionné
-		Toggle bouton = toggleGroupStatut.getSelectedToggle();
-		int statut = toggleGroupStatut.getToggles().indexOf( bouton );
-		//modelMemo.getCourant().setStatut( statut );
-	}
-	
-	private void actualiserStatutDansVue() {
-		// Sélectionne le bouton radio correspondant au statut
-		//int statut = modelMemo.getCourant().getStatut();
-		//Toggle bouton = toggleGroupStatut.getToggles().get( statut );
-		//toggleGroupStatut.selectToggle(  bouton );
-	}	*/
+	/*
+	 * private void actualiserDemandeCarteDansModele() { // Modifie le statut en
+	 * fonction du bouton radio sélectionné Toggle bouton =
+	 * toggleGroupStatut.getSelectedToggle(); int statut =
+	 * toggleGroupStatut.getToggles().indexOf( bouton );
+	 * //modelDonneur.getCourant().setStatut( statut ); }
+	 * 
+	 * private void actualiserStatutDansVue() { // Sélectionne le bouton radio
+	 * correspondant au statut //int statut = modelDonneur.getCourant().getStatut();
+	 * //Toggle bouton = toggleGroupStatut.getToggles().get( statut );
+	 * //toggleGroupStatut.selectToggle( bouton ); }
+	 */
 
 }

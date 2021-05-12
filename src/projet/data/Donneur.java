@@ -48,10 +48,10 @@ public class Donneur  {
 	
 	// toString()
 	
-//	@Override
-//	public String toString() {
-//		return getNom();
-//	}
+	@Override
+	public String toString() {
+		return getNom();
+	}
 	
 	
 	// hashCode() & equals()

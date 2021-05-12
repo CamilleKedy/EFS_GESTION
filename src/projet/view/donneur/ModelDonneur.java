@@ -5,8 +5,6 @@ import java.time.LocalDate;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
-import javafx.beans.property.Property;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import jfox.exception.ExceptionValidation;
@@ -22,8 +20,8 @@ public class ModelDonneur {
 	// Données observables 
 	
 //	private Property<String> niveau = new SimpleObjectProperty<>("non");
-//	private final ObservableList<String> listeChoixCarte = FXCollections.observableArrayList();
-	private final ObservableList<Donneur> liste = FXCollections.observableArrayList();
+	private final ObservableList<String> listeChoixCarte = FXCollections.observableArrayList();
+//	private final ObservableList<Donneur> liste = FXCollections.observableArrayList();
 	
 	private final Donneur	courant = new Donneur();
 	
@@ -37,26 +35,13 @@ public class ModelDonneur {
     @Inject
 	private DaoDonneur		daoDonneur;
 	
-/*	
+	
     @PostConstruct
 	public void init() {
     	listeChoixCarte.addAll("oui", "non");
     }
-*/    
     
-	// Getters & Setters
-	
-	public ObservableList<Donneur> getListe() {
-		return liste;
-	}
-	
-	public Donneur getCourant() {
-		return courant;
-	}
-	
-	public Donneur getSelection() {
-		return selection;
-	}
+    
 	
 	public void setSelection( Donneur selection ) {
 		if ( selection == null ) {
@@ -83,9 +68,9 @@ public class ModelDonneur {
 	
 	// Actions
 	
-	public void actualiserListe() {
-		liste.setAll( daoDonneur.listerTout() );
-	}
+	/*
+	 * public void actualiserListe() { liste.setAll( daoDonneur.listerTout() ); }
+	 */
 
 	
 	public void actualiserCourant() {
@@ -124,8 +109,10 @@ public class ModelDonneur {
 		}
 		
 		
-		if(courant.getDateNaissance() != null && courant.getDateNaissance().isAfter(LocalDate.of(2022, 1, 3))) {
-			message.append( "\nERREUR Date postérieure au 03/01/2022." );
+		if(courant.getDateNaissance() != null && courant.getDateNaissance().isAfter(LocalDate.now())) {
+			message.append( "\nERREUR Date postérieure au "+ LocalDate.now().toString() );	
+		} else if(courant.getDateNaissance().getYear() - LocalDate.now().getYear() < 18) {
+			message.append( "\nERREUR: Le donneur doit avoir plus de 18 ans." );
 		}
 		
 		if( courant.getDemandeCarte() == null ) {
@@ -148,15 +135,30 @@ public class ModelDonneur {
 		}
 	}
 	
-
-	public void supprimer( Donneur item ) {
-		daoDonneur.supprimer( item.getId() );
-		selection = UtilFX.findNext( liste, item );
-	}
-
+	/*
+	 * public void supprimer( Donneur item ) { daoDonneur.supprimer( item.getId() );
+	 * selection = UtilFX.findNext( liste, item ); }
+	 */
 
 
+
+	// Getters & Setters
 	
+	/*
+	 * public ObservableList<Donneur> getListe() { return liste; }
+	 */
+		public Donneur getCourant() {
+			return courant;
+		}
+		
+		public Donneur getSelection() {
+			return selection;
+		}
+
+		public ObservableList<String> getListeChoixCarte() {
+			return listeChoixCarte;
+		}
+		
 	
 
 	

@@ -12,15 +12,18 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="569.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.donneur.ControllerDonneurForm">
-   <center>
-      <TabPane prefHeight="272.0" prefWidth="415.0" style="-fx-background-color: #FFFAAA;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab text="Général">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="533.0" prefWidth="630.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane layoutX="64.0" layoutY="139.0" prefHeight="349.0" prefWidth="501.0" style="-fx-background-color: #FFFAAA;" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="Général">
                <content>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -35,7 +38,7 @@
                               <Label layoutX="10.0" layoutY="95.0" text="Demande de Carte :" />
                            </children>
                            <HBox.margin>
-                              <Insets bottom="2.0" left="2.0" right="2.0" top="6.0" />
+                              <Insets bottom="2.0" left="5.0" right="20.0" top="6.0" />
                            </HBox.margin>
                            <padding>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
@@ -67,8 +70,8 @@
                      </children>
                   </HBox>
                </content>
-          </Tab>
-          <Tab text="Dossier Medical">
+            </Tab>
+            <Tab text="Dossier Medical">
                <content>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -113,34 +116,40 @@
                      </children>
                   </HBox>
                </content>
-          </Tab>
-        </tabs>
+            </Tab>
+         </tabs>
       </TabPane>
-   </center>
-   <bottom>
-      <VBox prefHeight="50.0" prefWidth="569.0" BorderPane.alignment="CENTER" />
-   </bottom>
-   <left>
-      <VBox prefHeight="272.0" prefWidth="79.0" BorderPane.alignment="CENTER" />
-   </left>
-   <right>
-      <VBox prefHeight="272.0" prefWidth="76.0" BorderPane.alignment="CENTER" />
-   </right>
-   <top>
-      <HBox prefHeight="80.0" prefWidth="565.0">
+      <HBox layoutX="14.0" layoutY="14.0" prefHeight="108.0" prefWidth="600.0" style="-fx-background-color: #ffffff;">
          <children>
-            <ImageView fitHeight="72.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="112.0" fitWidth="172.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/Logo-ESF_Gestion%20blanc.png" />
                </image>
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin>
             </ImageView>
+            <VBox alignment="CENTER_RIGHT" prefHeight="112.0" prefWidth="423.0">
+               <children>
+                  <Label alignment="TOP_CENTER" styleClass="titre-vue" text="DONNEURS" textFill="#162c53">
+                     <font>
+                        <Font name="Rockwell Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <Line endX="34.31304931640625" endY="-0.035762786865234375" fill="#ea302b" startX="-377.90606689453125" startY="-0.035968780517578125" stroke="#ea302b" strokeWidth="5.0">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Line>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets top="40.0" />
+               </padding>
+            </VBox>
          </children>
-         <BorderPane.margin>
-            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-         </BorderPane.margin>
-         <padding>
-            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-         </padding>
       </HBox>
-   </top>
-</BorderPane>
+   </children>
+</AnchorPane>
