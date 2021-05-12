@@ -8,6 +8,8 @@ import org.mapstruct.factory.Mappers;
 import projet.data.Categorie;
 import projet.data.Collecte;
 import projet.data.Compte;
+import projet.data.Donneur;
+import projet.data.DossierMedical;
 import projet.data.Memo;
 import projet.data.Personne;
 import projet.data.Service;
@@ -21,6 +23,8 @@ public interface IMapper {
 	
 	Compte update( @MappingTarget Compte target, Compte source  );
 	
+	Donneur update ( @MappingTarget Donneur target, Donneur source);
+	
 	Categorie update( @MappingTarget Categorie target, Categorie source );
 
 	@Mapping( target="categorie", expression="java( source.getCategorie() )" )
@@ -30,6 +34,10 @@ public interface IMapper {
 	Memo update( @MappingTarget Memo target, Memo source );
 
 	Service update( @MappingTarget Service target, Service source );
+
+	DossierMedical update(@MappingTarget DossierMedical target, DossierMedical source);
+	
+
 	Collecte update( @MappingTarget Collecte target, Collecte source  );
 	
 	Site_de_collecte update( @MappingTarget Site_de_collecte target, Site_de_collecte source  );
