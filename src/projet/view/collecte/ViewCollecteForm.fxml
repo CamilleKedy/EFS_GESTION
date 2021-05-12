@@ -20,7 +20,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.memo.ControllerMemoForm">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.collecte.ControllerCollecteForm">
    <children>
       <HBox alignment="CENTER" layoutX="59.0" layoutY="118.0" prefHeight="412.0" prefWidth="600.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="118.0">
          <children>
@@ -44,18 +44,18 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Label text="Id" />
+                                    <Label text="Numéro" />
                                     <Label text="Date de début" GridPane.rowIndex="1" />
                                     <Label text="Date de fin" GridPane.rowIndex="2" />
                                     <Label text="Heure de début" GridPane.rowIndex="3" />
                                     <Label text="Heure de fin" GridPane.rowIndex="4" />
-                                    <TextField prefHeight="31.0" prefWidth="68.0" GridPane.columnIndex="1" />
-                                    <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <TextField prefHeight="31.0" prefWidth="70.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <TextField prefHeight="31.0" prefWidth="70.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <TextField fx:id="textFieldId" editable="false" prefHeight="31.0" prefWidth="68.0" GridPane.columnIndex="1" />
+                                    <DatePicker fx:id="datePickerDebut" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <DatePicker fx:id="datePickerFin" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="textFieldHeureDebut" prefHeight="31.0" prefWidth="70.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField fx:id="textFieldHeureFin" prefHeight="31.0" prefWidth="70.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                     <Label text="Lieu de collecte" GridPane.rowIndex="5" />
-                                    <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <ComboBox fx:id="comboBoxSite" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                  </children>
                                  <padding>
                                     <Insets left="5.0" />
@@ -168,7 +168,7 @@
       <HBox alignment="CENTER" prefHeight="71.0" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <Button defaultButton="true" mnemonicParsing="false" onAction="#doValider" prefHeight="38.0" prefWidth="75.0" style="-fx-background-color: #162c53;" text="OK" textFill="WHITE" />
-            <Button fx:id="buttonAnnuler" cancelButton="true" mnemonicParsing="false" onAction="#doAnnuler" prefHeight="38.0" prefWidth="90.0" style="-fx-background-color: #ea302b;" text="Annuler" textFill="WHITE" />
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#doAnnuler" prefHeight="38.0" prefWidth="90.0" style="-fx-background-color: #ea302b;" text="Annuler" textFill="WHITE" />
          </children>
       </HBox>
       <HBox layoutX="-1.0" layoutY="1.0" prefHeight="108.0" prefWidth="600.0">

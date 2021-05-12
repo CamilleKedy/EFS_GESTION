@@ -97,13 +97,27 @@ public class ModelCollecte  {
 		mapper.update( courant, selection );
 	}
 	
-	/*
+	
+	// Calcule le nombre de matériel et de membre de personnel nécessaires à une collecte
+	public void calculQuantites() {
+		// Math.ceil permet d'arrondir à l'entier supérieur un double
+		courant.setNbre_infirmiers((int)Math.ceil((courant.getSite_de_collecte().getNbr_lits()*1.)/2)) ; // 1 infirmier pour 2 lits
+		courant.setNbre_medecins((int)Math.ceil((courant.getSite_de_collecte().getNbr_lits()*1.)/6)) ; // 1 médécin pour 6 lits
+		courant.setNbre_secretaire((int)Math.ceil((courant.getSite_de_collecte().getNbr_lits()*1.)/12)) ; // 1 sécrétaire pour 12 lits
+		courant.setNbre_agents_collation((int)Math.ceil((courant.getSite_de_collecte().getNbr_lits()*1.)/12)) ; // 1 agent de collation pour 12 lits
+		
+		// On considère la durée moyenne d'un don étant de 45 min. On calcule donc le nombre de dons possibles dans la plage horaire
+		// Nombre de minute de fin - Nombre de min de départ / Durée moyenne d'un don * Nombre de dons simultanés (nombre de lits)
+		courant.setQte_collation((int)Math.ceil(((courant.getHoraire_fin().getHour()*60+courant.getHoraire_fin().getMinute() - courant.getHoraire_debut().getHour()*60 -courant.getHoraire_debut().getMinute())*1.)/45)*courant.getSite_de_collecte().getNbr_lits() );
+		
+	}
+	
 	public void validerMiseAJour() {
 
 		// Vérifie la validité des données
 		
 		StringBuilder message = new StringBuilder();
-
+		/*
 		if( courant.getTitre() == null || courant.getTitre().isEmpty() ) {
 			message.append( "\nLe titre ne doit pas être vide." );
 		} else  if ( courant.getTitre().length()> 50 ) {
@@ -117,19 +131,33 @@ public class ModelCollecte  {
 				message.append( "\nEffectif trop grand : 1000 maxi." );
 			}
 		}
-
-		if( courant.getBudget() != null  ) {
-			if( courant.getBudget() < 0  ) {
-				message.append( "\nLe budget ne peut pas être inférieur à zéro." );
-			} else  if ( courant.getBudget() > 1000000 ) {
-				message.append( "\nBudget trop grand : 1 000 000 maxi." );
-			}
+*/
+		if( courant.getHoraire_debut() != null  ) {
+		
+			  if ( courant.getHoraire_debut().isAfter(courant.getHoraire_fin())  ) {
+				message.append( "\nL'heure de début doit être inférieure à l'heure de fin" );
+			  }	
+		}
+		
+		if( courant.getHoraire_fin() != null  ) {
+			
+			  if ( courant.getHoraire_fin().isBefore(courant.getHoraire_debut()) ||  courant.getHoraire_fin().equals(courant.getHoraire_debut())   ) {
+				message.append( "\nL'heure de fin doit être supérieure à l'heure de début" );
+			  }	
 		}
 
-		if( courant.getEcheance() != null  ) {
-			if( courant.getEcheance().isBefore( LocalDate.of(2000, 1, 1) ) 
-					|| courant.getEcheance().isAfter( LocalDate.of(2099, 12, 31) ) ) {
-				message.append( "\nLa date d'échéance doit être comprise entre le 01/01/2000 et le 31/12/2099." );
+		if( courant.getDate_debut() != null  ) {
+			if( courant.getDate_debut().isBefore( LocalDate.of(2000, 1, 1) ) 
+					|| courant.getDate_fin().isAfter( courant.getDate_fin() )) 
+			{
+				message.append( "\nLa date de début doit être supérieure à la date d'aujourd'hui." );
+			}
+		}
+		
+		if( courant.getDate_fin() != null  ) {
+			if( courant.getDate_fin().isBefore( LocalDate.now() ) 
+					|| courant.getDate_fin().isBefore( courant.getDate_debut() ) ) {
+				message.append( "\nLa date de fin doit être supérieure à la date de début et à la date d'aujourd'hui" );
 			}
 		}
 		
@@ -137,31 +165,22 @@ public class ModelCollecte  {
 			throw new ExceptionValidation( message.toString().substring(1) );
 		}
 		
-		
+		// Mets à jour les quantités
+		calculQuantites();
 		// Effectue la mise à jour
 		
-		if ( courant.getId() == null ) {
+		if ( courant.getId_collecte() == null ) {
 			// Insertion
-			selection.setId( daoCollecte.inserer( courant ) );
+			selection.setId_collecte( daoCollecte.inserer( courant ) );
 		} else {
 			// modficiation
 			daoCollecte.modifier( courant );
 		}
 		
-		if ( flagModifSchema ) {
-			if (schema.getValue() == null) {
-				getCheminSchemaCourant().delete();
-			} else {
-				try {
-					ImageIO.write(SwingFXUtils.fromFXImage(schema.getValue(), null), "JPG", getCheminSchemaCourant());
-				} catch (IOException e) {
-					throw new RuntimeException(e);
-				}
-			} 
-		}
+		
 	}
 	
-	*/
+	
 	public void supprimer( Collecte item ) {
 		daoCollecte.supprimer( item.getId_collecte() );
 		selection = UtilFX.findNext( liste, item );

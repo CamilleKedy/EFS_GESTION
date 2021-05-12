@@ -18,9 +18,6 @@ public class Site_de_collecte  {
 	private final Property<Integer>	nbr_lits	= new SimpleObjectProperty<>();
 	private final StringProperty	adresse	= new SimpleStringProperty();
 	
-
-	
-	
 	// Constructeurs
 	
 	public Site_de_collecte() {
@@ -33,6 +30,8 @@ public class Site_de_collecte  {
 		setAdresse(adresse);
 		
 	}
+	
+	// Getters and Setters
 	
 	public final Property<Integer> id_site_de_collecteProperty() {
 		return this.id_site_de_collecte;
@@ -94,8 +93,10 @@ public class Site_de_collecte  {
 	}
 	
 
-	
-	// Getters et Setters
+	@Override
+	public String toString() {
+		return getAdresse()+", "+getVille();
+	}
 
 	
 	

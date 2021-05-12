@@ -137,7 +137,7 @@ public class DaoSite_de_collecte {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "SELECT * FROM site_de_collecte ORDER BY libelle";
+			sql = "SELECT * FROM site_de_collecte ORDER BY id_site";
 			stmt = cn.prepareStatement( sql );
 			rs = stmt.executeQuery();
 

@@ -23,16 +23,19 @@ import javafx.stage.FileChooser;
 import jfox.javafx.util.ConverterDouble;
 import jfox.javafx.util.ConverterInteger;
 import jfox.javafx.util.ConverterLocalDate;
+import jfox.javafx.util.ConverterLocalTime;
 import jfox.javafx.view.Controller;
 import jfox.javafx.view.IManagerGui;
 import projet.data.Categorie;
-import projet.data.Memo;
+import projet.data.Collecte;
 import projet.data.Personne;
+import projet.data.Site_de_collecte;
 import projet.view.EnumView;
 import projet.view.personne.ModelCategorie;
+import projet.view.site_collecte.ModelSiteCollecte;
 
 
-/*public class ControllerCollecteForm extends Controller {
+public class ControllerCollecteForm extends Controller {
 
 	
 	// Composants de la vue
@@ -40,37 +43,26 @@ import projet.view.personne.ModelCategorie;
 	@FXML
 	private TextField		textFieldId;
 	@FXML
-	private TextField		textFieldTitre;
+	private TextField		textFieldHeureDebut;
 	@FXML
-	private TextArea		textAreaDescription;
+	private TextField		textFieldHeureFin;
 	@FXML
-	private CheckBox		checkBoxUrgent;
+	private DatePicker		datePickerDebut;
 	@FXML
-	private ToggleGroup		toggleGroupStatut;
+	private DatePicker		datePickerFin;
 	@FXML
-	private TextField		textFieldEffectif;
-	@FXML
-	private TextField		textFieldBudget;
-	@FXML
-	private DatePicker		datePickerEcheance;
-	@FXML
-	private ComboBox<Categorie>	comboBoxCategorie;
-	@FXML
-	private ListView<Personne> listViewPersonnes;
-	@FXML
-	private ImageView		imageViewSchema;
-	@FXML
-	private Button			buttonOuvrirSchema;
+	private ComboBox<Site_de_collecte>	comboBoxSite;
+	
 
-
+	
 	// Autres champs
 	
 	@Inject
 	private IManagerGui		managerGui;
 	@Inject
-	private ModelCollecte		modelMemo;
+	private ModelCollecte	modelCollecte;
 	@Inject
-	private ModelCategorie	modelCategorie;
+	private ModelSiteCollecte	modelSite;
 
 
 	// Initialisation du Controller
@@ -78,52 +70,32 @@ import projet.view.personne.ModelCategorie;
 	@FXML
 	private void initialize() {
 		
-		Memo courant = modelMemo.getCourant();
+		Collecte courant = modelCollecte.getCourant();
 
 		// Data binding
 
-		bindBidirectional( textFieldId, courant.idProperty(), new ConverterInteger() );
-		bindBidirectional( textFieldTitre, courant.titreProperty() );
-		bindBidirectional( textAreaDescription, courant.descriptionProperty() );
-		bindBidirectional( checkBoxUrgent, courant.flagUrgentProperty() );
+		bindBidirectional( textFieldId, courant.id_collecteProperty(), new ConverterInteger() );
+		bindBidirectional( textFieldHeureDebut, courant.horaire_debutProperty(), new ConverterLocalTime() );
+		bindBidirectional( textFieldHeureFin, courant.horaire_finProperty(), new ConverterLocalTime() );
+		bindBidirectional( datePickerDebut, courant.date_debutProperty(), new ConverterLocalDate() );
+		bindBidirectional( datePickerFin, courant.date_finProperty(), new ConverterLocalDate() );
 
-		comboBoxCategorie.setItems( modelCategorie.getListe() );
-		bindBidirectional( comboBoxCategorie, courant.categorieProperty() );
+		comboBoxSite.setItems( modelSite.getListe());
+        comboBoxSite.valueProperty().bindBidirectional( courant.site_de_collecteProperty() );
 		
-		
-		// Statut
-		toggleGroupStatut.selectedToggleProperty().addListener( 
-				obs -> actualiserStatutDansModele() );
-		courant.statutProperty().addListener( obs -> actualiserStatutDansVue() );
-		actualiserStatutDansVue();
-		
-		// Effectif
-		bindBidirectional( textFieldEffectif, courant.effectifProperty(), new ConverterInteger() );
-
-		// Budget
-		bindBidirectional( textFieldBudget, courant.budgetProperty(), new ConverterDouble("#,##0.00", "Valeur incorrecte pour le budget !" ) );
-
-		// Date d'échéance
-		bindBidirectional( datePickerEcheance, courant.echeanceProperty(), new ConverterLocalDate() );
 		
 		// Liste des personnes
-		listViewPersonnes.setItems( courant.getPersonnes() );
-		listViewPersonnes.getSelectionModel().setSelectionMode( SelectionMode.MULTIPLE );
-		
-		// Schéma
-		bindBidirectional(imageViewSchema, modelMemo.schemaPropert() );
+		/*listViewPersonnes.setItems( courant.getPersonnes() );
+		listViewPersonnes.getSelectionModel().setSelectionMode( SelectionMode.MULTIPLE );*/
+
 		
 	}
 	
 	
 	public void refresh() {
-		modelMemo.actualiserCourant();
-		modelCategorie.actualiserListe();
-		if ( modelMemo.getCheminSchemaCourant().exists() ) {
-			buttonOuvrirSchema.setDisable( false );
-		} else {
-			buttonOuvrirSchema.setDisable( true );
-		}		
+		modelSite.actualiserListe();
+		modelCollecte.actualiserCourant();
+		
 	}
 	
 	
@@ -131,70 +103,35 @@ import projet.view.personne.ModelCategorie;
 	
 	@FXML
 	private void doSupprimerCategorie() {
-		comboBoxCategorie.setValue( null );
+		comboBoxSite.setValue( null );
 	}
 	
+	/*
 	@FXML
 	private void doSupprimerPersonnes() {
-		modelMemo.supprimerPersonnes( listViewPersonnes.getSelectionModel().getSelectedItems() );
+		modelCollecte.supprimerPersonnes( listViewPersonnes.getSelectionModel().getSelectedItems() );
 	}
 	
 	@FXML
 	private void doAjouterPersonnes() {
-		managerGui.showDialog( EnumView.MemoAjoutPersonnes );
+		managerGui.showDialog( EnumView.CollecteAjoutPersonnes );
 	}
+	*/
 	
-	@FXML
-	private void doChoisirSchema() {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Choisissez un fichier image");
-		File chemin = fileChooser.showOpenDialog( managerGui.getStage() );
-		if ( chemin != null ) {
-			imageViewSchema.setImage( new Image( chemin.toURI().toString() ) );
-		}
-	}
-		
-	@FXML
-	private void doOuvrirSchema() {
-		try {
-			Desktop.getDesktop().open( modelMemo.getCheminSchemaCourant() );
-		} catch (IOException e) {
-			throw new RuntimeException( e );
-		}
-	}
-		
-	@FXML
-	private void doSupprimerSchema() {
-		imageViewSchema.setImage( null );
-	}	
 	
 	@FXML
 	private void doAnnuler() {
-		managerGui.showView( EnumView.MemoListe );
+		managerGui.showView( EnumView.CollecteListe );
 	}
 	
 	@FXML
 	private void doValider() {
-		modelMemo.validerMiseAJour();
-		managerGui.showView( EnumView.MemoListe );
+		modelCollecte.validerMiseAJour();
+		managerGui.showView( EnumView.CollecteListe );
 	}
 	
 	
 	// Méthodes auxiliaires
 	
-	private void actualiserStatutDansModele() {
-		// Modifie le statut en fonction du bouton radio sélectionné
-		Toggle bouton = toggleGroupStatut.getSelectedToggle();
-		int statut = toggleGroupStatut.getToggles().indexOf( bouton );
-		modelMemo.getCourant().setStatut( statut );
-	}
-	
-	private void actualiserStatutDansVue() {
-		// Sélectionne le bouton radio correspondant au statut
-		int statut = modelMemo.getCourant().getStatut();
-		Toggle bouton = toggleGroupStatut.getToggles().get( statut );
-		toggleGroupStatut.selectToggle(  bouton );
-	}	
 
 }
-*/

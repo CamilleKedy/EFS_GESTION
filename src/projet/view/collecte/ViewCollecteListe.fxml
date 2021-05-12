@@ -27,7 +27,7 @@
             </ImageView>
             <VBox alignment="CENTER_RIGHT" prefHeight="112.0" prefWidth="423.0">
                <children>
-                  <Label alignment="TOP_CENTER" styleClass="titre-vue" text="COLLECTES" textFill="#162c53">
+                  <Label text="COLLECTES" textFill="#162c53">
                      <font>
                         <Font name="Rockwell Bold" size="30.0" />
                      </font>
@@ -50,10 +50,11 @@
          <children>
             <TableView fx:id="tableView" prefHeight="395.0" prefWidth="500.0">
               <columns>
-                <TableColumn fx:id="columnId" prefWidth="87.0" text="Id" />
+                <TableColumn fx:id="columnId" prefWidth="87.0" text="Numéro" />
                 <TableColumn fx:id="columnDateDebut" prefWidth="152.0" text="Date de début" />
                   <TableColumn fx:id="columnDateFin" minWidth="3.0" prefWidth="138.0" text="Date de fin" />
-                  <TableColumn fx:id="columnLieu" prefWidth="197.0" text="Site de collecte" />
+                  <TableColumn fx:id="columnAdresse" prefWidth="150.0" text="Adresse" />
+                  <TableColumn fx:id="columnVille" prefWidth="150.0" text="Ville" />
               </columns>
             </TableView>
          </children>

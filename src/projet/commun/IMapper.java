@@ -11,6 +11,7 @@ import projet.data.Compte;
 import projet.data.Memo;
 import projet.data.Personne;
 import projet.data.Service;
+import projet.data.Site_de_collecte;
 
 
 @Mapper
@@ -29,7 +30,8 @@ public interface IMapper {
 	Memo update( @MappingTarget Memo target, Memo source );
 
 	Service update( @MappingTarget Service target, Service source );
-	
 	Collecte update( @MappingTarget Collecte target, Collecte source  );
+	
+	Site_de_collecte update( @MappingTarget Site_de_collecte target, Site_de_collecte source  );
 	
 }

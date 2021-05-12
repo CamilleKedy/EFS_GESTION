@@ -43,7 +43,9 @@ public class ControllerCollecteListe extends Controller {
 	@FXML
 	private TableColumn<Collecte, LocalDate> columnDateFin;
 	@FXML
-	private TableColumn<Collecte, String> columnLieu;
+	private TableColumn<Collecte, String> columnVille;
+	@FXML
+	private TableColumn<Collecte, String> columnAdresse;
 
 	// Autres champs
 	
@@ -67,8 +69,9 @@ public class ControllerCollecteListe extends Controller {
 		columnId.setCellValueFactory( t -> t.getValue().id_collecteProperty() );
 		columnDateDebut.setCellValueFactory( t -> t.getValue().date_debutProperty() );
 		columnDateFin.setCellValueFactory( t -> t.getValue().date_finProperty() );
-		columnLieu.setCellValueFactory( t -> t.getValue().getSite_de_collecte()!=null ?  t.getValue().getSite_de_collecte().villeProperty() : null );
-		
+		columnVille.setCellValueFactory( t -> t.getValue().getSite_de_collecte()!=null ?  t.getValue().getSite_de_collecte().villeProperty() : null );
+		columnAdresse.setCellValueFactory( t -> t.getValue().getSite_de_collecte()!=null ?  t.getValue().getSite_de_collecte().adresseProperty() : null );
+
 		// Configuraiton des boutons
 		tableView.getSelectionModel().selectedItemProperty().addListener(
 				(obs, oldVal, newVal) -> {

@@ -39,7 +39,7 @@ public class DaoCollecte {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "INSERT INTO collecte ( qte_collation, date_debut, date_fin, nbre_infirmiers, nbre_medecins, nbre_secretaire, nbre_agents_collation, horaire_debut, horaire_fin, id_site ) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+			sql = "INSERT INTO collecte ( qte_collation, date_debut, date_fin, nbre_infirmiers, nbre_medecins, nbre_secretaire, nbre_agents_collation, horaire_debut, horaire_fin, id_site ) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
 			stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS );
 			stmt.setObject( 1, collecte.getQte_collation());
 			stmt.setObject( 2, collecte.getDate_debut());
@@ -77,7 +77,7 @@ public class DaoCollecte {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "UPDATE collecte SET qte_collation= ? , date_debut= ?, date_fin= ?, nbre_infirmiers= ?, nbre_medecins= ?, nbre_secretaire=?, nbre_agents_collation= ?, horaire_debut= ?, horaire_fin=?, id_site = ? WHERE idcollecte = ?";
+			sql = "UPDATE collecte SET qte_collation= ? , date_debut= ?, date_fin= ?, nbre_infirmiers= ?, nbre_medecins= ?, nbre_secretaire=?, nbre_agents_collation= ?, horaire_debut= ?, horaire_fin=?, id_site = ? WHERE id_collecte = ?";
 			stmt = cn.prepareStatement( sql );
 			stmt.setObject( 1, collecte.getQte_collation());
 			stmt.setObject( 2, collecte.getDate_debut());
