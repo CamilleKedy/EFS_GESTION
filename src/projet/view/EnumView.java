@@ -30,6 +30,8 @@ public enum EnumView implements IEnumView {
 	TestDaoService		( "test/ViewTestDaoService.fxml" ),
 	EtatPersonneParCategorie1	( "personne/ViewEtatPersonneParCategorie1.fxml" ),
 	EtatPersonneParCategorie2	( "personne/ViewEtatPersonneParCategorie2.fxml" ), 
+	Site_de_collecteListe		("site_de_collecte/ViewSite_de_collecteListe.fxml"),
+	Site_de_collecteForm		("site_de_collecte/ViewSite_de_collecteForm.fxml"),
 	DonneurForm 		( "Donneur/ViewDonneurForm.fxml" ),
 	DonneurListe		( "Donneur/ViewDonneurListe.fxml" ),
 	;
