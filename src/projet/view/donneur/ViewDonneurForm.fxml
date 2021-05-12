@@ -18,10 +18,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="533.0" prefWidth="630.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="533.0" prefWidth="630.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.donneur.ControllerDonneurForm">
    <children>
-      <TabPane layoutX="64.0" layoutY="139.0" prefHeight="349.0" prefWidth="501.0" style="-fx-background-color: #FFFAAA;" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="64.0" layoutY="139.0" prefHeight="349.0" prefWidth="501.0" style="-fx-background-color: #ffffff; -fx-border-color: red;" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab text="Général">
                <content>
@@ -46,7 +45,7 @@
                         </VBox>
                         <VBox prefHeight="267.0" prefWidth="284.0" spacing="8.0">
                            <children>
-                              <TextField fx:id="textFieldId" />
+                              <TextField fx:id="textFieldId" editable="false" prefHeight="25.0" prefWidth="50.0" />
                               <TextField fx:id="textFieldNom" layoutX="10.0" layoutY="10.0" />
                               <TextField fx:id="textFieldPrenom" layoutX="10.0" layoutY="35.0" />
                               <TextField fx:id="textFieldVille" layoutX="10.0" layoutY="60.0" />
@@ -55,8 +54,8 @@
                               <ComboBox fx:id="comboBoxCarte" layoutX="20.0" layoutY="158.0" prefHeight="25.0" prefWidth="84.0" />
                               <HBox alignment="BOTTOM_CENTER" prefHeight="66.0" prefWidth="243.0" spacing="40.0">
                                  <children>
-                                    <Button fx:id="buttonEnregistrerDonneur" mnemonicParsing="false" text="Enregistrer" />
-                                    <Button fx:id="buttonAnnulerE1" mnemonicParsing="false" text="Annuler" />
+                                    <Button fx:id="buttonEnregistrerDonneur" mnemonicParsing="false" onAction="#doEnregistrerDonneur" text="Enregistrer" />
+                                    <Button fx:id="buttonAnnulerE1" mnemonicParsing="false" onAction="#doAnnuler" text="Annuler" />
                                  </children>
                               </HBox>
                            </children>
@@ -93,7 +92,7 @@
                         </VBox>
                         <VBox prefHeight="267.0" prefWidth="284.0" spacing="8.0">
                            <children>
-                              <TextField fx:id="textFieldID1" />
+                              <TextField fx:id="textFieldID1" editable="false" />
                               <TextField fx:id="textFieldPoids" layoutX="10.0" layoutY="10.0" />
                               <ComboBox fx:id="comboBoxGSanguin" prefHeight="25.0" prefWidth="81.0" />
                               <ComboBox fx:id="comboBoxRhesus" prefHeight="25.0" prefWidth="81.0" />
@@ -101,8 +100,8 @@
                               <TextArea fx:id="textAreaInaptitude" prefHeight="200.0" prefWidth="200.0" />
                               <HBox alignment="BOTTOM_CENTER" prefHeight="66.0" prefWidth="243.0" spacing="40.0">
                                  <children>
-                                    <Button fx:id="buttonEnregistrerDossier" mnemonicParsing="false" text="Enregistrer" />
-                                    <Button fx:id="buttonAnnulerE2" mnemonicParsing="false" text="Annuler" />
+                                    <Button fx:id="buttonEnregistrerDossier" mnemonicParsing="false" onAction="#doEnregistrerDossier" text="Enregistrer" />
+                                    <Button fx:id="buttonAnnulerE2" mnemonicParsing="false" onAction="#doAnnuler" text="Annuler" />
                                  </children>
                               </HBox>
                            </children>

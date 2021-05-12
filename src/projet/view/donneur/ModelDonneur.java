@@ -21,14 +21,14 @@ public class ModelDonneur {
 	
 //	private Property<String> niveau = new SimpleObjectProperty<>("non");
 	private final ObservableList<String> listeChoixCarte = FXCollections.observableArrayList();
-//	private final ObservableList<Donneur> liste = FXCollections.observableArrayList();
+	private final ObservableList<Donneur> liste = FXCollections.observableArrayList();
 	
 	private final Donneur	courant = new Donneur();
 	
 	
 	// Autres champs
 	
-	private Donneur		selection;
+	private Donneur		selection = new Donneur();
 
 	@Inject
 	private IMapper			mapper;
@@ -68,9 +68,11 @@ public class ModelDonneur {
 	
 	// Actions
 	
-	/*
-	 * public void actualiserListe() { liste.setAll( daoDonneur.listerTout() ); }
-	 */
+	
+	public void actualiserListe() { 
+		liste.setAll( daoDonneur.listerTout() );
+	}
+	 
 
 	
 	public void actualiserCourant() {
@@ -111,7 +113,7 @@ public class ModelDonneur {
 		
 		if(courant.getDateNaissance() != null && courant.getDateNaissance().isAfter(LocalDate.now())) {
 			message.append( "\nERREUR Date postérieure au "+ LocalDate.now().toString() );	
-		} else if(courant.getDateNaissance().getYear() - LocalDate.now().getYear() < 18) {
+		} else if( LocalDate.now().getYear()-courant.getDateNaissance().getYear()  < 18) {
 			message.append( "\nERREUR: Le donneur doit avoir plus de 18 ans." );
 		}
 		
@@ -135,29 +137,33 @@ public class ModelDonneur {
 		}
 	}
 	
-	/*
-	 * public void supprimer( Donneur item ) { daoDonneur.supprimer( item.getId() );
-	 * selection = UtilFX.findNext( liste, item ); }
-	 */
+	
+	  public void supprimer( Donneur item ) {
+		  daoDonneur.supprimer( item.getId() );
+		  selection = UtilFX.findNext( liste, item ); 
+	  }
+	 
 
 
 
 	// Getters & Setters
 	
-	/*
-	 * public ObservableList<Donneur> getListe() { return liste; }
-	 */
-		public Donneur getCourant() {
-			return courant;
-		}
-		
-		public Donneur getSelection() {
-			return selection;
-		}
+	
+	  public ObservableList<Donneur> getListe() { 
+		  return liste;
+	  }
+	 
+	  public Donneur getCourant() {
+		  return courant;
+	  }
 
-		public ObservableList<String> getListeChoixCarte() {
-			return listeChoixCarte;
-		}
+	  public Donneur getSelection() {
+		  return selection;
+	  }
+
+	  public ObservableList<String> getListeChoixCarte() {
+		  return listeChoixCarte;
+	  }
 		
 	
 

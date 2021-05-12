@@ -166,7 +166,7 @@ public class DaoDonneur {
 			
 			List<Donneur> donneurs = new ArrayList<>();
 			while (rs.next()) {
-				donneurs.add( construireDonneur(rs, false) );
+				donneurs.add( construireDonneur(rs, true) );
 			}
 			return donneurs;
 

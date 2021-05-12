@@ -49,11 +49,11 @@
       </HBox>
       <HBox alignment="CENTER" layoutX="16.0" layoutY="123.0" prefHeight="391.0" prefWidth="600.0" style="-fx-background-color: #ffffff;">
          <children>
-            <TableView fx:id="listView" prefHeight="375.0" prefWidth="499.0">
+            <TableView fx:id="tableView" prefHeight="375.0" prefWidth="499.0">
                <columns>
-                  <TableColumn prefWidth="160.0" text="NOM" />
-                  <TableColumn prefWidth="170.0" text="ADRESSE" />
-                  <TableColumn minWidth="3.0" prefWidth="169.0" text="VILLE" />
+                  <TableColumn fx:id="columnNom" prefWidth="160.0" text="NOM" />
+                  <TableColumn fx:id="columnAdresse" prefWidth="170.0" text="ADRESSE" />
+                  <TableColumn fx:id="columnVille" minWidth="3.0" prefWidth="169.0" text="VILLE" />
                </columns>
             </TableView>
          </children>

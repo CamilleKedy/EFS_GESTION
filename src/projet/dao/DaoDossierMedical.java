@@ -241,7 +241,7 @@ public class DaoDossierMedical {
 		dossierMedical.setId(rs.getObject( "id_dossier", Integer.class ));
 		dossierMedical.setInaptitude(rs.getObject( "inaptitude_temporaire", String.class ));
 
-		dossierMedical.setPoids(rs.getObject( "demande_carte", Float.class ));
+		dossierMedical.setPoids(rs.getObject( "poids", Float.class ));
 		
 		if ( flagComplet ) {
 			dossierMedical.setDonneur( daoDonneur.retrouver( rs.getObject("id_donneur", Integer.class) ) );

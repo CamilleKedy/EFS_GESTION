@@ -91,8 +91,8 @@ public class ControllerDonneurForm extends Controller {
 				bindBidirectional( datePickerDdn, courant.dateNaissanceProperty(), new ConverterLocalDate() );
 
 		comboBoxCarte.setItems( modelDonneur.getListeChoixCarte() );
-		bindBidirectional( comboBoxCarte, courant.demandeCarteProperty() );
-		
+		//bindBidirectional( comboBoxCarte, courant.demandeCarteProperty() );
+		comboBoxCarte.valueProperty().bindBidirectional( courant.demandeCarteProperty() );
 		
 		/*
 		 * // Liste des personnes listViewPersonnes.setItems( courant.getPersonnes() );
@@ -109,22 +109,7 @@ public class ControllerDonneurForm extends Controller {
 	
 	
 	// Actions
-	
-	@FXML
-	private void doSupprimerCategorie() {
-		comboBoxCarte.setValue( null );
-	}
-	
-	@FXML
-	private void doSupprimerPersonnes() {
-	//	modelDonneur.supprimerPersonnes( listViewPersonnes.getSelectionModel().getSelectedItems() );
-	}
-	
-	@FXML
-	private void doAjouterPersonnes() {
-		managerGui.showDialog( EnumView.DonneurForm );
-	}
-	
+
 	@FXML
 	private void doAnnuler() {
 		managerGui.showView( EnumView.DonneurListe );
@@ -136,6 +121,17 @@ public class ControllerDonneurForm extends Controller {
 		managerGui.showView( EnumView.DonneurListe );
 	}
 	
+	@FXML
+	void doEnregistrerDonneur() {
+		modelDonneur.validerMiseAJour();
+		managerGui.showView( EnumView.DonneurListe );
+	}
+
+	@FXML
+	void doEnregistrerDossier() {
+		//modelDossierMedical.validerMiseAJour();
+		managerGui.showView( EnumView.DonneurListe );
+	}	
 	
 	// Méthodes auxiliaires
 	
