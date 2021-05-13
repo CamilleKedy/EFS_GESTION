@@ -24,14 +24,19 @@ import jfox.javafx.util.ConverterDouble;
 import jfox.javafx.util.ConverterInteger;
 import jfox.javafx.util.ConverterLocalDate;
 import jfox.javafx.util.ConverterLocalTime;
+import jfox.javafx.util.UtilFX;
 import jfox.javafx.view.Controller;
 import jfox.javafx.view.IManagerGui;
 import projet.data.Categorie;
 import projet.data.Collecte;
+import projet.data.Memo;
 import projet.data.Personne;
+import projet.data.Personnel;
+import projet.data.Profession;
 import projet.data.Site_de_collecte;
 import projet.view.EnumView;
 import projet.view.personne.ModelCategorie;
+import projet.view.personnel.ModelPersonnel;
 import projet.view.site_collecte.ModelSiteCollecte;
 
 
@@ -52,7 +57,10 @@ public class ControllerCollecteForm extends Controller {
 	private DatePicker		datePickerFin;
 	@FXML
 	private ComboBox<Site_de_collecte>	comboBoxSite;
-	
+	@FXML
+	private ComboBox<Profession>	comboBoxProfession;
+	@FXML
+	private ListView<Personnel>	listViewPersonnel;
 
 	
 	// Autres champs
@@ -63,6 +71,10 @@ public class ControllerCollecteForm extends Controller {
 	private ModelCollecte	modelCollecte;
 	@Inject
 	private ModelSiteCollecte	modelSite;
+	@Inject
+	private ModelProfession	modelProfession;
+	@Inject
+	private ModelPersonnel	modelPersonnel;
 
 
 	// Initialisation du Controller
@@ -73,17 +85,21 @@ public class ControllerCollecteForm extends Controller {
 		Collecte courant = modelCollecte.getCourant();
 
 		// Data binding
-
+		// TabPane 1
 		bindBidirectional( textFieldId, courant.id_collecteProperty(), new ConverterInteger() );
 		bindBidirectional( textFieldHeureDebut, courant.horaire_debutProperty(), new ConverterLocalTime() );
 		bindBidirectional( textFieldHeureFin, courant.horaire_finProperty(), new ConverterLocalTime() );
 		bindBidirectional( datePickerDebut, courant.date_debutProperty(), new ConverterLocalDate() );
 		bindBidirectional( datePickerFin, courant.date_finProperty(), new ConverterLocalDate() );
-
 		comboBoxSite.setItems( modelSite.getListe());
-        comboBoxSite.valueProperty().bindBidirectional( courant.site_de_collecteProperty() );
-		
-		
+		comboBoxSite.valueProperty().bindBidirectional( courant.site_de_collecteProperty() );
+        
+		// TabPane 2
+        comboBoxProfession.setItems( modelProfession.getListe());
+        
+        listViewPersonnel.setItems( modelPersonnel.getListe() );
+        UtilFX.setCellFactory( listViewPersonnel, item -> item.toString() );
+       
 		// Liste des personnes
 		/*listViewPersonnes.setItems( courant.getPersonnes() );
 		listViewPersonnes.getSelectionModel().setSelectionMode( SelectionMode.MULTIPLE );*/
@@ -94,12 +110,21 @@ public class ControllerCollecteForm extends Controller {
 	
 	public void refresh() {
 		modelSite.actualiserListe();
+		modelProfession.actualiserListe();
 		modelCollecte.actualiserCourant();
+		
 		
 	}
 	
 	
 	// Actions
+	@FXML
+	private void doPersonnelProfession() {
+		modelPersonnel.actualiserListeParProfession(comboBoxProfession.getValue().getLibelle());
+		UtilFX.selectInListView( listViewPersonnel, modelPersonnel.getSelection() );
+		listViewPersonnel.requestFocus();
+	}
+	
 	
 	@FXML
 	private void doSupprimerCategorie() {
