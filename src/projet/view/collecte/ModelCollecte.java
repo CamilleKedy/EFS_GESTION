@@ -1,30 +1,15 @@
 package projet.view.collecte;
 
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-import javax.imageio.ImageIO;
 import javax.inject.Inject;
 
-import javafx.beans.property.Property;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.image.Image;
 import jfox.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoCollecte;
-import projet.dao.DaoPersonne;
-import projet.dao.DaoSite_de_collecte;
 import projet.data.Collecte;
-import projet.data.Collecte;
-import projet.data.Personne;
-import projet.view.systeme.ModelConfig;
 
 
 public class ModelCollecte  {

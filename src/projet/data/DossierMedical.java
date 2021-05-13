@@ -6,8 +6,6 @@ import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 
 public class DossierMedical  {
@@ -16,8 +14,8 @@ public class DossierMedical  {
 	// Données observables
 	
 	private final Property<Integer>	id			= new SimpleObjectProperty<>();
-	private final ObservableList<String>	groupeSanguin		=FXCollections.observableArrayList();
-	private final ObservableList<String>	rhesus	= FXCollections.observableArrayList();
+	private final Property<String>	groupeSanguin =new SimpleObjectProperty<>();
+	private final Property<String>	rhesus	= new SimpleObjectProperty<>();
 	private final Property<Float> 	poids = new SimpleObjectProperty<>();
 	private final StringProperty 	inaptitude = new SimpleStringProperty();
 	private final Property<Donneur> donneur = new SimpleObjectProperty<>();
@@ -134,35 +132,30 @@ public class DossierMedical  {
 	
 	
 	
-	public boolean isInGroupeSanguin( String gs ) {
-		
-		if ( gs != null ) {
-			for ( String r : groupeSanguin ) {
-				if ( gs.equals( r ) ) {
-					return true;
-				}
-			}
-		}
-		return false;
+	/*
+	 * public boolean isInGroupeSanguin( String gs ) {
+	 * 
+	 * if ( gs != null ) { for ( String r : groupeSanguin ) { if ( gs.equals( r ) )
+	 * { return true; } } } return false; }
+	 * 
+	 * public boolean isInRhesus( String rh ) {
+	 * 
+	 * if ( rh != null ) { for ( String r : rhesus ) { if ( rh.equals( r ) ) {
+	 * return true; } } } return false; }
+	 */
+	public final Property<String> rhesusProperty() {
+		return this.rhesus;
+	}
+	public final Property<String> groupeSanguinProperty() {
+		return this.rhesus;
 	}
 	
-	public boolean isInRhesus( String rh ) {
-		
-		if ( rh != null ) {
-			for ( String r : rhesus ) {
-				if ( rh.equals( r ) ) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
 
-	public ObservableList<String> getGroupeSanguin() {
+	public Property<String> getGroupeSanguin() {
 		return groupeSanguin;
 	}
 
-	public ObservableList<String> getRhesus() {
+	public Property<String> getRhesus() {
 		return rhesus;
 	}
 	

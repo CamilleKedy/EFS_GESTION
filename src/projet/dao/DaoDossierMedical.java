@@ -41,15 +41,15 @@ public class DaoDossierMedical {
 			// Insère le dossierMedical
 			sql = "INSERT INTO DossierMedical ( poids, inaptitude_temporaire, id_donneur) VALUES ( ?, ?, ?)";
 			stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS  );
-//			stmt.setObject(	1, dossierMedical.getId() );
-//			stmt.setObject(	2, dossierMedical.getGroupeSanguin() );
-//			stmt.setObject(	3, dossierMedical.getRhesus() );
-			stmt.setObject(	1, dossierMedical.getPoids() );
-			stmt.setObject(	2, dossierMedical.getInaptitude() );
+			stmt.setObject(	1, dossierMedical.getId() );
+			stmt.setObject(	2, dossierMedical.getGroupeSanguin() );
+			stmt.setObject(	3, dossierMedical.getRhesus() );
+			stmt.setObject(	4, dossierMedical.getPoids() );
+			stmt.setObject(	5, dossierMedical.getInaptitude() );
 			if(dossierMedical.getDonneur().getId() == null)
-				stmt.setObject(	3, null );
+				stmt.setObject(	5, null );
 			else
-				stmt.setObject(3, dossierMedical.getDonneur().getId());
+				stmt.setObject(5, dossierMedical.getDonneur().getId());
 			
 			stmt.executeUpdate();
 
@@ -245,8 +245,8 @@ public class DaoDossierMedical {
 		
 		if ( flagComplet ) {
 			dossierMedical.setDonneur( daoDonneur.retrouver( rs.getObject("id_donneur", Integer.class) ) );
-			dossierMedical.getGroupeSanguin().addAll( daoDonneur.listerGroupeSanguinPourDossierMedical(dossierMedical));
-			dossierMedical.getRhesus().addAll( daoDonneur.listerRhesusPourDossierMedical(dossierMedical));
+			//dossierMedical.getGroupeSanguin().addAll( daoDonneur.listerGroupeSanguinPourDossierMedical(dossierMedical));
+			//dossierMedical.getRhesus().addAll( daoDonneur.listerRhesusPourDossierMedical(dossierMedical));
 		}
 		else
 		{

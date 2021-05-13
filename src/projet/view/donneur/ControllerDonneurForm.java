@@ -9,11 +9,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import jfox.javafx.util.ConverterFloat;
 import jfox.javafx.util.ConverterInteger;
 import jfox.javafx.util.ConverterLocalDate;
 import jfox.javafx.view.Controller;
 import jfox.javafx.view.IManagerGui;
 import projet.data.Donneur;
+import projet.data.DossierMedical;
 import projet.view.EnumView;
 
 
@@ -78,6 +80,7 @@ public class ControllerDonneurForm extends Controller {
 	private void initialize() {
 		
 		Donneur courant = modelDonneur.getCourant();
+		DossierMedical courantDossier = modelDossierMedical.getCourant();
 
 		// Data binding
 
@@ -86,7 +89,6 @@ public class ControllerDonneurForm extends Controller {
 		bindBidirectional( textFieldPrenom, courant.prenomProperty() );
 		bindBidirectional( textFieldVille, courant.villeProperty() );
 		bindBidirectional( textFieldAdresse, courant.adresseProperty() );
-		
 		// Date d'échéance
 				bindBidirectional( datePickerDdn, courant.dateNaissanceProperty(), new ConverterLocalDate() );
 
@@ -94,11 +96,18 @@ public class ControllerDonneurForm extends Controller {
 		//bindBidirectional( comboBoxCarte, courant.demandeCarteProperty() );
 		comboBoxCarte.valueProperty().bindBidirectional( courant.demandeCarteProperty() );
 		
-		/*
-		 * // Liste des personnes listViewPersonnes.setItems( courant.getPersonnes() );
-		 * listViewPersonnes.getSelectionModel().setSelectionMode(
-		 * SelectionMode.MULTIPLE );
-		 */
+		// dossier Medical
+		
+		bindBidirectional( textFieldID1, courantDossier.idProperty() ,new ConverterInteger());
+		comboBoxGSanguin.setItems(modelDossierMedical.getListeGroupeSanguin());
+		comboBoxGSanguin.valueProperty().bindBidirectional(courantDossier.rhesusProperty());
+		
+		comboBoxGSanguin.setItems(modelDossierMedical.getListeGroupeSanguin());
+		comboBoxGSanguin.valueProperty().bindBidirectional(courantDossier.groupeSanguinProperty());
+		
+		bindBidirectional( textFieldPoids, courantDossier.poidsProperty(), new ConverterFloat() );
+		bindBidirectional(textAreaInaptitude, courantDossier.inaptitudeProperty());
+		
 	}
 	
 	
