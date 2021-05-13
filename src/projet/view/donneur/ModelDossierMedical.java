@@ -12,6 +12,7 @@ import jfox.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoDossierMedical;
+import projet.data.Donneur;
 import projet.data.DossierMedical;
 
 
@@ -20,10 +21,10 @@ public class ModelDossierMedical {
 	
 	// Données observables 
 	
-//	private Property<String> groupeSanguin = new SimpleObjectProperty<>();
-//	private Property<String> rhesus = new SimpleObjectProperty<>();
-//	private final ObservableList<String> listeGroupeSanguin = FXCollections.observableArrayList();
-//	private final ObservableList<String> listeRhesus = FXCollections.observableArrayList();
+	private Property<String> groupeSanguin = new SimpleObjectProperty<>();
+	private Property<String> rhesus = new SimpleObjectProperty<>();
+	private final ObservableList<String> listeGroupeSanguin = FXCollections.observableArrayList();
+	private final ObservableList<String> listeRhesus = FXCollections.observableArrayList();
 	private final ObservableList<DossierMedical> liste = FXCollections.observableArrayList();
 	
 	private final DossierMedical	courant = new DossierMedical();
@@ -38,50 +39,15 @@ public class ModelDossierMedical {
     @Inject
 	private DaoDossierMedical		daoDossierMedical;
 	
-/*	
+	
     @PostConstruct
 	public void init() {
     	listeGroupeSanguin.addAll("A", "B", "AB", "O");
     	listeRhesus.addAll("positif", "negatif");
     }
-*/    
     
-	// Getters & Setters
-/*	
-	public final Property<String> groupeSanguinProperty() {
-		return this.groupeSanguin;
-	}
+    
 	
-
-
-	public final String getGroupeSanguin() {
-		return this.groupeSanguinProperty().getValue();
-	}
-	
-
-
-	public final void setGroupeSanguin(final String groupeSanguin) {
-		this.groupeSanguinProperty().setValue(groupeSanguin);
-	}
-	
-
-
-	public final Property<String> rhesusProperty() {
-		return this.rhesus;
-	}
-	
-
-
-	public final String getRhesus() {
-		return this.rhesusProperty().getValue();
-	}
-	
-
-
-	public final void setRhesus(final String rhesus) {
-		this.rhesusProperty().setValue(rhesus);
-	}
-*/	
 	
 	// Actions
 	
@@ -94,6 +60,15 @@ public class ModelDossierMedical {
 		mapper.update( courant, selection );
 	}
 
+	
+	public void setSelection( DossierMedical selection ) {
+		if ( selection == null ) {
+			this.selection = new DossierMedical();
+		} else {
+			this.selection = daoDossierMedical.retrouver( selection.getId() );
+		}
+	}
+	
 	
 	public void validerMiseAJour() {
 
@@ -131,14 +106,43 @@ public class ModelDossierMedical {
 		selection = UtilFX.findNext( liste, item );
 	}
 
-
-
+	// Getters & Setters
+	
+	public final Property<String> groupeSanguinProperty() {
+		return this.groupeSanguin;
+	}
 	
 
 
+	public final String getGroupeSanguin() {
+		return this.groupeSanguinProperty().getValue();
+	}
+	
+
+
+	public final void setGroupeSanguin(final String groupeSanguin) {
+		this.groupeSanguinProperty().setValue(groupeSanguin);
+	}
+	
+
+
+	public final Property<String> rhesusProperty() {
+		return this.rhesus;
+	}
+	
+
+
+	public final String getRhesus() {
+		return this.rhesusProperty().getValue();
+	}
+	
+
+
+	public final void setRhesus(final String rhesus) {
+		this.rhesusProperty().setValue(rhesus);
+	}
+
 
 	
-	
-
 	
 }

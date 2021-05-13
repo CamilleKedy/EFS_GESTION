@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.site_de_collecte.ControllerSite_de_collecteForm">
+   <children>
+      <HBox alignment="CENTER" layoutX="59.0" layoutY="118.0" prefHeight="412.0" prefWidth="600.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="118.0">
+         <children>
+            <TabPane prefHeight="412.0" prefWidth="538.0" style="-fx-border-color: lightgray;">
+               <tabs>
+                  <Tab closable="false" text="Détails">
+                     <content>
+                        <HBox alignment="CENTER" fillHeight="false" prefHeight="374.0" prefWidth="456.0">
+                           <children>
+                              <GridPane maxWidth="1.7976931348623157E308" prefHeight="316.0" prefWidth="416.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.0" minWidth="100.0" prefWidth="127.0" />
+                                    <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="168.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label text="Id" />
+                                    <Label text="Ville" GridPane.rowIndex="1" />
+                                    <Label prefHeight="17.0" prefWidth="90.0" text="Nombre de lits" GridPane.rowIndex="2" />
+                                    <Label text="Adresse" GridPane.rowIndex="3" />
+                                    <TextField fx:id="textFieldId" prefHeight="31.0" prefWidth="68.0" GridPane.columnIndex="1" />
+                                    <TextField fx:id="textFieldVille" prefHeight="31.0" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="textFieldNbr_lits" prefHeight="31.0" prefWidth="68.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="textFieldAdresse" prefHeight="31.0" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                              </GridPane>
+                           </children>
+                        </HBox>
+                     </content>
+                  </Tab>
+               </tabs>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TabPane>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="71.0" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#doValider" prefHeight="38.0" prefWidth="75.0" style="-fx-background-color: #162c53;" text="OK" textFill="WHITE" />
+            <Button fx:id="buttonAnnuler" cancelButton="true" mnemonicParsing="false" onAction="#doAnnuler" prefHeight="38.0" prefWidth="90.0" style="-fx-background-color: #ea302b;" text="Annuler" textFill="WHITE" />
+         </children>
+      </HBox>
+      <HBox layoutX="-1.0" layoutY="1.0" prefHeight="108.0" prefWidth="600.0">
+         <children>
+            <ImageView fitHeight="112.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/Logo-ESF_Gestion%20blanc.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin>
+            </ImageView>
+            <VBox alignment="CENTER_RIGHT" prefHeight="112.0" prefWidth="422.0">
+               <children>
+                  <Label text="SITE DE COLLECTE" textFill="#162c53">
+                     <font>
+                        <Font name="Rockwell Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <Line endX="100.0" startX="-335.54705810546875" startY="1.0001716613769531" stroke="#ea302b" strokeWidth="5.0">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Line>
+               </children>
+               <padding>
+                  <Insets top="40.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
