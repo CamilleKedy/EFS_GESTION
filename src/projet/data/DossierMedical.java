@@ -16,8 +16,8 @@ public class DossierMedical  {
 	// Données observables
 	
 	private final Property<Integer>	id			= new SimpleObjectProperty<>();
-	private final ObservableList<String>	groupeSanguin		=FXCollections.observableArrayList();
-	private final ObservableList<String>	rhesus	= FXCollections.observableArrayList();
+	private final Property<String>	groupeSanguin		=new SimpleObjectProperty<>();
+	private final Property<String>	rhesus	= new SimpleObjectProperty<>();
 	private final Property<Float> 	poids = new SimpleObjectProperty<>();
 	private final StringProperty 	inaptitude = new SimpleStringProperty();
 	private final Property<Donneur> donneur = new SimpleObjectProperty<>();
@@ -28,8 +28,10 @@ public class DossierMedical  {
 	public DossierMedical() {
 	}
 
-	public DossierMedical( int id, float poids, String inaptitude, Donneur donneur ) {
-		setId(id);	
+	public DossierMedical( int id, String groupeSanguin, String rhesus, float poids, String inaptitude, Donneur donneur ) {
+		setId(id);
+		setGroupeSanguin(groupeSanguin);
+		setRhesus(rhesus);
 		setPoids(poids);
 		setInaptitude(inaptitude);
 		setDonneur(donneur);
@@ -133,7 +135,7 @@ public class DossierMedical  {
 	}
 	
 	
-	
+/*	
 	public boolean isInGroupeSanguin( String gs ) {
 		
 		if ( gs != null ) {
@@ -157,14 +159,37 @@ public class DossierMedical  {
 		}
 		return false;
 	}
-
-	public ObservableList<String> getGroupeSanguin() {
-		return groupeSanguin;
+*/
+	public final Property<String> groupeSanguinProperty() {
+		return this.groupeSanguin;
 	}
+	
 
-	public ObservableList<String> getRhesus() {
-		return rhesus;
+	public final String getGroupeSanguin() {
+		return this.groupeSanguinProperty().getValue();
 	}
+	
+
+	public final void setGroupeSanguin(final String groupeSanguin) {
+		this.groupeSanguinProperty().setValue(groupeSanguin);
+	}
+	
+
+	public final Property<String> rhesusProperty() {
+		return this.rhesus;
+	}
+	
+
+	public final String getRhesus() {
+		return this.rhesusProperty().getValue();
+	}
+	
+
+	public final void setRhesus(final String rhesus) {
+		this.rhesusProperty().setValue(rhesus);
+	}
+	
+
 	
 	
 

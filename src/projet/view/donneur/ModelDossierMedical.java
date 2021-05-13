@@ -12,6 +12,7 @@ import jfox.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoDossierMedical;
+import projet.data.Donneur;
 import projet.data.DossierMedical;
 
 
@@ -59,6 +60,15 @@ public class ModelDossierMedical {
 		mapper.update( courant, selection );
 	}
 
+	
+	public void setSelection( DossierMedical selection ) {
+		if ( selection == null ) {
+			this.selection = new DossierMedical();
+		} else {
+			this.selection = daoDossierMedical.retrouver( selection.getId() );
+		}
+	}
+	
 	
 	public void validerMiseAJour() {
 
