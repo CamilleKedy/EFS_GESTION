@@ -39,13 +39,15 @@ public class DaoDossierMedical {
 			cn = dataSource.getConnection();
 
 			// Insère le dossierMedical
-			sql = "INSERT INTO DossierMedical ( poids, inaptitude_temporaire, id_donneur) VALUES ( ?, ?, ?)";
+			sql = "INSERT INTO DossierMedical ( groupe_sanguin, rhesus, poids, inaptitude_temporaire, id_donneur) VALUES ( ?, ?, ?, ?, ?)";
 			stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS  );
+
 			stmt.setObject(	1, dossierMedical.getId() );
 			stmt.setObject(	2, dossierMedical.getGroupeSanguin() );
 			stmt.setObject(	3, dossierMedical.getRhesus() );
 			stmt.setObject(	4, dossierMedical.getPoids() );
 			stmt.setObject(	5, dossierMedical.getInaptitude() );
+			
 			if(dossierMedical.getDonneur().getId() == null)
 				stmt.setObject(	5, null );
 			else
@@ -80,14 +82,14 @@ public class DaoDossierMedical {
 			cn = dataSource.getConnection();
 
 			// Modifie le dossierMedical
-			sql = "UPDATE dossierMedical SET  poids = ?, inaptitude_temporaire = ?, id_donneur = ? WHERE id_dossier =  ?";
+			sql = "UPDATE dossierMedical SET  groupe_sanguin = ?, rhesus = ?, poids = ?, inaptitude_temporaire = ?, id_donneur = ? WHERE id_dossier =  ?";
 			stmt = cn.prepareStatement( sql );
-//			stmt.setObject( 1, dossierMedical.getGroupeSanguin() );
-//			stmt.setObject( 2, dossierMedical.getRhesus() );
-			stmt.setObject( 1, dossierMedical.getPoids() );
-			stmt.setObject( 2, dossierMedical.getInaptitude() );
-			stmt.setObject( 3, dossierMedical.getDonneur().getId() );
-			stmt.setObject( 4, dossierMedical.getId() );
+			stmt.setObject( 1, dossierMedical.getGroupeSanguin() );
+			stmt.setObject( 2, dossierMedical.getRhesus() );
+			stmt.setObject( 3, dossierMedical.getPoids() );
+			stmt.setObject( 4, dossierMedical.getInaptitude() );
+			stmt.setObject( 5, dossierMedical.getDonneur().getId() );
+			stmt.setObject( 6, dossierMedical.getId() );
 			stmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -242,11 +244,18 @@ public class DaoDossierMedical {
 		dossierMedical.setInaptitude(rs.getObject( "inaptitude_temporaire", String.class ));
 
 		dossierMedical.setPoids(rs.getObject( "poids", Float.class ));
+		dossierMedical.setGroupeSanguin(rs.getObject( "groupe_sanguin", String.class ));
+		dossierMedical.setRhesus(rs.getObject( "rhesus", String.class ));
 		
 		if ( flagComplet ) {
 			dossierMedical.setDonneur( daoDonneur.retrouver( rs.getObject("id_donneur", Integer.class) ) );
+
 			//dossierMedical.getGroupeSanguin().addAll( daoDonneur.listerGroupeSanguinPourDossierMedical(dossierMedical));
 			//dossierMedical.getRhesus().addAll( daoDonneur.listerRhesusPourDossierMedical(dossierMedical));
+
+			
+//			dossierMedical.getGroupeSanguin().addAll( daoDonneur.listerGroupeSanguinPourDossierMedical(dossierMedical));
+//			dossierMedical.getRhesus().addAll( daoDonneur.listerRhesusPourDossierMedical(dossierMedical));}
 		}
 		else
 		{

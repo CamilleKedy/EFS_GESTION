@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import jfox.exception.ExceptionValidation;
@@ -19,7 +21,7 @@ public class ModelDonneur {
 	
 	// Données observables 
 	
-//	private Property<String> niveau = new SimpleObjectProperty<>("non");
+	private final Property<String> niveau = new SimpleObjectProperty<>("non");
 	private final ObservableList<String> listeChoixCarte = FXCollections.observableArrayList();
 	private final ObservableList<Donneur> liste = FXCollections.observableArrayList();
 	
@@ -50,8 +52,8 @@ public class ModelDonneur {
 			this.selection = daoDonneur.retrouver( selection.getId() );
 		}
 	}
+
 	
-/*	
 	public final Property<String> niveauProperty() {
 		return this.niveau;
 	}
@@ -64,7 +66,7 @@ public class ModelDonneur {
 	public final void setNiveau(final String niveau) {
 		this.niveauProperty().setValue(niveau);
 	}
-*/
+
 	
 	// Actions
 	

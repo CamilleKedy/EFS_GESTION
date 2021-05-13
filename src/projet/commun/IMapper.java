@@ -12,6 +12,8 @@ import projet.data.Donneur;
 import projet.data.DossierMedical;
 import projet.data.Memo;
 import projet.data.Personne;
+import projet.data.Personnel;
+import projet.data.Profession;
 import projet.data.Service;
 import projet.data.Site_de_collecte;
 
@@ -37,6 +39,9 @@ public interface IMapper {
 
 	DossierMedical update(@MappingTarget DossierMedical target, DossierMedical source);
 	
+	Profession update( @MappingTarget Profession target, Profession source );
+	
+	Personnel update( @MappingTarget Personnel target, Personnel source );
 
 	Collecte update( @MappingTarget Collecte target, Collecte source  );
 	

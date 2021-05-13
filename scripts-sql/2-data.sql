@@ -2,7 +2,9 @@ SET search_path TO projet;
 
 
 -- Supprimer toutes les données
+
 DELETE FROM Personnel;
+DELETE FROM Profession;
 DELETE FROM Donneur;
 DELETE FROM Site_de_collecte;
 DELETE FROM Connexion;
@@ -13,15 +15,25 @@ DELETE FROM RDV;
 DELETE FROM personnelDeCollecte;
 DELETE FROM materielDeCollecte;
 
+-- Profession
+
+INSERT INTO Profession (id_profession, libelle ) VALUES 
+  (1, 'Gestionnaire de site'),
+  (2, 'Agent de collation' ),
+  (3, 'Infirmière' ),
+  (4, 'Sécrétaire' ),
+  (5, 'Médecin' );
+
+ALTER TABLE Profession ALTER COLUMN id_profession RESTART WITH 6;
 
 -- Personnel
 
-INSERT INTO Personnel (id_personnel, nom, prenom, adresse, profession ) VALUES 
-  (1, 'cardinal', 'cardinal', 'system', 'Gestionnaire de site'),
-  (2, 'KEDY', 'Albert', '18 rue JAB', 'Agent de collation' ),
-  (3, 'TANKEU', 'Ange', '92 rue GDG', 'infirmière' ),
-  (4, 'TCHAMGOUE', 'Yvana', '21 rue JFK', 'Sécrétaire' ),
-  (5, 'NGABMEN', 'Benjamin', '16 rue JAB', 'Médecin' );
+INSERT INTO Personnel (id_personnel, nom, prenom, adresse, id_profession ) VALUES 
+  (1, 'cardinal', 'cardinal', 'system', 1),
+  (2, 'KEDY', 'Albert', '18 rue JAB', 2 ),
+  (3, 'TANKEU', 'Ange', '92 rue GDG', 3 ),
+  (4, 'TCHAMGOUE', 'Yvana', '21 rue JFK', 4 ),
+  (5, 'NGABMEN', 'Benjamin', '16 rue JAB', 5 );
 
 ALTER TABLE Personnel ALTER COLUMN id_personnel RESTART WITH 6;
 

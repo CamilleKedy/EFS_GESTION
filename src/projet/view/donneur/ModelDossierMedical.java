@@ -10,6 +10,7 @@ import jfox.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoDossierMedical;
+import projet.data.Donneur;
 import projet.data.DossierMedical;
 
 

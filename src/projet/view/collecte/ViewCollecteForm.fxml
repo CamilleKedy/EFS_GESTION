@@ -80,9 +80,9 @@
                                   <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="112.0" valignment="TOP" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Label text="Catégorie :" />
-                                    <ComboBox prefWidth="150.0" GridPane.columnIndex="1" />
-                                    <HBox prefHeight="219.0" prefWidth="462.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+                                    <Label text="Profession :" />
+                                    <ComboBox fx:id="comboBoxProfession" onAction="#doPersonnelProfession" prefWidth="150.0" GridPane.columnIndex="1" />
+                                    <HBox prefHeight="260.0" prefWidth="462.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
                                        <children>
                                           <GridPane prefHeight="253.0" prefWidth="486.0">
                                             <columnConstraints>
@@ -94,12 +94,12 @@
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <ListView prefHeight="200.0" prefWidth="200.0" />
-                                                <ListView prefHeight="219.0" prefWidth="180.0" GridPane.columnIndex="2" />
+                                                <ListView fx:id="listViewPersonnel" prefHeight="200.0" prefWidth="200.0" />
+                                                <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
                                                 <VBox alignment="CENTER" prefHeight="245.0" prefWidth="128.0" spacing="10.0" GridPane.columnIndex="1">
                                                    <children>
-                                                      <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" text="Ajouter" />
-                                                      <Button mnemonicParsing="false" text="Supprimer" />
+                                                      <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Ajouter" />
+                                                      <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Supprimer" />
                                                    </children>
                                                 </VBox>
                                              </children>
@@ -138,8 +138,8 @@
                                           <ListView prefHeight="219.0" prefWidth="180.0" GridPane.columnIndex="2" />
                                           <VBox alignment="CENTER" prefHeight="245.0" prefWidth="128.0" spacing="10.0" GridPane.columnIndex="1">
                                              <children>
-                                                <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" text="Ajouter" />
-                                                <Button mnemonicParsing="false" text="Supprimer" />
+                                                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Ajouter" />
+                                                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Supprimer" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -167,8 +167,14 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="71.0" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Button defaultButton="true" mnemonicParsing="false" onAction="#doValider" prefHeight="38.0" prefWidth="75.0" style="-fx-background-color: #162c53;" text="OK" textFill="WHITE" />
-            <Button cancelButton="true" mnemonicParsing="false" onAction="#doAnnuler" prefHeight="38.0" prefWidth="90.0" style="-fx-background-color: #ea302b;" text="Annuler" textFill="WHITE" />
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#doValider" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #162c53;" text="OK" textFill="WHITE">
+               <font>
+                  <Font name="Trebuchet MS" size="15.0" />
+               </font></Button>
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#doAnnuler" prefHeight="40.0" prefWidth="90.0" style="-fx-background-color: #ea302b;" text="Annuler" textFill="WHITE">
+               <font>
+                  <Font name="Trebuchet MS" size="15.0" />
+               </font></Button>
          </children>
       </HBox>
       <HBox layoutX="-1.0" layoutY="1.0" prefHeight="108.0" prefWidth="600.0">
