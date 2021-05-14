@@ -96,7 +96,7 @@ public class ControllerCollecteForm extends Controller {
 	
 	public void refresh() {
 		modelSite.actualiserListe();
-		modelProfession.actualiserListe();
+	//	modelProfession.actualiserListe();
 		modelCollecte.actualiserCourant();
 		
 		

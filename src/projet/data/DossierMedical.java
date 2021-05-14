@@ -16,7 +16,7 @@ public class DossierMedical  {
 	private final Property<Integer>	id			= new SimpleObjectProperty<>();
 	private final Property<String>	groupeSanguin		=new SimpleObjectProperty<>();
 	private final Property<String>	rhesus	= new SimpleObjectProperty<>();
-	private final Property<Float> 	poids = new SimpleObjectProperty<>();
+	private final Property<Double> 	poids = new SimpleObjectProperty<>();
 	private final StringProperty 	inaptitude = new SimpleStringProperty();
 	private final Property<Donneur> donneur = new SimpleObjectProperty<>();
 
@@ -26,7 +26,7 @@ public class DossierMedical  {
 	public DossierMedical() {
 	}
 
-	public DossierMedical( int id, String groupeSanguin, String rhesus, float poids, String inaptitude, Donneur donneur ) {
+	public DossierMedical( int id, String groupeSanguin, String rhesus, Double poids, String inaptitude, Donneur donneur ) {
 		setId(id);
 		setGroupeSanguin(groupeSanguin);
 		setRhesus(rhesus);
@@ -88,17 +88,17 @@ public class DossierMedical  {
 	}
 		
 
-	public final Property<Float> poidsProperty() {
+	public final Property<Double> poidsProperty() {
 		return this.poids;
 	}
 	
 
-	public final Float getPoids() {
+	public final Double getPoids() {
 		return this.poidsProperty().getValue();
 	}
 	
 
-	public final void setPoids(final Float poids) {
+	public final void setPoids(final Double poids) {
 		this.poidsProperty().setValue(poids);
 	}
 	

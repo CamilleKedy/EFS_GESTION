@@ -9,7 +9,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import jfox.javafx.util.ConverterFloat;
+import jfox.javafx.util.ConverterDouble;
 import jfox.javafx.util.ConverterInteger;
 import jfox.javafx.util.ConverterLocalDate;
 import jfox.javafx.view.Controller;
@@ -89,6 +89,7 @@ public class ControllerDonneurForm extends Controller {
 		bindBidirectional( textFieldPrenom, courant.prenomProperty() );
 		bindBidirectional( textFieldVille, courant.villeProperty() );
 		bindBidirectional( textFieldAdresse, courant.adresseProperty() );
+		
 		// Date d'échéance
 				bindBidirectional( datePickerDdn, courant.dateNaissanceProperty(), new ConverterLocalDate() );
 
@@ -98,16 +99,17 @@ public class ControllerDonneurForm extends Controller {
 		
 		// dossier Medical
 		
-		bindBidirectional( textFieldID1, courantDossier.idProperty() ,new ConverterInteger());
-		comboBoxGSanguin.setItems(modelDossierMedical.getListeGroupeSanguin());
-		comboBoxGSanguin.valueProperty().bindBidirectional(courantDossier.rhesusProperty());
-		
+		bindBidirectional( textFieldID1, courant.idProperty() ,new ConverterInteger());
 		comboBoxGSanguin.setItems(modelDossierMedical.getListeGroupeSanguin());
 		comboBoxGSanguin.valueProperty().bindBidirectional(courantDossier.groupeSanguinProperty());
 		
-		bindBidirectional( textFieldPoids, courantDossier.poidsProperty(), new ConverterFloat() );
-		bindBidirectional(textAreaInaptitude, courantDossier.inaptitudeProperty());
+		comboBoxRhesus.setItems(modelDossierMedical.getListeRhesus());
+		comboBoxRhesus.valueProperty().bindBidirectional(courantDossier.rhesusProperty());
 		
+		bindBidirectional( textFieldPoids, courantDossier.poidsProperty(), new ConverterDouble() );
+		bindBidirectional(textAreaInaptitude, courantDossier.inaptitudeProperty());
+	
+
 	}
 	
 	
@@ -138,7 +140,8 @@ public class ControllerDonneurForm extends Controller {
 
 	@FXML
 	void doEnregistrerDossier() {
-		//modelDossierMedical.validerMiseAJour();
+		
+		modelDossierMedical.validerMiseAJour();
 		managerGui.showView( EnumView.DonneurListe );
 	}	
 	
