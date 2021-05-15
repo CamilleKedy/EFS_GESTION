@@ -109,7 +109,7 @@ public class DaoDonneur {
 			cn = dataSource.getConnection();
 
 			// Supprime le donneur
-			sql = "DELETE FROM donneur WHERE id_donneur = ? ; DELETE FROM dossierMedical WHERE dossierMedical.id_donneur = ?;";
+			sql = " DELETE FROM dossierMedical WHERE dossierMedical.id_donneur = ?;DELETE FROM donneur WHERE id_donneur = ? ;";
 			stmt = cn.prepareStatement(sql);
 			stmt.setObject( 1, idDonneur );
 			stmt.setObject( 2, idDonneur );

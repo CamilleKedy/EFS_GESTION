@@ -10,7 +10,6 @@ import jfox.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoDossierMedical;
-import projet.data.Donneur;
 import projet.data.DossierMedical;
 
 
@@ -28,7 +27,7 @@ public class ModelDossierMedical {
 	
 	// Autres champs
 	
-	private DossierMedical		selection;
+	private DossierMedical		selection = new DossierMedical();
 
 	@Inject
 	private IMapper			mapper;

@@ -77,7 +77,7 @@
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="299.0" prefWidth="124.0" spacing="16.0">
                            <children>
-                              <Label text="Id_donneur :" />
+                              <Label text="Donneur" />
                               <Label layoutX="10.0" layoutY="10.0" text="Poids :" />
                               <Label layoutX="10.0" layoutY="27.0" text="Groupe sanguin :" />
                               <Label layoutX="10.0" layoutY="61.0" text="Rhésus :" />
@@ -93,7 +93,7 @@
                         </VBox>
                         <VBox prefHeight="267.0" prefWidth="284.0" spacing="8.0">
                            <children>
-                              <TextField fx:id="textFieldID1" editable="false" />
+                              <ComboBox fx:id="comboBoxDonneur" prefWidth="150.0" />
                               <TextField fx:id="textFieldPoids" layoutX="10.0" layoutY="10.0" />
                               <ComboBox fx:id="comboBoxGSanguin" prefHeight="25.0" prefWidth="81.0" />
                               <ComboBox fx:id="comboBoxRhesus" prefHeight="25.0" prefWidth="81.0" />

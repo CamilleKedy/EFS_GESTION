@@ -40,7 +40,7 @@ public class ControllerDonneurForm extends Controller {
 	private ComboBox<String>	comboBoxCarte;
 	
 	@FXML
-	private TextField textFieldID1;
+	private ComboBox<Donneur> comboBoxDonneur;
 	@FXML
 	private TextField		textFieldPoids;
 	@FXML
@@ -81,6 +81,7 @@ public class ControllerDonneurForm extends Controller {
 		
 		Donneur courant = modelDonneur.getCourant();
 		DossierMedical courantDossier = modelDossierMedical.getCourant();
+		//modelDossierMedical.setSelection(courantDossier);
 
 		// Data binding
 
@@ -99,7 +100,10 @@ public class ControllerDonneurForm extends Controller {
 		
 		// dossier Medical
 		
-		bindBidirectional( textFieldID1, courant.idProperty() ,new ConverterInteger());
+		comboBoxDonneur.setItems(modelDonneur.getListe());
+		comboBoxDonneur.valueProperty().bindBidirectional(courantDossier.donneurProperty());
+		
+		
 		comboBoxGSanguin.setItems(modelDossierMedical.getListeGroupeSanguin());
 		comboBoxGSanguin.valueProperty().bindBidirectional(courantDossier.groupeSanguinProperty());
 		
@@ -109,12 +113,13 @@ public class ControllerDonneurForm extends Controller {
 		bindBidirectional( textFieldPoids, courantDossier.poidsProperty(), new ConverterDouble() );
 		bindBidirectional(textAreaInaptitude, courantDossier.inaptitudeProperty());
 	
-
+		//modelDossierMedical.setSelection(courantDossier);
 	}
 	
 	
 	public void refresh() {
 		modelDonneur.actualiserCourant();
+		modelDossierMedical.actualiserCourant();
 		modelDossierMedical.actualiserListe();		
 	}
 	

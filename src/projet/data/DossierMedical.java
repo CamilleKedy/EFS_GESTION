@@ -118,18 +118,18 @@ public class DossierMedical  {
 	}
 	
 
-	public final Property<Donneur> idDonneurProperty() {
+	public final Property<Donneur> donneurProperty() {
 		return this.donneur;
 	}
 	
 
 	public final Donneur getDonneur() {
-		return this.idDonneurProperty().getValue();
+		return this.donneurProperty().getValue();
 	}
 	
 
 	public final void setDonneur(final Donneur donneur) {
-		this.idDonneurProperty().setValue(donneur);
+		this.donneurProperty().setValue(donneur);
 	}
 	
 	

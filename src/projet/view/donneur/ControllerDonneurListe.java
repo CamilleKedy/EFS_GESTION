@@ -42,13 +42,15 @@ public class ControllerDonneurListe {
 	private IManagerGui		managerGui;
 	@Inject
 	private ModelDonneur 	modelDonneur;
+	@Inject
+	private ModelDossierMedical modelDossierMedical;
 	
 	// Initialisation du Controller
 
 	@FXML
 	private void initialize() {
 
-		//Collecte courant = modelCollecte.getCourant();
+		
 		// Data binding
 		tableView.setItems(  modelDonneur.getListe() );
 
@@ -83,6 +85,7 @@ public class ControllerDonneurListe {
 	@FXML
 	private void doModifier() {
 		modelDonneur.setSelection( tableView.getSelectionModel().getSelectedItem() );
+		modelDossierMedical.getCourant().setDonneur(tableView.getSelectionModel().getSelectedItem());
 		managerGui.showView( EnumView.DonneurForm );
 	}
 
