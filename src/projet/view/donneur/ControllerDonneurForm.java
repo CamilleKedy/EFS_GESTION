@@ -2,6 +2,7 @@ package projet.view.donneur;
 
 import javax.inject.Inject;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -105,7 +106,8 @@ public class ControllerDonneurForm extends Controller {
 		
 		bindBidirectional( textFieldPoids, courantDossier.poidsProperty(), new ConverterDouble() );
 		bindBidirectional(textAreaInaptitude, courantDossier.inaptitudeProperty());
-	
+		
+		textAreaInaptitude.setDisable(true);
 		
 	}
 	
@@ -118,6 +120,17 @@ public class ControllerDonneurForm extends Controller {
 	
 	
 	// Actions
+	
+	 @FXML
+	 void aptitudeOn(ActionEvent event) {
+		 if(checkBoxAptitude.isSelected()) {
+			 textAreaInaptitude.setDisable(false);
+		 }
+		 else {
+			  textAreaInaptitude.setDisable(true);
+		 }
+		
+	 }
 
 	@FXML
 	private void doAnnuler() {

@@ -86,14 +86,20 @@
                         </VBox>
                         <VBox prefHeight="267.0" prefWidth="284.0" spacing="8.0">
                            <children>
-                              <TextField fx:id="textFieldPoids" layoutX="10.0" layoutY="10.0" />
+                              <TextField fx:id="textFieldPoids" layoutX="10.0" layoutY="10.0">
+                                 <font>
+                                    <Font name="Trebuchet MS" size="13.0" />
+                                 </font></TextField>
                               <ComboBox fx:id="comboBoxGSanguin" prefHeight="25.0" prefWidth="81.0" />
                               <ComboBox fx:id="comboBoxRhesus" prefHeight="25.0" prefWidth="81.0" />
-                              <CheckBox fx:id="checkBoxAptitude" mnemonicParsing="false">
+                              <CheckBox fx:id="checkBoxAptitude" mnemonicParsing="false" onAction="#aptitudeOn">
                                  <VBox.margin>
                                     <Insets top="5.0" />
                                  </VBox.margin></CheckBox>
-                              <TextArea fx:id="textAreaInaptitude" prefHeight="143.0" prefWidth="260.0" />
+                              <TextArea fx:id="textAreaInaptitude" prefHeight="143.0" prefWidth="260.0" promptText="Raisons de l'inaptitude">
+                                 <font>
+                                    <Font name="Trebuchet MS" size="12.0" />
+                                 </font></TextArea>
                               <HBox alignment="BOTTOM_CENTER" prefHeight="66.0" prefWidth="243.0" spacing="40.0" />
                            </children>
                            <HBox.margin>
@@ -143,8 +149,14 @@
       </HBox>
       <HBox alignment="CENTER" layoutX="193.0" layoutY="485.0" prefHeight="66.0" prefWidth="243.0" spacing="40.0">
          <children>
-            <Button fx:id="buttonEnregistrerDonneur" mnemonicParsing="false" onAction="#doEnregistrerDonneur" prefHeight="40.0" prefWidth="85.0" style="-fx-background-color: #162c53;" text="Enregistrer" textFill="WHITE" />
-            <Button fx:id="buttonAnnulerE1" mnemonicParsing="false" onAction="#doAnnuler" prefHeight="40.0" prefWidth="85.0" style="-fx-background-color: #ea302b;" text="Annuler" textFill="WHITE" />
+            <Button fx:id="buttonEnregistrerDonneur" mnemonicParsing="false" onAction="#doEnregistrerDonneur" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #162c53;" text="Enregistrer" textFill="WHITE">
+               <font>
+                  <Font name="Trebuchet MS" size="14.0" />
+               </font></Button>
+            <Button fx:id="buttonAnnulerE1" mnemonicParsing="false" onAction="#doAnnuler" prefHeight="40.0" prefWidth="85.0" style="-fx-background-color: #ea302b;" text="Annuler" textFill="WHITE">
+               <font>
+                  <Font name="Trebuchet MS" size="14.0" />
+               </font></Button>
          </children>
       </HBox>
    </children>
