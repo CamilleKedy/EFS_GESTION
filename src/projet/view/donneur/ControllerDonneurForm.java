@@ -39,8 +39,7 @@ public class ControllerDonneurForm extends Controller {
 	@FXML
 	private ComboBox<String>	comboBoxCarte;
 	
-	@FXML
-	private ComboBox<Donneur> comboBoxDonneur;
+	
 	@FXML
 	private TextField		textFieldPoids;
 	@FXML
@@ -97,10 +96,6 @@ public class ControllerDonneurForm extends Controller {
 		comboBoxCarte.valueProperty().bindBidirectional( courant.demandeCarteProperty() );
 		
 		// dossier Medical
-		
-		comboBoxDonneur.setItems(modelDonneur.getListe());
-		comboBoxDonneur.valueProperty().bindBidirectional(courantDossier.donneurProperty());
-		
 		
 		comboBoxGSanguin.setItems(modelDossierMedical.getListeGroupeSanguin());
 		comboBoxGSanguin.valueProperty().bindBidirectional(courantDossier.groupeSanguinProperty());
