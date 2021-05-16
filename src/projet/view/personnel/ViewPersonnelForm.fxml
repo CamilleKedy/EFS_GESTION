@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -17,17 +18,17 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.site_de_collecte.ControllerSite_de_collecteForm">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.personnel.ControllerPersonnelForm">
    <children>
       <HBox alignment="CENTER" layoutX="59.0" layoutY="118.0" prefHeight="412.0" prefWidth="600.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="118.0">
          <children>
-            <TabPane prefHeight="338.0" prefWidth="538.0" style="-fx-border-color: lightgray;">
+            <TabPane prefHeight="412.0" prefWidth="538.0" style="-fx-border-color: lightgray;">
                <tabs>
                   <Tab closable="false" text="Détails">
                      <content>
-                        <HBox alignment="CENTER" fillHeight="false" prefHeight="327.0" prefWidth="536.0">
+                        <HBox alignment="CENTER" fillHeight="false" prefHeight="374.0" prefWidth="456.0">
                            <children>
-                              <GridPane maxWidth="1.7976931348623157E308" prefHeight="263.0" prefWidth="416.0">
+                              <GridPane maxWidth="1.7976931348623157E308" prefHeight="295.0" prefWidth="416.0">
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.0" minWidth="100.0" prefWidth="127.0" />
                                     <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="168.0" />
@@ -37,16 +38,19 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Label text="Id" />
-                                    <Label text="Ville" GridPane.rowIndex="1" />
-                                    <Label prefHeight="17.0" prefWidth="90.0" text="Nombre de lits" GridPane.rowIndex="2" />
+                                    <Label text="Numéro" />
+                                    <Label text="Nom" GridPane.rowIndex="1" />
+                                    <Label text="Prénom" GridPane.rowIndex="2" />
                                     <Label text="Adresse" GridPane.rowIndex="3" />
-                                    <TextField fx:id="textFieldId" prefHeight="31.0" prefWidth="68.0" GridPane.columnIndex="1" />
-                                    <TextField fx:id="textFieldVille" prefHeight="31.0" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <TextField fx:id="textFieldNbr_lits" prefHeight="31.0" prefWidth="68.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <TextField fx:id="textFieldAdresse" prefHeight="31.0" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField fx:id="textFieldId_personnel" editable="false" prefHeight="31.0" prefWidth="68.0" GridPane.columnIndex="1" />
+                                    <TextField fx:id="textFieldAdresse" prefHeight="31.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label text="Profession" GridPane.rowIndex="4" />
+                                    <ComboBox fx:id="comboBoxProfession" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <TextField fx:id="textFieldNom" prefHeight="31.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="textFieldPrenom" prefHeight="31.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                  </children>
                                  <padding>
                                     <Insets left="5.0" />
@@ -65,8 +69,14 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="71.0" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Button defaultButton="true" mnemonicParsing="false" onAction="#doValider" prefHeight="38.0" prefWidth="75.0" style="-fx-background-color: #162c53;" text="OK" textFill="WHITE" />
-            <Button fx:id="buttonAnnuler" cancelButton="true" mnemonicParsing="false" onAction="#doAnnuler" prefHeight="38.0" prefWidth="90.0" style="-fx-background-color: #ea302b;" text="Annuler" textFill="WHITE" />
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#doValider" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #162c53;" text="OK" textFill="WHITE">
+               <font>
+                  <Font name="Trebuchet MS" size="15.0" />
+               </font></Button>
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#doAnnuler" prefHeight="40.0" prefWidth="90.0" style="-fx-background-color: #ea302b;" text="Annuler" textFill="WHITE">
+               <font>
+                  <Font name="Trebuchet MS" size="15.0" />
+               </font></Button>
          </children>
       </HBox>
       <HBox layoutX="-1.0" layoutY="1.0" prefHeight="108.0" prefWidth="600.0">
@@ -81,7 +91,7 @@
             </ImageView>
             <VBox alignment="CENTER_RIGHT" prefHeight="112.0" prefWidth="422.0">
                <children>
-                  <Label text="SITE DE COLLECTE" textFill="#162c53">
+                  <Label text="PERSONNEL" textFill="#162c53">
                      <font>
                         <Font name="Rockwell Bold" size="30.0" />
                      </font>
