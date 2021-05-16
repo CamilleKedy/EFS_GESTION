@@ -39,11 +39,6 @@ public class Donneur  {
 	}
 	
 	
-	
-
-
-
-	
 	// toString()
 	
 	@Override
@@ -148,9 +143,6 @@ public class Donneur  {
 		this.villeProperty().set(ville);
 	}
 	
-
-	
-
 	public final Property<LocalDate> dateNaissanceProperty() {
 		return this.dateNaissance;
 	}
@@ -178,11 +170,7 @@ public class Donneur  {
 	public final void setDemandeCarte(final String demandeCarte) {
 		this.demandeCarteProperty().setValue(demandeCarte);
 	}
-	
-	
-	
-	
 
-	
+
 	
 }

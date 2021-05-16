@@ -81,7 +81,6 @@ public class ControllerDonneurForm extends Controller {
 		
 		Donneur courant = modelDonneur.getCourant();
 		DossierMedical courantDossier = modelDossierMedical.getCourant();
-		//modelDossierMedical.setSelection(courantDossier);
 
 		// Data binding
 
@@ -91,11 +90,10 @@ public class ControllerDonneurForm extends Controller {
 		bindBidirectional( textFieldVille, courant.villeProperty() );
 		bindBidirectional( textFieldAdresse, courant.adresseProperty() );
 		
-		// Date d'échéance
-				bindBidirectional( datePickerDdn, courant.dateNaissanceProperty(), new ConverterLocalDate() );
+		// Date de naissance
+		bindBidirectional( datePickerDdn, courant.dateNaissanceProperty(), new ConverterLocalDate() );
 
 		comboBoxCarte.setItems( modelDonneur.getListeChoixCarte() );
-		//bindBidirectional( comboBoxCarte, courant.demandeCarteProperty() );
 		comboBoxCarte.valueProperty().bindBidirectional( courant.demandeCarteProperty() );
 		
 		// dossier Medical
@@ -113,7 +111,7 @@ public class ControllerDonneurForm extends Controller {
 		bindBidirectional( textFieldPoids, courantDossier.poidsProperty(), new ConverterDouble() );
 		bindBidirectional(textAreaInaptitude, courantDossier.inaptitudeProperty());
 	
-		//modelDossierMedical.setSelection(courantDossier);
+		
 	}
 	
 	
@@ -140,29 +138,11 @@ public class ControllerDonneurForm extends Controller {
 	@FXML
 	void doEnregistrerDonneur() {
 		modelDonneur.validerMiseAJour();
-		managerGui.showView( EnumView.DonneurListe );
-	}
-
-	@FXML
-	void doEnregistrerDossier() {
-		
+		if(modelDossierMedical.getCourant().getDonneur() == null) {
+			modelDossierMedical.affecterDonneur(modelDonneur.getCourant());
+		}
 		modelDossierMedical.validerMiseAJour();
 		managerGui.showView( EnumView.DonneurListe );
-	}	
-	
-	// Méthodes auxiliaires
-	
-	/*
-	 * private void actualiserDemandeCarteDansModele() { // Modifie le statut en
-	 * fonction du bouton radio sélectionné Toggle bouton =
-	 * toggleGroupStatut.getSelectedToggle(); int statut =
-	 * toggleGroupStatut.getToggles().indexOf( bouton );
-	 * //modelDonneur.getCourant().setStatut( statut ); }
-	 * 
-	 * private void actualiserStatutDansVue() { // Sélectionne le bouton radio
-	 * correspondant au statut //int statut = modelDonneur.getCourant().getStatut();
-	 * //Toggle bouton = toggleGroupStatut.getToggles().get( statut );
-	 * //toggleGroupStatut.selectToggle( bouton ); }
-	 */
+	}
 
 }

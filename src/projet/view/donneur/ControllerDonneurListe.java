@@ -70,7 +70,7 @@ public class ControllerDonneurListe {
 	
 	public void refresh() {
 		modelDonneur.actualiserListe();
-	/*	UtilFX.selectInTableView( tableView, modelCollecte.getSelection() );*/
+		modelDossierMedical.actualiserCourant();
 		tableView.requestFocus();
 	}
 	
@@ -79,13 +79,14 @@ public class ControllerDonneurListe {
 	@FXML
 	private void doAjouter() {
 		modelDonneur.setSelection( null );
+		modelDossierMedical.setSelectionParDonneur(null);
 		managerGui.showView( EnumView.DonneurForm );
 	}
 
 	@FXML
 	private void doModifier() {
 		modelDonneur.setSelection( tableView.getSelectionModel().getSelectedItem() );
-		modelDossierMedical.getCourant().setDonneur(tableView.getSelectionModel().getSelectedItem());
+		modelDossierMedical.setSelectionParDonneur(tableView.getSelectionModel().getSelectedItem());
 		managerGui.showView( EnumView.DonneurForm );
 	}
 

@@ -35,7 +35,7 @@ public class ManagerGui extends ManagerGuiAbstract {
 	public void configureStage()  {
 		
 		// Choisit la vue à afficher
-		showView( EnumView.DonneurForm);
+		showView( EnumView.DonneurListe);
 		
 		// Configure le stage
 		stage.setTitle( "Gestion de contacts" );

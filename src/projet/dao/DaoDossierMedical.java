@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 
 import jfox.jdbc.UtilJdbc;
 import projet.data.DossierMedical;
+import projet.data.Personnel;
 
 
 public class DaoDossierMedical {
@@ -230,6 +231,33 @@ public class DaoDossierMedical {
 		}
     }
 	
+    public DossierMedical retrouverDossierDuDonneur( int idDonneur )  {
+
+		Connection			cn		= null;
+		PreparedStatement	stmt	= null;
+		ResultSet 			rs 		= null;
+		String				sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			sql = "SELECT * FROM dossierMedical WHERE id_donneur = ?";
+            stmt = cn.prepareStatement(sql);
+            stmt.setObject( 1, idDonneur);
+            rs = stmt.executeQuery();
+
+            if ( rs.next() ) {
+                return construireDossierMedical(rs, true );
+            } else {
+            	return null;
+            }
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( rs, stmt, cn );
+		}
+	}
+    
 	
 	// Méthodes auxiliaires
 	

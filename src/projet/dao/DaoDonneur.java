@@ -14,7 +14,6 @@ import javax.sql.DataSource;
 
 import jfox.jdbc.UtilJdbc;
 import projet.data.Donneur;
-import projet.data.DossierMedical;
 
 
 public class DaoDonneur {
@@ -177,88 +176,6 @@ public class DaoDonneur {
 			UtilJdbc.close( rs, stmt, cn );
 		}
 	}
-
-
-	public List<String> listerGroupeSanguinPourDossierMedical( DossierMedical dossierMedical )   {
-
-		Connection			cn		= null;
-		PreparedStatement	stmt	= null;
-		ResultSet 			rs 		= null;
-		String				sql;
-
-		try {
-			cn = dataSource.getConnection();
-
-			sql = "SELECT * FROM donneur WHERE id_dossier = ? ORDER BY groupe_sanguin";
-			stmt = cn.prepareStatement(sql);
-            stmt.setObject( 1, dossierMedical.getId() );
-			rs = stmt.executeQuery();
-			
-			List<String> donneurs = new ArrayList<>();
-			while (rs.next()) {
-				donneurs.add( rs.getObject("groupe_sanguin", String.class) );
-			}
-			return donneurs;
-
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			UtilJdbc.close( rs, stmt, cn );
-		}
-	}
-
-	
-	public List<String> listerRhesusPourDossierMedical( DossierMedical dossierMedical )   {
-
-		Connection			cn		= null;
-		PreparedStatement	stmt	= null;
-		ResultSet 			rs 		= null;
-		String				sql;
-
-		try {
-			cn = dataSource.getConnection();
-
-			sql = "SELECT * FROM donneur WHERE id_dossier = ? ORDER BY rhesus";
-			stmt = cn.prepareStatement(sql);
-            stmt.setObject( 1, dossierMedical.getId() );
-			rs = stmt.executeQuery();
-			
-			List<String> rhesus = new ArrayList<>();
-			while (rs.next()) {
-				rhesus.add( rs.getObject("rhesus", String.class) );
-			}
-			return rhesus;
-
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			UtilJdbc.close( rs, stmt, cn );
-		}
-	}
-	
-    
-    public int compterPourCategorie( int idCategorie ) {
-    	
-		Connection			cn		= null;
-		PreparedStatement	stmt 	= null;
-		ResultSet 			rs		= null;
-
-		try {
-			cn = dataSource.getConnection();
-            String sql = "SELECT COUNT(*) FROM donneur WHERE idcategorie = ?";
-            stmt = cn.prepareStatement( sql );
-            stmt.setObject( 1, idCategorie );
-            rs = stmt.executeQuery();
-
-            rs.next();
-            return rs.getInt( 1 );
-
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			UtilJdbc.close( rs, stmt, cn );
-		}
-    }
 	
 	
 	// Méthodes auxiliaires
