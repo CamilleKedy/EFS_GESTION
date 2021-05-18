@@ -28,7 +28,7 @@ public class ModelDossierMedical {
 	
 	// Autres champs
 	
-	private DossierMedical		selection;
+	private DossierMedical		selection = new DossierMedical();
 
 	@Inject
 	private IMapper			mapper;
@@ -44,7 +44,6 @@ public class ModelDossierMedical {
     
     
 	
-	
 	// Actions
 	
 	public void actualiserListe() {
@@ -56,6 +55,9 @@ public class ModelDossierMedical {
 		mapper.update( courant, selection );
 	}
 
+	public void affecterDonneur(Donneur donneur) {
+		courant.setDonneur(donneur);
+	}
 	
 	public void validerMiseAJour() {
 
@@ -80,6 +82,7 @@ public class ModelDossierMedical {
 		
 		if ( courant.getId() == null ) {
 			// Insertion
+			selection = new DossierMedical();
 			selection.setId( daoDossierMedical.inserer( courant ) );
 		} else {
 			// modficiation
@@ -94,7 +97,6 @@ public class ModelDossierMedical {
 	}
 
 
-	
 
 	// Getters & Setters
 
@@ -103,13 +105,19 @@ public class ModelDossierMedical {
 	}
 
 
-
-
 	public void setSelection(DossierMedical selection) {
 		if ( selection == null ) {
 			this.selection = new DossierMedical();
 		} else {
 			this.selection = daoDossierMedical.retrouver( selection.getId() );
+		}
+	}
+	
+	public void setSelectionParDonneur(Donneur donneur) {
+		if ( donneur == null ) {
+			this.selection = new DossierMedical();
+		} else {
+			this.selection = daoDossierMedical.retrouverDossierDuDonneur( donneur.getId() );
 		}
 	}
 

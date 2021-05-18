@@ -20,7 +20,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="631.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.donneur.ControllerDonneurForm">
    <children>
-      <TabPane layoutX="64.0" layoutY="139.0" prefHeight="397.0" prefWidth="527.0" style="-fx-background-color: #ffffff; -fx-border-color: red;" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="62.0" layoutY="139.0" prefHeight="346.0" prefWidth="507.0" style="-fx-background-color: #ffffff; -fx-border-color: red;" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab text="Général">
                <content>
@@ -53,12 +53,6 @@
                               <DatePicker fx:id="datePickerDdn" />
                               <ComboBox fx:id="comboBoxCarte" layoutX="20.0" layoutY="158.0" prefHeight="25.0" prefWidth="84.0" />
                               <HBox prefHeight="7.0" prefWidth="244.0" />
-                              <HBox alignment="CENTER" prefHeight="66.0" prefWidth="243.0" spacing="40.0">
-                                 <children>
-                                    <Button fx:id="buttonEnregistrerDonneur" mnemonicParsing="false" onAction="#doEnregistrerDonneur" prefHeight="40.0" prefWidth="85.0" style="-fx-background-color: #162c53;" text="Enregistrer" textFill="WHITE" />
-                                    <Button fx:id="buttonAnnulerE1" mnemonicParsing="false" onAction="#doAnnuler" prefHeight="40.0" prefWidth="85.0" style="-fx-background-color: #ea302b;" text="Annuler" textFill="WHITE" />
-                                 </children>
-                              </HBox>
                            </children>
                            <HBox.margin>
                               <Insets bottom="9.0" left="2.0" right="2.0" top="2.0" />
@@ -77,11 +71,10 @@
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="299.0" prefWidth="124.0" spacing="16.0">
                            <children>
-                              <Label text="Id_donneur :" />
                               <Label layoutX="10.0" layoutY="10.0" text="Poids :" />
                               <Label layoutX="10.0" layoutY="27.0" text="Groupe sanguin :" />
                               <Label layoutX="10.0" layoutY="61.0" text="Rhésus :" />
-                              <Label layoutX="10.0" layoutY="78.0" text="Inaptiude : " />
+                              <Label layoutX="10.0" layoutY="78.0" text="Aptitude : " />
                               <Label />
                            </children>
                            <HBox.margin>
@@ -93,17 +86,21 @@
                         </VBox>
                         <VBox prefHeight="267.0" prefWidth="284.0" spacing="8.0">
                            <children>
-                              <TextField fx:id="textFieldID1" editable="false" />
-                              <TextField fx:id="textFieldPoids" layoutX="10.0" layoutY="10.0" />
+                              <TextField fx:id="textFieldPoids" layoutX="10.0" layoutY="10.0">
+                                 <font>
+                                    <Font name="Trebuchet MS" size="13.0" />
+                                 </font></TextField>
                               <ComboBox fx:id="comboBoxGSanguin" prefHeight="25.0" prefWidth="81.0" />
                               <ComboBox fx:id="comboBoxRhesus" prefHeight="25.0" prefWidth="81.0" />
-                              <CheckBox fx:id="checkBoxAptitude" mnemonicParsing="false" />
-                              <TextArea fx:id="textAreaInaptitude" prefHeight="143.0" prefWidth="260.0" />
-                              <HBox alignment="BOTTOM_CENTER" prefHeight="66.0" prefWidth="243.0" spacing="40.0">
-                                 <children>
-                                    <Button fx:id="buttonEnregistrerDossier" mnemonicParsing="false" onAction="#doEnregistrerDossier" prefHeight="40.0" prefWidth="85.0" style="-fx-background-color: #162c53;" text="Enregistrer" textFill="WHITE" />
-                                    <Button fx:id="buttonAnnulerE2" mnemonicParsing="false" onAction="#doAnnuler" prefHeight="40.0" prefWidth="84.0" style="-fx-background-color: #ea302b;" text="Annuler" textFill="WHITE" />
-                                 </children></HBox>
+                              <CheckBox fx:id="checkBoxAptitude" mnemonicParsing="false" onAction="#aptitudeOn">
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin></CheckBox>
+                              <TextArea fx:id="textAreaInaptitude" prefHeight="143.0" prefWidth="260.0" promptText="Raisons de l'inaptitude">
+                                 <font>
+                                    <Font name="Trebuchet MS" size="12.0" />
+                                 </font></TextArea>
+                              <HBox alignment="BOTTOM_CENTER" prefHeight="66.0" prefWidth="243.0" spacing="40.0" />
                            </children>
                            <HBox.margin>
                               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
@@ -148,6 +145,18 @@
                   <Insets top="40.0" />
                </padding>
             </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="193.0" layoutY="485.0" prefHeight="66.0" prefWidth="243.0" spacing="40.0">
+         <children>
+            <Button fx:id="buttonEnregistrerDonneur" mnemonicParsing="false" onAction="#doEnregistrerDonneur" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #162c53;" text="Enregistrer" textFill="WHITE">
+               <font>
+                  <Font name="Trebuchet MS" size="14.0" />
+               </font></Button>
+            <Button fx:id="buttonAnnulerE1" mnemonicParsing="false" onAction="#doAnnuler" prefHeight="40.0" prefWidth="85.0" style="-fx-background-color: #ea302b;" text="Annuler" textFill="WHITE">
+               <font>
+                  <Font name="Trebuchet MS" size="14.0" />
+               </font></Button>
          </children>
       </HBox>
    </children>

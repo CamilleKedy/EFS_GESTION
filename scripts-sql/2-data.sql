@@ -21,7 +21,7 @@ INSERT INTO Profession (id_profession, libelle ) VALUES
   (1, 'Gestionnaire de site'),
   (2, 'Agent de collation' ),
   (3, 'Infirmière' ),
-  (4, 'Sécrétaire' ),
+  (4, 'Secrétaire' ),
   (5, 'Médecin' );
 
 ALTER TABLE Profession ALTER COLUMN id_profession RESTART WITH 6;
@@ -115,9 +115,9 @@ ALTER TABLE RDV ALTER COLUMN id_rdv RESTART WITH 5;
 -- personnelDeCollecte
 
  INSERT INTO personnelDeCollecte (id_personnel, id_collecte) VALUES 
-  (2, 1 ),
+  (2, 2 ),
   (3, 1),
-  (4, 1),
+  (4, 2),
   (5, 1);
 
 

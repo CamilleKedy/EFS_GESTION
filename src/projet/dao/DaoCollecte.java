@@ -15,6 +15,9 @@ import javax.sql.DataSource;
 
 import jfox.jdbc.UtilJdbc;
 import projet.data.Collecte;
+import projet.data.Collecte;
+import projet.data.Personne;
+import projet.data.Personnel;
 
 
 public class DaoCollecte {
@@ -26,6 +29,9 @@ public class DaoCollecte {
 	private DataSource		dataSource;
 	@Inject
 	private DaoSite_de_collecte daoSite_de_collecte;
+	@Inject
+	private DaoPersonnel daoPersonnel;
+
 
 	
 	// Actions
@@ -58,6 +64,7 @@ public class DaoCollecte {
 			rs.next();
 			collecte.setId_collecte( rs.getObject( 1, Integer.class) );
 			
+			insererPersonnelDeCollecte(collecte);
 	
 		} catch ( SQLException e ) {
 			throw new RuntimeException(e);
@@ -91,6 +98,9 @@ public class DaoCollecte {
 			stmt.setObject( 10, collecte.getSite_de_collecte().getId_site_de_collecte());
 			stmt.setObject( 11, collecte.getId_collecte());
 			stmt.executeUpdate();
+			
+			supprimerPersonnelDeCollecte( collecte.getId_collecte() );
+			insererPersonnelDeCollecte( collecte );
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -107,6 +117,8 @@ public class DaoCollecte {
 		String				sql;
 
 		try {
+			supprimerPersonnelDeCollecte(id_collecte);
+			
 			cn = dataSource.getConnection();
 			sql = "DELETE FROM collecte WHERE id_collecte = ? ";
 			stmt = cn.prepareStatement( sql );
@@ -214,13 +226,51 @@ public class DaoCollecte {
 		collecte.setHoraire_fin(rs.getObject("horaire_fin", LocalTime.class ) );
 		if ( flagComplet ) {
 			collecte.setSite_de_collecte( daoSite_de_collecte.retrouver( rs.getObject("id_site", Integer.class) ) );
-		}
-		else
-		{
-			System.out.println("Flag incomplet");
+			collecte.getPersonnel().setAll(daoPersonnel.listerParCollecte( collecte.getId_collecte() ) );
 		}
 
 		return collecte;
 	}
 
+	private void insererPersonnelDeCollecte( Collecte collecte ) {
+
+		Connection			cn		= null;
+		PreparedStatement	stmt	= null;
+		String				sql;
+
+		try {
+			cn = dataSource.getConnection();
+			sql = "INSERT INTO personnelDeCollecte ( id_collecte, id_personnel ) VALUES( ?, ? ) ";
+			stmt = cn.prepareStatement( sql );
+			stmt.setObject( 1, collecte.getId_collecte() );
+			for ( Personnel personnel : collecte.getPersonnel() ) {
+				stmt.setObject( 2, personnel.getId() );
+				stmt.executeUpdate();
+			}
+		} catch ( SQLException e ) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( stmt, cn );
+		}
+	}
+	
+	private void supprimerPersonnelDeCollecte( int idCollecte ) {
+
+		Connection			cn 		= null;
+		PreparedStatement	stmt 	= null;
+		String				sql;
+
+		try {
+			cn = dataSource.getConnection();
+			sql = "DELETE FROM personnelDeCollecte WHERE id_collecte = ? ";
+			stmt = cn.prepareStatement( sql );
+			stmt.setObject( 1, idCollecte );
+			stmt.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( stmt, cn );
+		}
+	}
 }

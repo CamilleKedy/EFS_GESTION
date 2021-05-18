@@ -73,17 +73,17 @@ public class ModelPersonnel  {
 		mapper.update( courant, selection );
 	}
 	
-	/*
+	
 	public void validerMiseAJour() {
 
 		// Vérifie la validité des données
 		
 		StringBuilder message = new StringBuilder();
 
-		if( courant.getLibelle() == null || courant.getLibelle().isEmpty() ) {
-			message.append( "\nLe libellé ne doit pas être vide." );
-		} else  if ( courant.getLibelle().length()> 25 ) {
-			message.append( "\nLe libellé est trop long : 25 maxi." );
+		if( courant.getNom() == null || courant.getNom().isEmpty() ) {
+			message.append( "\nLe nom ne doit pas être vide." );
+		} else  if ( courant.getNom().length()> 50 ) {
+			message.append( "\nLe nom est trop long : 50 maxi." );
 		}
 		
 		if ( message.length() > 0 ) {
@@ -103,15 +103,9 @@ public class ModelPersonnel  {
 	}
 	
 	
-	public void supprimer( Personnel item ) {
-		
-		// Vérifie l'abence de personnes rattachées à la catégorie
-		if ( daoPersonne.compterPourPersonnel( item.getId() ) != 0 ) {
-			throw new ExceptionValidation( "Des personnes sont rattachées à cette catégorie.." ) ;
-		}
-		
+	public void supprimer( Personnel item ) {	
 		daoPersonnel.supprimer( item.getId() );
 		selection = UtilFX.findNext( liste, item );
 	}
-	*/
+	
 }

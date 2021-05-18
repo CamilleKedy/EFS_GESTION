@@ -39,12 +39,12 @@ public class DaoPersonnel {
 			cn = dataSource.getConnection();
 
 			// Insère le personnel
-			sql = "INSERT INTO personnel ( id_profession, nom, prenom, adresse ) VALUES ( ?, ?, ?, ? )";
+			sql = "INSERT INTO personnel (nom, prenom, adresse ,id_profession) VALUES ( ?, ?, ?, ? )";
 			stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS  );
-			stmt.setObject(	1, personnel.getProfession().getId() );
-			stmt.setObject(	2, personnel.getNom() );
-			stmt.setObject(	3, personnel.getPrenom() );
-			stmt.setObject(	4, personnel.getAdresse() );
+			stmt.setObject(	1, personnel.getNom() );
+			stmt.setObject(	2, personnel.getPrenom() );
+			stmt.setObject(	3, personnel.getAdresse() );
+			stmt.setObject(	4, personnel.getProfession().getId() );
 			stmt.executeUpdate();
 
 			// Récupère l'identifiant généré par le SGBD
@@ -191,6 +191,35 @@ public class DaoPersonnel {
 			List<Personnel> personnels = new ArrayList<>();
 			while (rs.next()) {
 				personnels.add( construirePersonnel(rs, false) );
+			}
+			return personnels;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( rs, stmt, cn );
+		}
+	}
+	
+	public List<Personnel> listerParCollecte( int id_collecte )   {
+
+		Connection			cn		= null;
+		PreparedStatement	stmt	= null;
+		ResultSet 			rs 		= null;
+		String				sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+	
+			sql= "SELECT * FROM Personnel p INNER JOIN personnelDeCollecte c ON p.id_personnel = c.id_personnel WHERE c.id_collecte = ? ORDER BY nom, prenom";
+			stmt = cn.prepareStatement(sql);
+            stmt.setObject( 1, id_collecte );
+			rs = stmt.executeQuery();
+			
+			List<Personnel> personnels = new ArrayList<>();
+			while (rs.next()) {
+				personnels.add( construirePersonnel(rs, true) );
 			}
 			return personnels;
 
