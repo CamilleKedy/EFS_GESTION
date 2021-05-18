@@ -20,7 +20,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
-import jfox.javafx.util.ConverterDouble;
 import jfox.javafx.util.ConverterInteger;
 import jfox.javafx.util.ConverterLocalDate;
 import jfox.javafx.view.Controller;
@@ -101,7 +100,7 @@ public class ControllerMemoForm extends Controller {
 		bindBidirectional( textFieldEffectif, courant.effectifProperty(), new ConverterInteger() );
 
 		// Budget
-		bindBidirectional( textFieldBudget, courant.budgetProperty(), new ConverterDouble("#,##0.00", "Valeur incorrecte pour le budget !" ) );
+		//bindBidirectional( textFieldBudget, courant.budgetProperty(), new ConverterDouble("#,##0.00", "Valeur incorrecte pour le budget !" ) );
 
 		// Date d'échéance
 		bindBidirectional( datePickerEcheance, courant.echeanceProperty(), new ConverterLocalDate() );

@@ -4,8 +4,6 @@ package projet.view.donneur;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
-import javafx.beans.property.Property;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import jfox.exception.ExceptionValidation;
@@ -21,8 +19,6 @@ public class ModelDossierMedical {
 	
 	// Données observables 
 	
-	private Property<String> groupeSanguin = new SimpleObjectProperty<>();
-	private Property<String> rhesus = new SimpleObjectProperty<>();
 	private final ObservableList<String> listeGroupeSanguin = FXCollections.observableArrayList();
 	private final ObservableList<String> listeRhesus = FXCollections.observableArrayList();
 	private final ObservableList<DossierMedical> liste = FXCollections.observableArrayList();
@@ -32,7 +28,7 @@ public class ModelDossierMedical {
 	
 	// Autres champs
 	
-	private DossierMedical		selection;
+	private DossierMedical		selection = new DossierMedical();
 
 	@Inject
 	private IMapper			mapper;
@@ -48,7 +44,6 @@ public class ModelDossierMedical {
     
     
 	
-	
 	// Actions
 	
 	public void actualiserListe() {
@@ -60,15 +55,9 @@ public class ModelDossierMedical {
 		mapper.update( courant, selection );
 	}
 
-	
-	public void setSelection( DossierMedical selection ) {
-		if ( selection == null ) {
-			this.selection = new DossierMedical();
-		} else {
-			this.selection = daoDossierMedical.retrouver( selection.getId() );
-		}
+	public void affecterDonneur(Donneur donneur) {
+		courant.setDonneur(donneur);
 	}
-	
 	
 	public void validerMiseAJour() {
 
@@ -93,6 +82,7 @@ public class ModelDossierMedical {
 		
 		if ( courant.getId() == null ) {
 			// Insertion
+			selection = new DossierMedical();
 			selection.setId( daoDossierMedical.inserer( courant ) );
 		} else {
 			// modficiation
@@ -106,43 +96,50 @@ public class ModelDossierMedical {
 		selection = UtilFX.findNext( liste, item );
 	}
 
+
+
 	// Getters & Setters
-	
-	public final Property<String> groupeSanguinProperty() {
-		return this.groupeSanguin;
-	}
-	
 
-
-	public final String getGroupeSanguin() {
-		return this.groupeSanguinProperty().getValue();
-	}
-	
-
-
-	public final void setGroupeSanguin(final String groupeSanguin) {
-		this.groupeSanguinProperty().setValue(groupeSanguin);
-	}
-	
-
-
-	public final Property<String> rhesusProperty() {
-		return this.rhesus;
-	}
-	
-
-
-	public final String getRhesus() {
-		return this.rhesusProperty().getValue();
-	}
-	
-
-
-	public final void setRhesus(final String rhesus) {
-		this.rhesusProperty().setValue(rhesus);
+	public DossierMedical getSelection() {
+		return selection;
 	}
 
 
+	public void setSelection(DossierMedical selection) {
+		if ( selection == null ) {
+			this.selection = new DossierMedical();
+		} else {
+			this.selection = daoDossierMedical.retrouver( selection.getId() );
+		}
+	}
+	
+	public void setSelectionParDonneur(Donneur donneur) {
+		if ( donneur == null ) {
+			this.selection = new DossierMedical();
+		} else {
+			this.selection = daoDossierMedical.retrouverDossierDuDonneur( donneur.getId() );
+		}
+	}
+
+	public DossierMedical getCourant() {
+		return courant;
+	}
+
+
+	public ObservableList<String> getListeGroupeSanguin() {
+		return listeGroupeSanguin;
+	}
+
+
+	public ObservableList<String> getListeRhesus() {
+		return listeRhesus;
+	}
+
+
+	public ObservableList<DossierMedical> getListe() {
+		return liste;
+	}
+	
 	
 	
 }

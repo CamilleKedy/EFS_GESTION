@@ -1,4 +1,4 @@
-package projet.view.collecte;
+package projet.view.personnel;
 
 import java.time.LocalDate;
 import javax.inject.Inject;
@@ -11,38 +11,38 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import jfox.javafx.view.Controller;
 import jfox.javafx.view.IManagerGui;
-import projet.data.Collecte;
+import projet.data.Personnel;
 import projet.view.EnumView;
 
 
-public class ControllerCollecteListe extends Controller {
+public class ControllerPersonnelListe extends Controller {
 	
 	
 	// Composants de la vue
 
 	@FXML
-	private TableView<Collecte>	tableView;
+	private TableView<Personnel>	tableView;
 	@FXML
 	private Button			buttonModifier;
 	@FXML
 	private Button			buttonSupprimer;
 	@FXML
-	private TableColumn<Collecte, Integer> columnId;
+	private TableColumn<Personnel, Integer> columnId_personnel;
 	@FXML
-	private TableColumn<Collecte, LocalDate> columnDateDebut;
+	private TableColumn<Personnel, String> columnNom;
 	@FXML
-	private TableColumn<Collecte, LocalDate> columnDateFin;
+	private TableColumn<Personnel, String> columnPrenom;
 	@FXML
-	private TableColumn<Collecte, String> columnVille;
+	private TableColumn<Personnel, String> columnAdresse;
 	@FXML
-	private TableColumn<Collecte, String> columnAdresse;
+	private TableColumn<Personnel, String> columnProfession;
 
 	// Autres champs
 	
 	@Inject
 	private IManagerGui		managerGui;
 	@Inject
-	private ModelCollecte		modelCollecte;
+	private ModelPersonnel		modelPersonnel;
 	
 
 	
@@ -52,15 +52,15 @@ public class ControllerCollecteListe extends Controller {
 	@FXML
 	private void initialize() {
 
-		//Collecte courant = modelCollecte.getCourant();
+		Personnel courant = modelPersonnel.getCourant();
 		// Data binding
-		tableView.setItems(  modelCollecte.getListe() );
+		tableView.setItems(  modelPersonnel.getListe() );
 		
-		columnId.setCellValueFactory( t -> t.getValue().id_collecteProperty() );
-		columnDateDebut.setCellValueFactory( t -> t.getValue().date_debutProperty() );
-		columnDateFin.setCellValueFactory( t -> t.getValue().date_finProperty() );
-		columnVille.setCellValueFactory( t -> t.getValue().getSite_de_collecte()!=null ?  t.getValue().getSite_de_collecte().villeProperty() : null );
-		columnAdresse.setCellValueFactory( t -> t.getValue().getSite_de_collecte()!=null ?  t.getValue().getSite_de_collecte().adresseProperty() : null );
+		columnId_personnel.setCellValueFactory( t -> t.getValue().idProperty() );
+		columnNom.setCellValueFactory( t -> t.getValue().nomProperty() );
+		columnPrenom.setCellValueFactory( t -> t.getValue().prenomProperty() );
+		columnAdresse.setCellValueFactory(  t -> t.getValue().adresseProperty() );
+		columnProfession.setCellValueFactory( t -> t.getValue().getProfession()!=null ?  t.getValue().getProfession().libelleProperty() : null );
 
 		// Configuraiton des boutons
 		tableView.getSelectionModel().selectedItemProperty().addListener(
@@ -72,8 +72,8 @@ public class ControllerCollecteListe extends Controller {
 	}
 	
 	public void refresh() {
-		modelCollecte.actualiserListe();
-	/*	UtilFX.selectInTableView( tableView, modelCollecte.getSelection() );*/
+		modelPersonnel.actualiserListe();
+	/*	UtilFX.selectInTableView( tableView, modelPersonnel.getSelection() );*/
 		tableView.requestFocus();
 	}
 
@@ -82,20 +82,20 @@ public class ControllerCollecteListe extends Controller {
 	
 	@FXML
 	private void doAjouter() {
-		modelCollecte.setSelection( null );
-		managerGui.showView( EnumView.CollecteForm );
+		modelPersonnel.setSelection( null );
+		managerGui.showView( EnumView.PersonnelForm );
 	}
 
 	@FXML
 	private void doModifier() {
-		modelCollecte.setSelection( tableView.getSelectionModel().getSelectedItem() );
-		managerGui.showView( EnumView.CollecteForm );
+		modelPersonnel.setSelection( tableView.getSelectionModel().getSelectedItem() );
+		managerGui.showView( EnumView.PersonnelForm );
 	}
 
 	@FXML
 	private void doSupprimer() {
 		if ( managerGui.showDialogConfirm( "Confirmez-vous la suppresion ?" ) ) {
-			modelCollecte.supprimer( tableView.getSelectionModel().getSelectedItem() );
+			modelPersonnel.supprimer( tableView.getSelectionModel().getSelectedItem() );
 			refresh();
 		}
 	}

@@ -1,7 +1,5 @@
 package projet.view.site_de_collecte;
 
-import java.io.File;
-
 import javax.inject.Inject;
 
 import javafx.collections.FXCollections;
@@ -10,7 +8,6 @@ import jfox.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoSite_de_collecte;
-import projet.dao.DaoPersonne;
 import projet.data.Site_de_collecte;
 
 

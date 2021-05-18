@@ -39,12 +39,12 @@ public class DaoPersonnel {
 			cn = dataSource.getConnection();
 
 			// Insère le personnel
-			sql = "INSERT INTO personnel ( id_profession, nom, prenom, adresse ) VALUES ( ?, ?, ?, ? )";
+			sql = "INSERT INTO personnel (nom, prenom, adresse ,id_profession) VALUES ( ?, ?, ?, ? )";
 			stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS  );
-			stmt.setObject(	1, personnel.getProfession().getId() );
-			stmt.setObject(	2, personnel.getNom() );
-			stmt.setObject(	3, personnel.getPrenom() );
-			stmt.setObject(	4, personnel.getAdresse() );
+			stmt.setObject(	1, personnel.getNom() );
+			stmt.setObject(	2, personnel.getPrenom() );
+			stmt.setObject(	3, personnel.getAdresse() );
+			stmt.setObject(	4, personnel.getProfession().getId() );
 			stmt.executeUpdate();
 
 			// Récupère l'identifiant généré par le SGBD

@@ -4,16 +4,13 @@ import javax.inject.Inject;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import jfox.javafx.view.IManagerGui;
 import projet.data.Donneur;
-import projet.data.Memo;
 import projet.view.EnumView;
-import projet.view.collecte.ModelCollecte;
 
 public class ControllerDonneurListe {
 	
@@ -22,6 +19,9 @@ public class ControllerDonneurListe {
 	private TableView<Donneur>	tableView;
 	@FXML
 	private TableColumn<Donneur, String> columnNom;
+	   
+	@FXML
+	private TableColumn<Donneur, String> columnPrenom;
 
 	@FXML
 	private TableColumn<Donneur, String> columnAdresse;
@@ -42,17 +42,20 @@ public class ControllerDonneurListe {
 	private IManagerGui		managerGui;
 	@Inject
 	private ModelDonneur 	modelDonneur;
+	@Inject
+	private ModelDossierMedical modelDossierMedical;
 	
 	// Initialisation du Controller
 
 	@FXML
 	private void initialize() {
 
-		//Collecte courant = modelCollecte.getCourant();
+		
 		// Data binding
 		tableView.setItems(  modelDonneur.getListe() );
 
 		columnNom.setCellValueFactory( t -> t.getValue().nomProperty() );
+		columnPrenom.setCellValueFactory( t -> t.getValue().prenomProperty() );
 		columnAdresse.setCellValueFactory( t -> t.getValue().adresseProperty() );
 		columnVille.setCellValueFactory( t -> t.getValue().villeProperty() );
 		
@@ -67,7 +70,7 @@ public class ControllerDonneurListe {
 	
 	public void refresh() {
 		modelDonneur.actualiserListe();
-	/*	UtilFX.selectInTableView( tableView, modelCollecte.getSelection() );*/
+		modelDossierMedical.actualiserCourant();
 		tableView.requestFocus();
 	}
 	
@@ -76,12 +79,14 @@ public class ControllerDonneurListe {
 	@FXML
 	private void doAjouter() {
 		modelDonneur.setSelection( null );
+		modelDossierMedical.setSelectionParDonneur(null);
 		managerGui.showView( EnumView.DonneurForm );
 	}
 
 	@FXML
 	private void doModifier() {
 		modelDonneur.setSelection( tableView.getSelectionModel().getSelectedItem() );
+		modelDossierMedical.setSelectionParDonneur(tableView.getSelectionModel().getSelectedItem());
 		managerGui.showView( EnumView.DonneurForm );
 	}
 

@@ -1,42 +1,30 @@
 package projet.view.collecte;
 
-import java.awt.Desktop;
-import java.io.File;
-import java.io.IOException;
-
 import javax.inject.Inject;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
-import jfox.javafx.util.ConverterDouble;
 import jfox.javafx.util.ConverterInteger;
 import jfox.javafx.util.ConverterLocalDate;
 import jfox.javafx.util.ConverterLocalTime;
 import jfox.javafx.util.UtilFX;
 import jfox.javafx.view.Controller;
 import jfox.javafx.view.IManagerGui;
-import projet.data.Categorie;
 import projet.data.Collecte;
-import projet.data.Memo;
-import projet.data.Personne;
+
 import projet.data.Personnel;
 import projet.data.Profession;
+
 import projet.data.Site_de_collecte;
 import projet.view.EnumView;
-import projet.view.personne.ModelCategorie;
+
 import projet.view.personnel.ModelPersonnel;
+
 import projet.view.site_collecte.ModelSiteCollecte;
 
 
@@ -133,8 +121,7 @@ public class ControllerCollecteForm extends Controller {
 		modelSite.actualiserListe();
 		modelProfession.actualiserListe();
 		modelCollecte.actualiserCourant();	
-		
-		 
+	 
 		configurerQte();
 		
 	}

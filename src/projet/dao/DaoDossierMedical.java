@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 
 import jfox.jdbc.UtilJdbc;
 import projet.data.DossierMedical;
+import projet.data.Personnel;
 
 
 public class DaoDossierMedical {
@@ -41,14 +42,13 @@ public class DaoDossierMedical {
 			// Insère le dossierMedical
 			sql = "INSERT INTO DossierMedical ( groupe_sanguin, rhesus, poids, inaptitude_temporaire, id_donneur) VALUES ( ?, ?, ?, ?, ?)";
 			stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS  );
+
 			stmt.setObject(	1, dossierMedical.getGroupeSanguin() );
 			stmt.setObject(	2, dossierMedical.getRhesus() );
 			stmt.setObject(	3, dossierMedical.getPoids() );
 			stmt.setObject(	4, dossierMedical.getInaptitude() );
-			if(dossierMedical.getDonneur().getId() == null)
-				stmt.setObject(	5, null );
-			else
-				stmt.setObject(5, dossierMedical.getDonneur().getId());
+			
+			stmt.setObject(5, dossierMedical.getDonneur().getId());
 			
 			stmt.executeUpdate();
 
@@ -231,6 +231,33 @@ public class DaoDossierMedical {
 		}
     }
 	
+    public DossierMedical retrouverDossierDuDonneur( int idDonneur )  {
+
+		Connection			cn		= null;
+		PreparedStatement	stmt	= null;
+		ResultSet 			rs 		= null;
+		String				sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			sql = "SELECT * FROM dossierMedical WHERE id_donneur = ?";
+            stmt = cn.prepareStatement(sql);
+            stmt.setObject( 1, idDonneur);
+            rs = stmt.executeQuery();
+
+            if ( rs.next() ) {
+                return construireDossierMedical(rs, true );
+            } else {
+            	return null;
+            }
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( rs, stmt, cn );
+		}
+	}
+    
 	
 	// Méthodes auxiliaires
 	
@@ -240,15 +267,19 @@ public class DaoDossierMedical {
 		dossierMedical.setId(rs.getObject( "id_dossier", Integer.class ));
 		dossierMedical.setInaptitude(rs.getObject( "inaptitude_temporaire", String.class ));
 
-		dossierMedical.setPoids(rs.getObject( "poids", Float.class ));
+		dossierMedical.setPoids(rs.getObject( "poids", Double.class ));
 		dossierMedical.setGroupeSanguin(rs.getObject( "groupe_sanguin", String.class ));
 		dossierMedical.setRhesus(rs.getObject( "rhesus", String.class ));
 		
 		if ( flagComplet ) {
 			dossierMedical.setDonneur( daoDonneur.retrouver( rs.getObject("id_donneur", Integer.class) ) );
+
+			//dossierMedical.getGroupeSanguin().addAll( daoDonneur.listerGroupeSanguinPourDossierMedical(dossierMedical));
+			//dossierMedical.getRhesus().addAll( daoDonneur.listerRhesusPourDossierMedical(dossierMedical));
+
 			
 //			dossierMedical.getGroupeSanguin().addAll( daoDonneur.listerGroupeSanguinPourDossierMedical(dossierMedical));
-//			dossierMedical.getRhesus().addAll( daoDonneur.listerRhesusPourDossierMedical(dossierMedical));
+//			dossierMedical.getRhesus().addAll( daoDonneur.listerRhesusPourDossierMedical(dossierMedical));}
 		}
 		else
 		{

@@ -6,8 +6,6 @@ import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 
 public class DossierMedical  {
@@ -18,7 +16,7 @@ public class DossierMedical  {
 	private final Property<Integer>	id			= new SimpleObjectProperty<>();
 	private final Property<String>	groupeSanguin		=new SimpleObjectProperty<>();
 	private final Property<String>	rhesus	= new SimpleObjectProperty<>();
-	private final Property<Float> 	poids = new SimpleObjectProperty<>();
+	private final Property<Double> 	poids = new SimpleObjectProperty<>();
 	private final StringProperty 	inaptitude = new SimpleStringProperty();
 	private final Property<Donneur> donneur = new SimpleObjectProperty<>();
 
@@ -28,7 +26,7 @@ public class DossierMedical  {
 	public DossierMedical() {
 	}
 
-	public DossierMedical( int id, String groupeSanguin, String rhesus, float poids, String inaptitude, Donneur donneur ) {
+	public DossierMedical( int id, String groupeSanguin, String rhesus, Double poids, String inaptitude, Donneur donneur ) {
 		setId(id);
 		setGroupeSanguin(groupeSanguin);
 		setRhesus(rhesus);
@@ -37,20 +35,7 @@ public class DossierMedical  {
 		setDonneur(donneur);
 	}
 	
-	
-	
 
-
-
-	
-	// toString()
-	
-//	@Override
-//	public String toString() {
-//		return getNom();
-//	}
-	
-	
 	// hashCode() & equals()
 
 	@Override
@@ -90,17 +75,17 @@ public class DossierMedical  {
 	}
 		
 
-	public final Property<Float> poidsProperty() {
+	public final Property<Double> poidsProperty() {
 		return this.poids;
 	}
 	
 
-	public final Float getPoids() {
+	public final Double getPoids() {
 		return this.poidsProperty().getValue();
 	}
 	
 
-	public final void setPoids(final Float poids) {
+	public final void setPoids(final Double poids) {
 		this.poidsProperty().setValue(poids);
 	}
 	
@@ -120,53 +105,28 @@ public class DossierMedical  {
 	}
 	
 
-	public final Property<Donneur> idDonneurProperty() {
+	public final Property<Donneur> donneurProperty() {
 		return this.donneur;
 	}
 	
 
 	public final Donneur getDonneur() {
-		return this.idDonneurProperty().getValue();
+		return this.donneurProperty().getValue();
 	}
 	
 
 	public final void setDonneur(final Donneur donneur) {
-		this.idDonneurProperty().setValue(donneur);
+		this.donneurProperty().setValue(donneur);
 	}
 	
 	
-/*	
-	public boolean isInGroupeSanguin( String gs ) {
-		
-		if ( gs != null ) {
-			for ( String r : groupeSanguin ) {
-				if ( gs.equals( r ) ) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
-	public boolean isInRhesus( String rh ) {
-		
-		if ( rh != null ) {
-			for ( String r : rhesus ) {
-				if ( rh.equals( r ) ) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-*/
 	public final Property<String> groupeSanguinProperty() {
 		return this.groupeSanguin;
 	}
 	
-
 	public final String getGroupeSanguin() {
 		return this.groupeSanguinProperty().getValue();
+
 	}
 	
 
@@ -188,15 +148,6 @@ public class DossierMedical  {
 	public final void setRhesus(final String rhesus) {
 		this.rhesusProperty().setValue(rhesus);
 	}
-	
-
-	
-	
-
-	
-	
-	
-
 	
 	
 }

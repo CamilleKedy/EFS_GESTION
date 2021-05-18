@@ -4,11 +4,8 @@ import javax.inject.Inject;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import jfox.exception.ExceptionValidation;
-import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoSite_de_collecte;
-import projet.dao.DaoPersonne;
 import projet.data.Site_de_collecte;
 
 

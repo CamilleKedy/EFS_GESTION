@@ -7,8 +7,6 @@ import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 
 public class Donneur  {
@@ -40,11 +38,6 @@ public class Donneur  {
 		setDemandeCarte(carte);
 	}
 	
-	
-	
-
-
-
 	
 	// toString()
 	
@@ -150,9 +143,6 @@ public class Donneur  {
 		this.villeProperty().set(ville);
 	}
 	
-
-	
-
 	public final Property<LocalDate> dateNaissanceProperty() {
 		return this.dateNaissance;
 	}
@@ -180,11 +170,7 @@ public class Donneur  {
 	public final void setDemandeCarte(final String demandeCarte) {
 		this.demandeCarteProperty().setValue(demandeCarte);
 	}
-	
-	
-	
-	
 
-	
+
 	
 }
