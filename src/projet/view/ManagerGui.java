@@ -35,10 +35,10 @@ public class ManagerGui extends ManagerGuiAbstract {
 	public void configureStage()  {
 		
 		// Choisit la vue à afficher
-		showView( EnumView.DonneurListe);
+		showView( EnumView.CollecteListe);
 		
 		// Configure le stage
-		stage.setTitle( "Gestion de contacts" );
+		stage.setTitle( "EFS Gestion" );
 		stage.setWidth(600);
 		stage.setHeight(600);
 		stage.setMinWidth(400);

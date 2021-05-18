@@ -61,7 +61,15 @@ public class ControllerCollecteForm extends Controller {
 	private ComboBox<Profession>	comboBoxProfession;
 	@FXML
 	private ListView<Personnel>	listViewPersonnel;
-
+	@FXML
+	private ListView<Personnel>	listViewPersonnelCollecte;
+	@FXML
+	private Button			buttonAjouterPersonnel;
+	@FXML
+	private Button			buttonSupprimerPersonnel;
+	@FXML
+	private TextField		textFieldQtePersonnel;
+	
 	
 	// Autres champs
 	
@@ -96,23 +104,38 @@ public class ControllerCollecteForm extends Controller {
         
 		// TabPane 2
         comboBoxProfession.setItems( modelProfession.getListe());
+        comboBoxProfession.getSelectionModel().selectFirst();
         
-        listViewPersonnel.setItems( modelPersonnel.getListe() );
+        listViewPersonnel.setItems( modelCollecte.getPersonnelFiltre() );
         UtilFX.setCellFactory( listViewPersonnel, item -> item.toString() );
-       
-		// Liste des personnes
-		/*listViewPersonnes.setItems( courant.getPersonnes() );
-		listViewPersonnes.getSelectionModel().setSelectionMode( SelectionMode.MULTIPLE );*/
+        listViewPersonnel.getSelectionModel().setSelectionMode( SelectionMode.MULTIPLE );
 
+        
+        listViewPersonnelCollecte.setItems( modelCollecte.getPersonnelCollecteFiltre() );
+        UtilFX.setCellFactory( listViewPersonnelCollecte, item -> item.toString() );
+		listViewPersonnelCollecte.getSelectionModel().setSelectionMode( SelectionMode.MULTIPLE );
+		
+		// Configuration des boutons
+		listViewPersonnel.getSelectionModel().selectedItemProperty().addListener(
+				(obs, oldVal, newVal) -> {
+					configurerBoutons();
+		});
+		listViewPersonnelCollecte.getSelectionModel().selectedItemProperty().addListener(
+				(obs, oldVal, newVal) -> {
+					configurerBoutons();
+		});
+		configurerBoutons();
+		//configurerQte();
 		
 	}
-	
 	
 	public void refresh() {
 		modelSite.actualiserListe();
 		modelProfession.actualiserListe();
-		modelCollecte.actualiserCourant();
+		modelCollecte.actualiserCourant();	
 		
+		 
+		configurerQte();
 		
 	}
 	
@@ -120,28 +143,33 @@ public class ControllerCollecteForm extends Controller {
 	// Actions
 	@FXML
 	private void doPersonnelProfession() {
-		modelPersonnel.actualiserListeParProfession(comboBoxProfession.getValue().getLibelle());
-		UtilFX.selectInListView( listViewPersonnel, modelPersonnel.getSelection() );
-		listViewPersonnel.requestFocus();
+		configurerQte();
+		if (comboBoxProfession.getValue()!=null)
+		{
+			modelPersonnel.actualiserListeParProfession(comboBoxProfession.getValue().getLibelle());
+			modelCollecte.actualiserPersonnelListe();
+			modelCollecte.filtrePersonnelParProfession(comboBoxProfession.getValue().getLibelle());
+			modelCollecte.filtrePersonnelCollecteParProfession(comboBoxProfession.getValue().getLibelle());
+			
+				
+			UtilFX.selectInListView( listViewPersonnel, modelPersonnel.getSelection() );
+			listViewPersonnel.requestFocus();
+		}
+		
 	}
 	
+
 	
 	@FXML
-	private void doSupprimerCategorie() {
-		comboBoxSite.setValue( null );
-	}
-	
-	/*
-	@FXML
-	private void doSupprimerPersonnes() {
-		modelCollecte.supprimerPersonnes( listViewPersonnes.getSelectionModel().getSelectedItems() );
+	private void doSupprimerPersonnel() {
+		modelCollecte.supprimerPersonnel( listViewPersonnelCollecte.getSelectionModel().getSelectedItems() );
 	}
 	
 	@FXML
-	private void doAjouterPersonnes() {
-		managerGui.showDialog( EnumView.CollecteAjoutPersonnes );
+	private void doAjouterPersonnel() {
+		modelCollecte.ajouterPersonnel(listViewPersonnel.getSelectionModel().getSelectedItems());
 	}
-	*/
+	
 	
 	
 	@FXML
@@ -157,6 +185,47 @@ public class ControllerCollecteForm extends Controller {
 	
 	
 	// Méthodes auxiliaires
+	private void configurerBoutons() {
+		
+    	if( listViewPersonnel.getSelectionModel().getSelectedItems().isEmpty() ) {
+			buttonAjouterPersonnel.setDisable(true);
+		} else {
+			buttonAjouterPersonnel.setDisable(false);
+		}
+    	
+    	if( listViewPersonnelCollecte.getSelectionModel().getSelectedItems().isEmpty() ) {
+			buttonSupprimerPersonnel.setDisable(true);
+		} else {
+			buttonSupprimerPersonnel.setDisable(false);
+		}
+	}
 	
+	private void configurerQte() {
+		if (comboBoxProfession.getValue()!=null)
+		{
+			//System.out.println(comboBoxProfession.getValue().getLibelle());
+			if (comboBoxProfession.getValue().getLibelle().equals( "Secrétaire"))
+			{
+				bindBidirectional( textFieldQtePersonnel, modelCollecte.getCourant().nbre_secretaireProperty(), new ConverterInteger() );
+			}
+			else if (comboBoxProfession.getValue().getLibelle().equals("Infirmière") )
+			{
+				bindBidirectional( textFieldQtePersonnel, modelCollecte.getCourant().nbre_infirmiersProperty(), new ConverterInteger() );
+			}
+			else if (comboBoxProfession.getValue().getLibelle().equals("Médecin") )
+			{
+				bindBidirectional( textFieldQtePersonnel, modelCollecte.getCourant().nbre_medecinsProperty(), new ConverterInteger() );
+			}
+			else if (comboBoxProfession.getValue().getLibelle().equals( "Agent de collation"))
+			{
+				bindBidirectional( textFieldQtePersonnel, modelCollecte.getCourant().nbre_agents_collationProperty(), new ConverterInteger() );
+			}
+		}
+		else
+		{
+			System.out.println("Valeur combobox profession nulle");
+			textFieldQtePersonnel.setText(" ");
+		}
+	}
 
 }

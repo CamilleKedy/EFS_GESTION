@@ -200,6 +200,35 @@ public class DaoPersonnel {
 			UtilJdbc.close( rs, stmt, cn );
 		}
 	}
+	
+	public List<Personnel> listerParCollecte( int id_collecte )   {
+
+		Connection			cn		= null;
+		PreparedStatement	stmt	= null;
+		ResultSet 			rs 		= null;
+		String				sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+	
+			sql= "SELECT * FROM Personnel p INNER JOIN personnelDeCollecte c ON p.id_personnel = c.id_personnel WHERE c.id_collecte = ? ORDER BY nom, prenom";
+			stmt = cn.prepareStatement(sql);
+            stmt.setObject( 1, id_collecte );
+			rs = stmt.executeQuery();
+			
+			List<Personnel> personnels = new ArrayList<>();
+			while (rs.next()) {
+				personnels.add( construirePersonnel(rs, true) );
+			}
+			return personnels;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( rs, stmt, cn );
+		}
+	}
 
     
     public int compterPourProfession( int idProfession ) {

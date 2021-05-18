@@ -31,10 +31,8 @@ public class Collecte  {
 	private final Property<LocalTime>	horaire_debut	= new SimpleObjectProperty<>();
 	private final Property<LocalTime>	horaire_fin	= new SimpleObjectProperty<>();
 	private final Property<Site_de_collecte>	site_de_collecte		= new SimpleObjectProperty<>();
-	// Liste observable
-	/*private final ObservableList<Site_de_collecte>	lieu	= FXCollections.observableArrayList(
-			t ->  new Observable[] { t.villeProperty(), t.nbr_litsProperty(), t.adresseProperty() } 
-		);*/
+	private final ObservableList<Personnel> personnel = FXCollections.observableArrayList();
+	
 	
 	// Constructeurs
 	
@@ -220,10 +218,10 @@ public class Collecte  {
 	public final void setSite_de_collecte(final projet.data.Site_de_collecte site_de_collecte) {
 		this.site_de_collecteProperty().setValue(site_de_collecte);
 	}
-	/*public ObservableList<Site_de_collecte> getLieu() {
-		return lieu;
-	}*/
-
+	
+	public ObservableList<Personnel> getPersonnel() {
+		return personnel;
+	}
 	
 	
 	// hashCode() & equals()

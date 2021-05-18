@@ -95,11 +95,11 @@
                                             </rowConstraints>
                                              <children>
                                                 <ListView fx:id="listViewPersonnel" prefHeight="200.0" prefWidth="200.0" />
-                                                <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+                                                <ListView fx:id="listViewPersonnelCollecte" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
                                                 <VBox alignment="CENTER" prefHeight="245.0" prefWidth="128.0" spacing="10.0" GridPane.columnIndex="1">
                                                    <children>
-                                                      <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Ajouter" />
-                                                      <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Supprimer" />
+                                                      <Button fx:id="buttonAjouterPersonnel" mnemonicParsing="false" onAction="#doAjouterPersonnel" prefHeight="40.0" prefWidth="90.0" text="Ajouter" />
+                                                      <Button fx:id="buttonSupprimerPersonnel" mnemonicParsing="false" onAction="#doSupprimerPersonnel" prefHeight="40.0" prefWidth="90.0" text="Supprimer" />
                                                    </children>
                                                 </VBox>
                                              </children>
@@ -109,7 +109,7 @@
                                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.columnIndex="2">
                                        <children>
                                           <Label text="Quantité :" />
-                                          <TextField prefHeight="31.0" prefWidth="70.0" />
+                                          <TextField fx:id="textFieldQtePersonnel" editable="false" prefHeight="31.0" prefWidth="70.0" />
                                        </children>
                                     </HBox>
                                  </children>

@@ -13,6 +13,7 @@ import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import jfox.exception.ExceptionValidation;
@@ -20,10 +21,12 @@ import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoCollecte;
 import projet.dao.DaoPersonne;
+import projet.dao.DaoPersonnel;
 import projet.dao.DaoSite_de_collecte;
 import projet.data.Collecte;
 import projet.data.Collecte;
 import projet.data.Personne;
+import projet.data.Personnel;
 import projet.view.systeme.ModelConfig;
 
 
@@ -31,10 +34,13 @@ public class ModelCollecte  {
 	
 	
 	// Données observables 
-	
-	private final ObservableList<Collecte> liste = FXCollections.observableArrayList(); 
-	
 	private final Collecte	courant = new Collecte();
+	private final ObservableList<Collecte> liste = FXCollections.observableArrayList(); 
+	private final ObservableList<Personnel> personnel = FXCollections.observableArrayList();
+	private final FilteredList<Personnel> personnelFiltre = new FilteredList<>(personnel, s -> true);
+	
+	
+	
 	
 	/*private final ObservableList<Personne> personnesPourDialogAjout = FXCollections.observableArrayList();
 	*/
@@ -44,13 +50,16 @@ public class ModelCollecte  {
 	
 	private Collecte		selection;
 
+	private  FilteredList<Personnel> personnelCollecteFiltre = new FilteredList<>(courant.getPersonnel(), s -> true);
+
 	@Inject
 	private IMapper		mapper;
     @Inject
 	private DaoCollecte		daoCollecte;
 
-    /*@Inject
-    private DaoPersonne	daoPersonne;
+   @Inject
+    private DaoPersonnel	daoPersonnel;
+   /*
     @Inject
     private ModelConfig	modelConfig;
     
@@ -70,9 +79,17 @@ public class ModelCollecte  {
 		return courant;
 	}
 	
-	/*public ObservableList<Personne> getPersonnesPourDialogAjout() {
-		return personnesPourDialogAjout;
-	}*/
+	public ObservableList<Personnel> getPersonnel() {
+		return personnel;
+	}
+	
+	public FilteredList<Personnel> getPersonnelFiltre() {
+		return personnelFiltre;
+	}
+	
+	public FilteredList<Personnel> getPersonnelCollecteFiltre() {
+		return personnelCollecteFiltre;
+	}
 	
 	public Collecte getSelection() {
 		return selection;
@@ -90,11 +107,30 @@ public class ModelCollecte  {
 	
 	public void actualiserListe() {
 		liste.setAll( daoCollecte.listerTout() );
+		
  	}
+	
+	public void filtrePersonnelParProfession(String filtre) {
+		personnelFiltre.setPredicate(s-> filtre != null ?  s.getProfession().getLibelle().equals(filtre) : true);
+	
+	}
+	
+	public void filtrePersonnelCollecteParProfession(String filtre) {
+		personnelCollecteFiltre.setPredicate(s-> filtre != null ?  s.getProfession().getLibelle().equals(filtre) : true);	
+		
+	}
+	
+	public void actualiserPersonnelListe() {
+		personnel.setAll(daoPersonnel.listerTout());
+		personnel.removeAll(courant.getPersonnel());
+		
+	}
 	
 	
 	public void actualiserCourant() {
 		mapper.update( courant, selection );
+		filtrePersonnelCollecteParProfession(null);
+		
 	}
 	
 	
@@ -185,17 +221,17 @@ public class ModelCollecte  {
 		daoCollecte.supprimer( item.getId_collecte() );
 		selection = UtilFX.findNext( liste, item );
 	}
-	/*
 	
-	public void supprimerPersonnes( List<Personne> items ) {
-		courant.getPersonnes().removeAll( items );
+	
+	public void supprimerPersonnel( List<Personnel> items ) {
+		courant.getPersonnel().removeAll( items );
 	}
 	
 	
-	public void ajouterPersonnes( List<Personne> items ) {
-		courant.getPersonnes().addAll( items );
+	public void ajouterPersonnel( List<Personnel> items ) {
+		courant.getPersonnel().addAll( items );
 	}
-	*/
+	
 	
 	// Métodes auxiliaires
 	
