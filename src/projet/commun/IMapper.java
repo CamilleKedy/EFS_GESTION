@@ -39,10 +39,13 @@ public interface IMapper {
 
 	DossierMedical update(@MappingTarget DossierMedical target, DossierMedical source);
 	
+	//@Mapping( target="libelle", expression="java( source.getLibelle() )" )
 	Profession update( @MappingTarget Profession target, Profession source );
 	
 	Personnel update( @MappingTarget Personnel target, Personnel source );
-
+	
+	@Mapping( target="site_de_collecte", expression="java( source.getSite_de_collecte() )" )
+	
 	Collecte update( @MappingTarget Collecte target, Collecte source  );
 	
 	Site_de_collecte update( @MappingTarget Site_de_collecte target, Site_de_collecte source  );

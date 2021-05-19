@@ -36,8 +36,10 @@ public class ModelCollecte  {
 	// Données observables 
 	private final Collecte	courant = new Collecte();
 	private final ObservableList<Collecte> liste = FXCollections.observableArrayList(); 
+	private final ObservableList<String> listeRecherche = FXCollections.observableArrayList();  // Liste des filtres de recherche
 	private final ObservableList<Personnel> personnel = FXCollections.observableArrayList();
 	private final FilteredList<Personnel> personnelFiltre = new FilteredList<>(personnel, s -> true);
+	private final FilteredList<Collecte> collecteFiltre = new FilteredList<>(liste, s -> true);// Liste filtrée de collectes. C'est cette liste qui sera affichée
 	
 	
 	
@@ -67,12 +69,20 @@ public class ModelCollecte  {
     
 	
 	// Initialisations
-	
+   @PostConstruct
+	public void init() {
+		listeRecherche.addAll("Numéro", "Ville", "Adresse", "Date de début", "Date de fin");
+		//niveau.addListener( obs -> chargerImages() );
+	}
 	
 	// Getters & Setters
 	
 	public ObservableList<Collecte> getListe() {
 		return liste;
+	}
+	
+	public ObservableList<String> getListeRecherche() {
+		return listeRecherche;
 	}
 	
 	public Collecte getCourant() {
@@ -89,6 +99,10 @@ public class ModelCollecte  {
 	
 	public FilteredList<Personnel> getPersonnelCollecteFiltre() {
 		return personnelCollecteFiltre;
+	}
+	
+	public FilteredList<Collecte> getCollecteFiltre() {
+		return collecteFiltre;
 	}
 	
 	public Collecte getSelection() {
@@ -110,6 +124,34 @@ public class ModelCollecte  {
 		
  	}
 	
+	// Fonction permettant de filtre la liste de collecte en fonction de la catégorie à filtrer et le contenu du texte, passés en paramètres
+	public void filtreListeCollecte(String categorie, String filtre) {
+		if (categorie!=null)
+		{
+			if (categorie.equals("Numéro"))
+			{
+				collecteFiltre.setPredicate(s-> filtre != null ?  s.getId_collecte().toString().contains(filtre) : true);
+			}
+			else if (categorie.equals("Ville"))
+			{
+				collecteFiltre.setPredicate(s-> filtre != null ?  s.getSite_de_collecte().getVille().contains(filtre) : true);
+			}
+			else if (categorie.equals("Adresse"))
+			{
+				collecteFiltre.setPredicate(s-> filtre != null ?  s.getSite_de_collecte().getAdresse().contains(filtre) : true);
+			}
+			else if (categorie.equals("Date de début"))
+			{
+				collecteFiltre.setPredicate(s-> filtre != null ?  s.getDate_debut().toString().contains(filtre) : true);
+			}
+			else if (categorie.equals("Date de fin"))
+			{
+				collecteFiltre.setPredicate(s-> filtre != null ?  s.getDate_fin().toString().contains(filtre) : true);
+			}
+			
+		}	
+	
+	}
 	public void filtrePersonnelParProfession(String filtre) {
 		personnelFiltre.setPredicate(s-> filtre != null ?  s.getProfession().getLibelle().equals(filtre) : true);
 	
