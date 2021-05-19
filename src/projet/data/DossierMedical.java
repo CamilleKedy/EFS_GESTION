@@ -120,6 +120,54 @@ public class DossierMedical  {
 	}
 	
 	
+//<<<<<<< HEAD
+
+	
+	/*
+	 * public boolean isInGroupeSanguin( String gs ) {
+	 * 
+	 * if ( gs != null ) { for ( String r : groupeSanguin ) { if ( gs.equals( r ) )
+	 * { return true; } } } return false; }
+	 * 
+	 * public boolean isInRhesus( String rh ) {
+	 * 
+	 * if ( rh != null ) { for ( String r : rhesus ) { if ( rh.equals( r ) ) {
+	 * return true; } } } return false; }
+	 */
+
+/*	
+	public boolean isInGroupeSanguin( String gs ) {
+		
+		if ( gs != null ) {
+			for ( String r : groupeSanguin ) {
+				if ( gs.equals( r ) ) {
+					return true;
+				}
+			}
+		}
+		return false;
+>>>>>>> branch 'master' of https://github.com/dev-appli-21/g37-maxxxx.git
+	}
+	
+<<<<<<< HEAD
+
+	public Property<String> getGroupeSanguin() {
+		return groupeSanguin;
+=======
+	public boolean isInRhesus( String rh ) {
+		
+		if ( rh != null ) {
+			for ( String r : rhesus ) {
+				if ( rh.equals( r ) ) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+*/
+//=======
+//>>>>>>> branch 'master' of https://github.com/dev-appli-21/g37-maxxxx.git
 	public final Property<String> groupeSanguinProperty() {
 		return this.groupeSanguin;
 	}

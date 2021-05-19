@@ -43,10 +43,18 @@ public class DaoDossierMedical {
 			sql = "INSERT INTO DossierMedical ( groupe_sanguin, rhesus, poids, inaptitude_temporaire, id_donneur) VALUES ( ?, ?, ?, ?, ?)";
 			stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS  );
 
+//<<<<<<< HEAD
+//			stmt.setObject(	1, dossierMedical.getId() );
+//			stmt.setObject(	2, dossierMedical.getGroupeSanguin() );
+//			stmt.setObject(	3, dossierMedical.getRhesus() );
+//			stmt.setObject(	4, dossierMedical.getPoids() );
+//			stmt.setObject(	5, dossierMedical.getInaptitude() );
+//=======
 			stmt.setObject(	1, dossierMedical.getGroupeSanguin() );
 			stmt.setObject(	2, dossierMedical.getRhesus() );
 			stmt.setObject(	3, dossierMedical.getPoids() );
 			stmt.setObject(	4, dossierMedical.getInaptitude() );
+//>>>>>>> branch 'master' of https://github.com/dev-appli-21/g37-maxxxx.git
 			
 			stmt.setObject(5, dossierMedical.getDonneur().getId());
 			
