@@ -5,10 +5,9 @@ import java.time.LocalDate;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
-import javafx.beans.property.Property;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import jfox.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
@@ -21,9 +20,10 @@ public class ModelDonneur {
 	
 	// Données observables 
 	
-	private final Property<String> niveau = new SimpleObjectProperty<>("non");
 	private final ObservableList<String> listeChoixCarte = FXCollections.observableArrayList();
 	private final ObservableList<Donneur> liste = FXCollections.observableArrayList();
+	private final ObservableList<String> critereRecherche = FXCollections.observableArrayList();
+	private final FilteredList<Donneur> donneurFiltre = new FilteredList<>(liste, s -> true);// Liste filtrée de collectes. C'est cette liste qui sera affichée
 	
 	private final Donneur	courant = new Donneur();
 	
@@ -41,6 +41,7 @@ public class ModelDonneur {
     @PostConstruct
 	public void init() {
     	listeChoixCarte.addAll("oui", "non");
+    	critereRecherche.addAll("Nom", "Prenom","Adresse", "Ville");
     }
     
     
@@ -52,24 +53,31 @@ public class ModelDonneur {
 			this.selection = daoDonneur.retrouver( selection.getId() );
 		}
 	}
-
-	
-	public final Property<String> niveauProperty() {
-		return this.niveau;
-	}
-	
-	public final String getNiveau() {
-		return this.niveauProperty().getValue();
-	}
-	
-
-	public final void setNiveau(final String niveau) {
-		this.niveauProperty().setValue(niveau);
-	}
-
 	
 	// Actions
-	
+	// Fonction permettant de filtre la liste de donneur en fonction de la catégorie à filtrer et le contenu du texte, passés en paramètres
+		public void filtreListeDonneur(String categorie, String filtre) {
+			if (categorie!=null)
+			{
+				if (categorie.equals("Nom"))
+				{
+					donneurFiltre.setPredicate(s-> filtre != null ?  s.getNom().toLowerCase().contains(filtre) : true);
+				}
+				else if (categorie.equals("Prenom"))
+				{
+					donneurFiltre.setPredicate(s-> filtre != null ?  s.getPrenom().toLowerCase().contains(filtre) : true);
+				}
+				else if (categorie.equals("Adresse"))
+				{
+					donneurFiltre.setPredicate(s-> filtre != null ?  s.getAdresse().contains(filtre) : true);
+				}
+				else if (categorie.equals("Ville"))
+				{
+					donneurFiltre.setPredicate(s-> filtre != null ?  s.getVille().toLowerCase().contains(filtre) : true);
+				}
+			}	
+		
+		}
 	
 	public void actualiserListe() { 
 		liste.setAll( daoDonneur.listerTout() );
@@ -166,6 +174,21 @@ public class ModelDonneur {
 	  public ObservableList<String> getListeChoixCarte() {
 		  return listeChoixCarte;
 	  }
+
+
+
+	public ObservableList<String> getCritereRecherche() {
+		return critereRecherche;
+	}
+
+
+
+	public FilteredList<Donneur> getDonneurFiltre() {
+		return donneurFiltre;
+	}
+
+
+
 		
 	
 

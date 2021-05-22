@@ -20,7 +20,7 @@ public class MenuBarAppli extends MenuBar {
 	
 	// Champs 
 	
-	private Menu	menuDonnees;
+	private Menu	menuDonneur;
 	private Menu	menuTests;
 	private Menu	menuEtats;
 	
@@ -63,33 +63,29 @@ public class MenuBarAppli extends MenuBar {
 		menu.getItems().add( item );
 
 		
-		// Manu Données
+		// Menu Secretaire
 		
-		menu =  new Menu( "Données" );;
+		menu =  new Menu( "Donneur" );;
 		this.getMenus().add(menu);
-		menuDonnees = menu;
+		menuDonneur = menu;
 		
-		item = new MenuItem( "Services" );
-		item.setOnAction(  e -> managerGui.showView( EnumView.ServiceListe )  );
+		item = new MenuItem( "Rendez-vous" );
+		//item.setOnAction(  e -> managerGui.showView( EnumView.RDVListe )  );
 		menu.getItems().add( item );
 		
-		item = new MenuItem( "Mémos" );
-		item.setOnAction(  e -> managerGui.showView( EnumView.MemoListe )  );
+		item = new MenuItem( "Rechercher un donneur" );
+		item.setOnAction(  e -> managerGui.showView( EnumView.DonneurListe )  );
 		menu.getItems().add( item );
 		
-		item = new MenuItem( "Personnes" );
-		item.setOnAction(  e -> managerGui.showView( EnumView.PersonneListe )  );
-		menu.getItems().add( item );
-		
-		item = new MenuItem( "Catégories" );
-		item.setOnAction(  e -> managerGui.showView( EnumView.CategorieListe )  );
+		item = new MenuItem( "Retour" );
+		item.setOnAction(  e -> managerGui.showView( EnumView.Connexion )  );
 		menu.getItems().add( item );
 		itemCategories = item;
 		
-		item = new MenuItem( "Comptes" );
+		/*item = new MenuItem( "Comptes" );
 		item.setOnAction(  e -> managerGui.showView( EnumView.CompteListe )  );
 		menu.getItems().add( item );
-		itemComptes = item;
+		itemComptes = item;*/
 
 		
 		// Manu Etats
@@ -135,7 +131,7 @@ public class MenuBarAppli extends MenuBar {
 
 
 		// Configuration initiale du menu
-		configurerMenu( modelConnexion.getCompteActif() );
+		//configurerMenu( modelConnexion.getCompteActif() );
 
 		// Le changement du compte connecté modifie automatiquement le menu
 		modelConnexion.compteActifProperty().addListener( (obs) -> {
@@ -152,7 +148,7 @@ public class MenuBarAppli extends MenuBar {
 
 		itemDeconnecter.setDisable(true);
 		
-		menuDonnees.setVisible(false);
+		menuDonneur.setVisible(false);
 		itemCategories.setVisible(false);
 		itemComptes.setVisible(false);
 		menuTests.setVisible(false);
@@ -162,11 +158,11 @@ public class MenuBarAppli extends MenuBar {
 		if( compteActif != null ) {
 			itemDeconnecter.setDisable(false);
 			if( compteActif.isInRole( Roles.UTILISATEUR) ) {
-				menuDonnees.setVisible(true);
+				menuDonneur.setVisible(true);
 				menuEtats.setVisible(true);
 			}
 			if( compteActif.isInRole( Roles.ADMINISTRATEUR ) ) {
-				menuDonnees.setVisible(true);
+				menuDonneur.setVisible(true);
 				itemCategories.setVisible(true);
 				itemComptes.setVisible(true);
 				menuTests.setVisible(true);

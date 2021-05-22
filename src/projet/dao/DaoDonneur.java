@@ -148,6 +148,112 @@ public class DaoDonneur {
 			UtilJdbc.close( rs, stmt, cn );
 		}
 	}
+	
+	public Donneur retrouverParNom( String nom )  {
+
+		Connection			cn		= null;
+		PreparedStatement	stmt	= null;
+		ResultSet 			rs 		= null;
+		String				sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			sql = "SELECT * FROM donneur WHERE nom_donneur LIKE '?%' ";
+            stmt = cn.prepareStatement(sql);
+            stmt.setObject( 1, nom);
+            rs = stmt.executeQuery();
+
+            if ( rs.next() ) {
+                return construireDonneur(rs, true );
+            } else {
+            	return null;
+            }
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( rs, stmt, cn );
+		}
+	}
+	public Donneur retrouverParPrenom( String prenom )  {
+
+		Connection			cn		= null;
+		PreparedStatement	stmt	= null;
+		ResultSet 			rs 		= null;
+		String				sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			sql = "SELECT * FROM donneur WHERE prenom_donneur LIKE ?";
+            stmt = cn.prepareStatement(sql);
+            stmt.setObject( 1, prenom);
+            rs = stmt.executeQuery();
+
+            if ( rs.next() ) {
+                return construireDonneur(rs, true );
+            } else {
+            	return null;
+            }
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( rs, stmt, cn );
+		}
+	}
+	
+	public Donneur retrouverParAdresse( String adresse )  {
+
+		Connection			cn		= null;
+		PreparedStatement	stmt	= null;
+		ResultSet 			rs 		= null;
+		String				sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			sql = "SELECT * FROM donneur WHERE adresse_donneur LIKE '%?%'";
+            stmt = cn.prepareStatement(sql);
+            stmt.setObject( 1, adresse);
+            rs = stmt.executeQuery();
+
+            if ( rs.next() ) {
+                return construireDonneur(rs, true );
+            } else {
+            	return null;
+            }
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( rs, stmt, cn );
+		}
+	}
+	public Donneur retrouverParVille( String ville )  {
+
+		Connection			cn		= null;
+		PreparedStatement	stmt	= null;
+		ResultSet 			rs 		= null;
+		String				sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			sql = "SELECT * FROM donneur WHERE ville_donneur LIKE ville '%?%'";
+            stmt = cn.prepareStatement(sql);
+            stmt.setObject( 1, ville);
+            rs = stmt.executeQuery();
+
+            if ( rs.next() ) {
+                return construireDonneur(rs, true );
+            } else {
+            	return null;
+            }
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( rs, stmt, cn );
+		}
+	}
 
 	
 	public List<Donneur> listerTout()   {

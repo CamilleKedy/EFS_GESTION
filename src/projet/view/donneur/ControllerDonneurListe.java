@@ -4,8 +4,10 @@ import javax.inject.Inject;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import jfox.javafx.view.IManagerGui;
@@ -28,6 +30,11 @@ public class ControllerDonneurListe {
 
 	@FXML
 	private TableColumn<Donneur, String> columnVille;
+	@FXML
+	private ComboBox<String> recherche;
+
+	@FXML
+	private TextField rechercher;
 
 	@FXML
 	private Button			buttonAjouter;
@@ -52,8 +59,8 @@ public class ControllerDonneurListe {
 
 		
 		// Data binding
-		tableView.setItems(  modelDonneur.getListe() );
-
+		tableView.setItems(  modelDonneur.getDonneurFiltre());
+		
 		columnNom.setCellValueFactory( t -> t.getValue().nomProperty() );
 		columnPrenom.setCellValueFactory( t -> t.getValue().prenomProperty() );
 		columnAdresse.setCellValueFactory( t -> t.getValue().adresseProperty() );
@@ -65,6 +72,13 @@ public class ControllerDonneurListe {
 					configurerBoutons();
 				});
 		configurerBoutons();
+		
+		// Recherche
+		recherche.setItems(modelDonneur.getCritereRecherche());
+		rechercher.textProperty().addListener(obs ->{
+			String filtre = rechercher.getText();
+			modelDonneur.filtreListeDonneur(recherche.getValue(), filtre);
+		});
 
 	}
 	
