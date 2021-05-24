@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="631.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.donneur.ControllerDonneurForm">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="602.0" prefWidth="635.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.donneur.ControllerDonneurForm">
    <children>
       <TabPane layoutX="62.0" layoutY="139.0" prefHeight="346.0" prefWidth="507.0" style="-fx-background-color: #ffffff; -fx-border-color: red;" tabClosingPolicy="UNAVAILABLE">
          <tabs>
@@ -147,7 +147,7 @@
             </VBox>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="193.0" layoutY="485.0" prefHeight="66.0" prefWidth="243.0" spacing="40.0">
+      <HBox alignment="CENTER" layoutX="196.0" layoutY="515.0" prefHeight="66.0" prefWidth="243.0" spacing="40.0">
          <children>
             <Button fx:id="buttonEnregistrerDonneur" mnemonicParsing="false" onAction="#doEnregistrerDonneur" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #162c53;" text="Enregistrer" textFill="WHITE">
                <font>
