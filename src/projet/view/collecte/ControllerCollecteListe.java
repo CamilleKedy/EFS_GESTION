@@ -59,6 +59,7 @@ public class ControllerCollecteListe extends Controller {
 
 	@FXML
 	private void initialize() {
+		
 
 		//Collecte courant = modelCollecte.getCourant();
 		// Data binding

@@ -33,7 +33,7 @@ public class DaoRole {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "INSERT INTO role (idcompte, role) VALUES (?,?)";
+			sql = "INSERT INTO role (id_connexion, role) VALUES (?,?)";
 			stmt = cn.prepareStatement( sql );
 			for( String role : compte.getRoles() ) {
 				stmt.setObject( 1, compte.getId() );
@@ -58,7 +58,7 @@ public class DaoRole {
 			cn = dataSource.getConnection();
 
 			// Supprime les roles
-			sql = "DELETE FROM role  WHERE idcompte = ? ";
+			sql = "DELETE FROM role  WHERE id_connexion = ? ";
 			stmt = cn.prepareStatement(sql);
 			stmt.setObject( 1, idCompte );
 			stmt.executeUpdate();
@@ -81,7 +81,7 @@ public class DaoRole {
 		try {
 			cn = dataSource.getConnection();
 
-			sql = "SELECT * FROM role WHERE idcompte = ? ORDER BY role";
+			sql = "SELECT * FROM role WHERE id_connexion = ? ORDER BY role";
 			stmt = cn.prepareStatement(sql);
 			stmt.setObject( 1, compte.getId() );
 			rs = stmt.executeQuery();

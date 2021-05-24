@@ -18,20 +18,19 @@ public class Compte  {
 	private final Property<Integer>	id			= new SimpleObjectProperty<>();
 	private final StringProperty	pseudo		= new SimpleStringProperty();
 	private final StringProperty	motDePasse	= new SimpleStringProperty();
-	private final StringProperty	email 		= new SimpleStringProperty();
 	private final ObservableList<String> roles = FXCollections.observableArrayList();
-	
+	private final Property<Personnel>	personnel			= new SimpleObjectProperty<>();
 	
 	// Constructeurs
 	
 	public Compte() {
 	}
 
-	public Compte( int id, String pseudo, String motDePasse, String email ) {
+	public Compte( int id, String pseudo, String motDePasse, Personnel personnel ) {
 		setId(id);
 		setPseudo(pseudo);
 		setMotDePasse(motDePasse);
-		setEmail(email);
+		setPersonnel(personnel);
 	}
 	
 	
@@ -72,19 +71,20 @@ public class Compte  {
 	public final void setMotDePasse(final String motDePasse) {
 		this.motDePasseProperty().setValue(motDePasse);
 	}
-
-	public final StringProperty emailProperty() {
-		return this.email;
+	
+	public final Property<Personnel> personnelProperty() {
+		return this.personnel;
 	}
 
-	public final String getEmail() {
-		return this.emailProperty().getValue();
+	public final Personnel getPersonnel() {
+		return this.personnelProperty().getValue();
 	}
 
-	public final void setEmail(final String email) {
-		this.emailProperty().setValue(email);
+	public final void setPersonnel(final Personnel personnel) {
+		this.personnelProperty().setValue(personnel);
 	}
 
+	
 	public final ObservableList<String> getRoles() {
 		return this.roles;
 	}

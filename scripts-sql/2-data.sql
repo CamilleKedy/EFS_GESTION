@@ -4,6 +4,7 @@ SET search_path TO projet;
 -- Supprimer toutes les données
 
 DELETE FROM Personnel;
+DELETE FROM Role;
 DELETE FROM Profession;
 DELETE FROM Donneur;
 DELETE FROM Site_de_collecte;
@@ -60,14 +61,22 @@ INSERT INTO Site_de_collecte (id_site, ville, nbr_lits, adresse ) VALUES
 
 ALTER TABLE Site_de_collecte ALTER COLUMN id_site RESTART WITH 6;
 
-
 -- Connexion
 
-INSERT INTO Connexion (IdConnexion, login,  motDePasse, role, id_personnel) VALUES 
-  ( 1, 'cardinal',  'cardinal',   'Gestionnaire', 2 ),
-  ( 2, 'nawel', 'nawel',  'Sécrétaire', 3 );
+INSERT INTO Connexion (id_connexion, login,  motDePasse, id_personnel) VALUES 
+  ( 1, 'cardinal',  'cardinal', 2 ),
+  ( 2, 'nawel', 'nawel',  3 );
 
-ALTER TABLE Connexion ALTER COLUMN IdConnexion RESTART WITH 3;
+ALTER TABLE Connexion ALTER COLUMN id_connexion RESTART WITH 3;
+
+
+-- Roles
+
+INSERT INTO Role (id_role, role, id_connexion) VALUES 
+  ( 1, 'ADMINISTRATEUR', 1 ),
+  ( 2, 'UTILISATEUR', 2 );
+
+ALTER TABLE Role ALTER COLUMN id_role RESTART WITH 3;
 
 
 -- dossierMedical

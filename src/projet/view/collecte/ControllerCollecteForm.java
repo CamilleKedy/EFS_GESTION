@@ -188,26 +188,23 @@ public class ControllerCollecteForm extends Controller {
 	}
 	
 	private void configurerQte() {
-		if (comboBoxProfession.getValue()!=null)
-		{
-			//System.out.println(comboBoxProfession.getValue().getLibelle());
-			if (comboBoxProfession.getValue().getLibelle().equals( "Secrétaire"))
-			{
-				bindBidirectional( textFieldQtePersonnel, modelCollecte.getCourant().nbre_secretaireProperty(), new ConverterInteger() );
-			}
-			else if (comboBoxProfession.getValue().getLibelle().equals("Infirmière") )
-			{
-				bindBidirectional( textFieldQtePersonnel, modelCollecte.getCourant().nbre_infirmiersProperty(), new ConverterInteger() );
-			}
-			else if (comboBoxProfession.getValue().getLibelle().equals("Médecin") )
-			{
-				bindBidirectional( textFieldQtePersonnel, modelCollecte.getCourant().nbre_medecinsProperty(), new ConverterInteger() );
-			}
-			else if (comboBoxProfession.getValue().getLibelle().equals( "Agent de collation"))
-			{
-				bindBidirectional( textFieldQtePersonnel, modelCollecte.getCourant().nbre_agents_collationProperty(), new ConverterInteger() );
-			}
-		}
+		 if (comboBoxProfession.getValue()!=null)
+	        {
+	            switch ( comboBoxProfession.getValue().getLibelle() ) {
+	            case "Secrétaire":
+	                textFieldQtePersonnel.setText( modelCollecte.getCourant().getNbre_secretaire().toString() );
+	                break;
+	            case "Infirmière":
+	                textFieldQtePersonnel.setText( modelCollecte.getCourant().getNbre_infirmiers().toString() );
+	                break;
+	            case "Médecin":
+	                textFieldQtePersonnel.setText( modelCollecte.getCourant().getNbre_medecins().toString() );
+	                break;
+	            case "Agent de collation":
+	                textFieldQtePersonnel.setText( modelCollecte.getCourant().getNbre_agents_collation().toString() );
+	                break;
+	            }
+	        }
 		else
 		{
 			System.out.println("Valeur combobox profession nulle");

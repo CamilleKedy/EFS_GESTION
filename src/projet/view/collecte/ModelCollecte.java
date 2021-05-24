@@ -130,23 +130,23 @@ public class ModelCollecte  {
 		{
 			if (categorie.equals("Numéro"))
 			{
-				collecteFiltre.setPredicate(s-> filtre != null ?  s.getId_collecte().toString().contains(filtre) : true);
+				collecteFiltre.setPredicate(s-> filtre != null ?  s.getId_collecte().toString().toUpperCase().contains(filtre.toUpperCase()) : true);
 			}
 			else if (categorie.equals("Ville"))
 			{
-				collecteFiltre.setPredicate(s-> filtre != null ?  s.getSite_de_collecte().getVille().contains(filtre) : true);
+				collecteFiltre.setPredicate(s-> filtre != null ?  s.getSite_de_collecte().getVille().toUpperCase().contains(filtre.toUpperCase()) : true);
 			}
 			else if (categorie.equals("Adresse"))
 			{
-				collecteFiltre.setPredicate(s-> filtre != null ?  s.getSite_de_collecte().getAdresse().contains(filtre) : true);
+				collecteFiltre.setPredicate(s-> filtre != null ?  s.getSite_de_collecte().getAdresse().toUpperCase().contains(filtre.toUpperCase()) : true);
 			}
 			else if (categorie.equals("Date de début"))
 			{
-				collecteFiltre.setPredicate(s-> filtre != null ?  s.getDate_debut().toString().contains(filtre) : true);
+				collecteFiltre.setPredicate(s-> filtre != null ?  s.getDate_debut().toString().toUpperCase().contains(filtre.toUpperCase()) : true);
 			}
 			else if (categorie.equals("Date de fin"))
 			{
-				collecteFiltre.setPredicate(s-> filtre != null ?  s.getDate_fin().toString().contains(filtre) : true);
+				collecteFiltre.setPredicate(s-> filtre != null ?  s.getDate_fin().toString().toUpperCase().contains(filtre.toUpperCase()) : true);
 			}
 			
 		}	

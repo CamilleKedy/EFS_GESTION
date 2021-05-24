@@ -24,6 +24,8 @@ public class DaoCompte {
 	private DataSource		dataSource;
 	@Inject
 	private DaoRole			daoRole;
+	@Inject
+	private DaoPersonnel	daoPersonnel;
 
 	
 	// Actions
@@ -39,11 +41,11 @@ public class DaoCompte {
 			cn = dataSource.getConnection();
 
 			// Insère le compte
-			sql = "INSERT INTO compte ( pseudo, motdepasse, email ) VALUES ( ?, ?, ? )";
+			sql = "INSERT INTO connexion ( login, motDePasse, id_personnel ) VALUES ( ?, ?, ? )";
 			stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS ); 
 			stmt.setObject( 1, compte.getPseudo() );
 			stmt.setObject( 2, compte.getMotDePasse() );
-			stmt.setObject( 3, compte.getEmail() );
+			stmt.setObject( 3, compte.getPersonnel().getId() );
 			stmt.executeUpdate();
 
 			// Récupère l'identifiant généré par le SGBD
@@ -75,11 +77,11 @@ public class DaoCompte {
 			cn = dataSource.getConnection();
 
 			// Modifie le compte
-			sql = "UPDATE compte SET pseudo = ?, motdepasse = ?, email = ? WHERE idcompte =  ?";
+			sql = "UPDATE connexion SET login = ?, motDePasse = ?, id_personnel = ? WHERE id_connexion =  ?";
 			stmt = cn.prepareStatement( sql );
 			stmt.setObject( 1, compte.getPseudo() );
 			stmt.setObject( 2, compte.getMotDePasse() );
-			stmt.setObject( 3, compte.getEmail() );
+			stmt.setObject( 3, compte.getPersonnel().getId() );
 			stmt.setObject( 4, compte.getId() );
 			stmt.executeUpdate();
 			
@@ -109,7 +111,7 @@ public class DaoCompte {
 			cn = dataSource.getConnection();
 
 			// Supprime le compte
-			sql = "DELETE FROM compte WHERE idcompte = ? ";
+			sql = "DELETE FROM connexion WHERE id_connexion = ? ";
 			stmt = cn.prepareStatement( sql );
 			stmt.setObject( 1, idCompte );
 			stmt.executeUpdate();
@@ -132,13 +134,13 @@ public class DaoCompte {
 		try {
 			cn = dataSource.getConnection();
 
-			sql = "SELECT * FROM compte WHERE idcompte = ?";
+			sql = "SELECT * FROM connexion WHERE id_connexion = ?";
             stmt = cn.prepareStatement( sql );
             stmt.setObject( 1, idCompte );
             rs = stmt.executeQuery();
 
             if ( rs.next() ) {
-                return construireCompte( rs );
+                return construireCompte( rs , true);
             } else {
             	return null;
             }
@@ -160,13 +162,13 @@ public class DaoCompte {
 		try {
 			cn = dataSource.getConnection();
 
-			sql = "SELECT * FROM compte ORDER BY pseudo";
+			sql = "SELECT * FROM connexion ORDER BY login";
 			stmt = cn.prepareStatement( sql );
 			rs = stmt.executeQuery();
 
 			List<Compte> comptes = new ArrayList<>();
 			while ( rs.next() ) {
-				comptes.add( construireCompte(rs) );
+				comptes.add( construireCompte(rs, true) );
 			}
 			return comptes;
 
@@ -188,14 +190,14 @@ public class DaoCompte {
 		try {
 			cn = dataSource.getConnection();
 
-			sql = "SELECT * FROM compte WHERE pseudo = ? AND motdepasse = ?";
+			sql = "SELECT * FROM connexion WHERE login = ? AND motDePasse = ?";
 			stmt = cn.prepareStatement( sql );
 			stmt.setObject( 1, pseudo );
 			stmt.setObject( 2, motDePasse );
 			rs = stmt.executeQuery();
 
 			if ( rs.next() ) {
-				return construireCompte( rs );			
+				return construireCompte( rs, true );			
 			} else {
 				return null;
 			}
@@ -220,7 +222,7 @@ public class DaoCompte {
 			cn = dataSource.getConnection();
 
 			sql = "SELECT COUNT(*) = 0 AS unicite"
-					+ " FROM compte WHERE pseudo = ? AND idcompte <> ?";
+					+ " FROM connexion WHERE login = ? AND id_connexion <> ?";
 			stmt = cn.prepareStatement( sql );
 			stmt.setObject(	1, pseudo );
 			stmt.setObject(	2, idCompte );
@@ -239,13 +241,16 @@ public class DaoCompte {
 	
 	// Méthodes auxiliaires
 	
-	private Compte construireCompte( ResultSet rs ) throws SQLException {
+	private Compte construireCompte( ResultSet rs, boolean flagComplet ) throws SQLException {
 		Compte compte = new Compte();
-		compte.setId( rs.getObject( "idcompte", Integer.class ) );
-		compte.setPseudo( rs.getObject( "pseudo", String.class ) );
-		compte.setMotDePasse( rs.getObject( "motdepasse", String.class ) );
-		compte.setEmail( rs.getObject( "email", String.class ) );
+		compte.setId( rs.getObject( "id_connexion", Integer.class ) );
+		compte.setPseudo( rs.getObject( "login", String.class ) );
+		compte.setMotDePasse( rs.getObject( "motDePasse", String.class ) );
 		compte.getRoles().setAll( daoRole.listerPourCompte( compte ) );
+		
+		if ( flagComplet ) {
+			compte.setPersonnel( daoPersonnel.retrouver( rs.getObject("id_personnel", Integer.class) ) );
+		}
 		return compte;
 	}
 	

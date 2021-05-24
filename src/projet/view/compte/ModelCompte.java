@@ -91,11 +91,11 @@ public class ModelCompte {
 			message.append( "\nLe mot de passe est trop long : 25 maxi." );
 		}
 		
-		if( courant.getEmail() == null || courant.getEmail().isEmpty() ) {
+	/*	if( courant.getEmail() == null || courant.getEmail().isEmpty() ) {
 			message.append( "\nL'adresse e-mail ne doit pas être vide." );
 		} else  if ( courant.getEmail().length()> 100 ) {
 			message.append( "\nL'adresse e-mail est trop longue : 100 maxi." );
-		}
+		}*/
 		
 		if ( message.length() > 0 ) {
 			throw new ExceptionValidation( message.toString().substring(1) );

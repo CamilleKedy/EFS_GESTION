@@ -62,7 +62,7 @@ public class ControllerCompteForm extends Controller {
 		textFieldId.textProperty().bindBidirectional( courant.idProperty(), new ConverterInteger());
 		textFieldPseudo.textProperty().bindBidirectional( courant.pseudoProperty() );
 		textFieldMotDePasse.textProperty().bindBidirectional( courant.motDePasseProperty() );
-		textFieldEmail.textProperty().bindBidirectional( courant.emailProperty() );
+	//	textFieldEmail.textProperty().bindBidirectional( courant.emailProperty() );
 		
 		// ListView
 		
