@@ -92,11 +92,11 @@ ALTER TABLE dossierMedical ALTER COLUMN id_dossier RESTART WITH 6;
 
 
 -- Materiel
-  
-INSERT INTO Materiel (id_materiel, nom_materiel) VALUES 
-  (1,   'SERINGUE' ),
-  (2,   'Gants'),
-  (3,   'cache nez');
+
+INSERT INTO Materiel (id_materiel, nom_materiel, quantite_materiel) VALUES 
+  (1,   'SERINGUE', 1000 ),
+  (2,   'Gants', 1000),
+  (3,   'cache nez', 1000);
 
 ALTER TABLE Materiel ALTER COLUMN id_materiel RESTART WITH 4;
 
@@ -137,5 +137,4 @@ INSERT INTO materielDeCollecte (id_collecte, id_materiel, quantite) VALUES
   (1, 2, 100),
   (1, 1, 125),
   (1, 3, 200);
-  
 
