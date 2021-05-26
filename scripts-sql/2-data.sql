@@ -94,9 +94,9 @@ ALTER TABLE dossierMedical ALTER COLUMN id_dossier RESTART WITH 6;
 -- Materiel
 
 INSERT INTO Materiel (id_materiel, nom_materiel, quantite_materiel) VALUES 
-  (1,   'SERINGUE', 1000 ),
-  (2,   'Gants', 1000),
-  (3,   'cache nez', 1000);
+  (1,   'Seringue', 500 ),
+  (2,   'Gants', 100),
+  (3,   'Cache-nez', 600);
 
 ALTER TABLE Materiel ALTER COLUMN id_materiel RESTART WITH 4;
 

@@ -14,16 +14,18 @@ public class Materiel  {
 	// Données observables
 	
 	private final Property<Integer>	id_materiel		= new SimpleObjectProperty<>();
-	private final StringProperty	nom_materiel	= new SimpleStringProperty();	
+	private final StringProperty	nom_materiel	= new SimpleStringProperty();
+	private final Property<Integer> 	quantite_materiel	= new SimpleObjectProperty();
 	
 	// Constructeurs
 	
 	public Materiel() {
 	}
 
-	public Materiel( final int id_materiel, final String nom_materiel) {
+	public Materiel( final int id_materiel, final String nom_materiel, final int quantite_materiel) {
 		setId_materiel(id_materiel);
 		setNom_materiel(nom_materiel);
+		setQuantite_materiel(quantite_materiel);
 	}
 	
 	
@@ -58,9 +60,28 @@ public class Materiel  {
 		this.nom_materielProperty().set(nom_materiel);
 	}
 	
-
 	
+	public final Property<Integer> quantite_materielProperty() {
+		return this.quantite_materiel;
+	}
+	
+
+	public final Integer getQuantite_materiel() {
+		return this.quantite_materielProperty().getValue();
+	}
+	
+
+	public final void setQuantite_materiel(final Integer quantite_materiel) {
+		this.quantite_materielProperty().setValue(quantite_materiel);
+	}
+
+
 	// hashCode() & equals()
+
+	@Override
+	public String toString() {
+		return  nom_materiel.getValue() ;
+	}
 
 	@Override
 	public int hashCode() {
@@ -79,11 +100,5 @@ public class Materiel  {
 		return Objects.equals(id_materiel.getValue(), other.id_materiel.getValue() );
 	}
 
-
-	
-
-
-
-	
 }
 
