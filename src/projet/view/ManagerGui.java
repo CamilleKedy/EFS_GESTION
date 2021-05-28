@@ -36,7 +36,7 @@ public class ManagerGui extends ManagerGuiAbstract {
 		
 		// Choisit la vue à afficher
 
-		showView( EnumView.Connexion);
+		showView( EnumView.CollecteListe);
 
 		// Configure le stage
 		stage.setTitle( "EFS Gestion" );

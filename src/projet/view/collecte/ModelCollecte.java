@@ -13,8 +13,11 @@ import jfox.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoCollecte;
+import projet.dao.DaoMateriel;
 import projet.dao.DaoPersonnel;
 import projet.data.Collecte;
+import projet.data.Materiel;
+import projet.data.Materieldecollecte;
 import projet.data.Personnel;
 
 
@@ -26,7 +29,10 @@ public class ModelCollecte  {
 	private final ObservableList<Collecte> liste = FXCollections.observableArrayList(); 
 	private final ObservableList<String> listeRecherche = FXCollections.observableArrayList();  // Liste des filtres de recherche
 	private final ObservableList<Personnel> personnel = FXCollections.observableArrayList();
+	private final ObservableList<Materiel> materiel = FXCollections.observableArrayList();
+	private final ObservableList<Materiel> materielCollecte = FXCollections.observableArrayList();
 	private final FilteredList<Personnel> personnelFiltre = new FilteredList<>(personnel, s -> true);
+	private final FilteredList<Materiel> materielFiltre = new FilteredList<>(materiel, s -> true);
 	private final FilteredList<Collecte> collecteFiltre = new FilteredList<>(liste, s -> true);// Liste filtrée de collectes. C'est cette liste qui sera affichée
 	
 	
@@ -41,8 +47,9 @@ public class ModelCollecte  {
 	private Collecte		selection;
 
 	private  FilteredList<Personnel> personnelCollecteFiltre = new FilteredList<>(courant.getPersonnel(), s -> true);
-	
-	
+
+	private  FilteredList<Materieldecollecte> materielCollecteFiltre = new FilteredList<>(courant.getMateriel(), s -> true);
+
 
 	@Inject
 	private IMapper		mapper;
@@ -51,6 +58,13 @@ public class ModelCollecte  {
 
    @Inject
     private DaoPersonnel	daoPersonnel;
+   
+   @Inject
+   private DaoMateriel daoMateriel;
+   
+   @Inject
+   private ModelMateriel modelMateriel;
+   
    /*
     @Inject
     private ModelConfig	modelConfig;
@@ -83,8 +97,20 @@ public class ModelCollecte  {
 		return personnel;
 	}
 	
+	public ObservableList<Materiel> getMateriel() {
+		return materiel;
+	}
+	
+	public FilteredList<Materiel> getMaterielFiltre() {
+		return materielFiltre;
+	}
+	
 	public FilteredList<Personnel> getPersonnelFiltre() {
 		return personnelFiltre;
+	}
+	
+	public FilteredList<Materieldecollecte> getMaterielCollecteFiltre() {
+		return materielCollecteFiltre;
 	}
 	
 	public FilteredList<Personnel> getPersonnelCollecteFiltre() {
@@ -158,11 +184,16 @@ public class ModelCollecte  {
 		
 	}
 	
+	public void actualiserMateriellListe() {
+		materiel.setAll(daoMateriel.listerTout());
+		materiel.removeAll(courant.getMateriel());
+		
+	}
+	
 	
 	public void actualiserCourant() {
 		mapper.update( courant, selection );
 		filtrePersonnelCollecteParProfession(null);
-		
 	}
 	
 	
@@ -177,7 +208,7 @@ public class ModelCollecte  {
 		// On considère la durée moyenne d'un don étant de 45 min. On calcule donc le nombre de dons possibles dans la plage horaire
 		// Nombre de minute de fin - Nombre de min de départ / Durée moyenne d'un don * Nombre de dons simultanés (nombre de lits)
 		courant.setQte_collation((int)Math.ceil(((courant.getHoraire_fin().getHour()*60+courant.getHoraire_fin().getMinute() - courant.getHoraire_debut().getHour()*60 -courant.getHoraire_debut().getMinute())*1.)/45)*courant.getSite_de_collecte().getNbr_lits() );
-		
+	
 	}
 	
 	public void validerMiseAJour() {
@@ -235,6 +266,7 @@ public class ModelCollecte  {
 		
 		// Mets à jour les quantités
 		calculQuantites();
+		
 		// Effectue la mise à jour
 		
 		if ( courant.getId_collecte() == null ) {
@@ -242,7 +274,8 @@ public class ModelCollecte  {
 			selection.setId_collecte( daoCollecte.inserer( courant ) );
 		} else {
 			// modficiation
-			daoCollecte.modifier( courant );
+			daoCollecte.modifier( courant);
+			
 		}
 		
 		
@@ -264,8 +297,29 @@ public class ModelCollecte  {
 		courant.getPersonnel().addAll( items );
 	}
 	
+	public void supprimerMateriel( Materieldecollecte materiel ) {
+		courant.getMateriel().remove(materiel);
+		modelMateriel.ModifierQuantite(materiel.getMateriel(), -materiel.getQuantite());
+	}
 	
+	
+	public void ajouterMateriel( Materiel materiel, String quantite ) {
+		Materieldecollecte m = new Materieldecollecte();
+		m.setCollecte(courant);
+		m.setMateriel(materiel);
+		m.setQuantite(Integer.parseInt(quantite));
+		courant.getMateriel().add( m );
+		materiel.setQuantite_materiel(materiel.getQuantite_materiel() - Integer.parseInt(quantite));
+	}
+/*
+	public ObservableList<Materieldecollecte> getMaterielCollecte() {
+		// TODO Auto-generated method stub
+		return MaterielCollecte;
+	}
+	
+	*/
 	// Métodes auxiliaires
 	
+
 	
 }

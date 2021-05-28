@@ -11,9 +11,9 @@ public class Materieldecollecte  {
 
 	// Données observables
 	
-	private final Property<Integer>	id_collecte			= new SimpleObjectProperty<>();
-	private final Property<Integer>	id_materiel		= new SimpleObjectProperty<>();
-	private final Property<Integer>	quantite		= new SimpleObjectProperty<>();
+	private final Property<Collecte>	collecte		= new SimpleObjectProperty<>();
+	private final Property<Materiel>	materiel		= new SimpleObjectProperty<>();
+	private final Property<Integer>	    quantite		= new SimpleObjectProperty<>();
 	
 	
 	// Constructeurs
@@ -21,41 +21,42 @@ public class Materieldecollecte  {
 	public Materieldecollecte() {
 	}
 
-	public Materieldecollecte( final int id_collecte, final int id_materiel, final int quantite ) {
-		setId_collecte(id_collecte);
-		setId_materiel(id_materiel);
+	public Materieldecollecte( final Collecte collecte, final Materiel materiel, final int quantite ) {
+		setCollecte(collecte);
+		setMateriel(materiel);
 		setQuantite(quantite);
 	}
 	
 	
 	// Getters et Setters	
-
-	public final Property<Integer> id_collecteProperty() {
-		return this.id_collecte;
+	
+	public final Property<Collecte> collecteProperty() {
+		return this.collecte;
 	}
 	
 
-	public final Integer getId_collecte() {
-		return this.id_collecteProperty().getValue();
+	public final Collecte getCollecte() {
+		return this.collecteProperty().getValue();
 	}
 	
 
-	public final void setId_collecte(final Integer id_collecte) {
-		this.id_collecteProperty().setValue(id_collecte);
-	}
-	
-	public final Property<Integer> id_materielProperty() {
-		return this.id_materiel;
+	public final void setCollecte(final Collecte collecte) {
+		this.collecteProperty().setValue(collecte);
 	}
 	
 
-	public final Integer getId_materiel() {
-		return this.id_materielProperty().getValue();
+	public final Property<Materiel> materielProperty() {
+		return this.materiel;
 	}
 	
 
-	public final void setId_materiel(final Integer id_materiel) {
-		this.id_materielProperty().setValue(id_materiel);
+	public final Materiel getMateriel() {
+		return this.materielProperty().getValue();
+	}
+	
+
+	public final void setMateriel(final Materiel materiel) {
+		this.materielProperty().setValue(materiel);
 	}
 	
 	public final Property<Integer> quantiteProperty() {
@@ -74,11 +75,17 @@ public class Materieldecollecte  {
 		
 	
 	
+	
 	// hashCode() & equals()
 
 	@Override
+	public String toString() {
+		return  quantite.getValue() + " " + materiel.getValue();
+	}
+
+	@Override
 	public int hashCode() {
-		return Objects.hash(id_collecte.getValue(), id_materiel.getValue() );
+		return Objects.hash(collecte.hashCode(), materiel.hashCode() );
 	}
 
 	@Override
@@ -90,8 +97,11 @@ public class Materieldecollecte  {
 		if (getClass() != obj.getClass())
 			return false;
 		Materieldecollecte other = (Materieldecollecte) obj;
-		return Objects.equals(id_collecte.getValue(), other.id_materiel.getValue() );
+		return Objects.equals(collecte.getValue(), other.materiel.getValue() );
 	}
+
+
+	
 
 
 	
