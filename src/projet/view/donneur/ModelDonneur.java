@@ -61,19 +61,19 @@ public class ModelDonneur {
 			{
 				if (categorie.equals("Nom"))
 				{
-					donneurFiltre.setPredicate(s-> filtre != null ?  s.getNom().toLowerCase().contains(filtre) : true);
+					donneurFiltre.setPredicate(s-> filtre != null ?  s.getNom().toLowerCase().contains(filtre.toLowerCase()) : true);
 				}
 				else if (categorie.equals("Prenom"))
 				{
-					donneurFiltre.setPredicate(s-> filtre != null ?  s.getPrenom().toLowerCase().contains(filtre) : true);
+					donneurFiltre.setPredicate(s-> filtre != null ?  s.getPrenom().toLowerCase().contains(filtre.toLowerCase()) : true);
 				}
 				else if (categorie.equals("Adresse"))
 				{
-					donneurFiltre.setPredicate(s-> filtre != null ?  s.getAdresse().contains(filtre) : true);
+					donneurFiltre.setPredicate(s-> filtre != null ?  s.getAdresse().contains(filtre.toLowerCase()) : true);
 				}
 				else if (categorie.equals("Ville"))
 				{
-					donneurFiltre.setPredicate(s-> filtre != null ?  s.getVille().toLowerCase().contains(filtre) : true);
+					donneurFiltre.setPredicate(s-> filtre != null ?  s.getVille().toLowerCase().contains(filtre.toLowerCase()) : true);
 				}
 			}	
 		

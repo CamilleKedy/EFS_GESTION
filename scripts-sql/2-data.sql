@@ -73,8 +73,8 @@ ALTER TABLE Connexion ALTER COLUMN id_connexion RESTART WITH 3;
 -- Roles
 
 INSERT INTO Role (id_role, role, id_connexion) VALUES 
-  ( 1, 'ADMINISTRATEUR', 1 ),
-  ( 2, 'UTILISATEUR', 2 );
+  ( 1, 'GESTIONNAIRE', 1 ),
+  ( 2, 'SECRETAIRE', 2 );
 
 ALTER TABLE Role ALTER COLUMN id_role RESTART WITH 3;
 

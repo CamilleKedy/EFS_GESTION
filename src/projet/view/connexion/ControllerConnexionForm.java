@@ -29,9 +29,6 @@ public class ControllerConnexionForm extends Controller {
 	private IManagerGui		managerGui;
 	@Inject
 	private ModelConnexionForm	modelConnexion;
-	@Inject
-	private ModelInfo		modelInfo;
-	
 	
 	// Initialisation du Controller
 	
@@ -61,12 +58,13 @@ public class ControllerConnexionForm extends Controller {
 		managerGui.execTask( () -> {
 			modelConnexion.ouvrirSessionUtilisateur();
 			Platform.runLater( () -> {
-         			if (modelConnexion.getCompteActif().getRoles().contains("ADMINISTRATEUR"))
+         			if (modelConnexion.getCompteActif().getRoles().contains("GESTIONNAIRE"))
          				managerGui.showView(EnumView.CollecteListe);
          			else 
          				managerGui.showView(EnumView.DonneurListe);
             }) ;
 		} );
+		
 	}
 	
 
