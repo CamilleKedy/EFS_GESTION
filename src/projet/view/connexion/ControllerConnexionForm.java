@@ -62,9 +62,9 @@ public class ControllerConnexionForm extends Controller {
 			modelConnexion.ouvrirSessionUtilisateur();
 			Platform.runLater( () -> {
          			if (modelConnexion.getCompteActif().getRoles().contains("ADMINISTRATEUR"))
-         				managerGui.showView(EnumView.CollecteListe);
+         				managerGui.showView(EnumView.AccueilGestionnaire);
          			else 
-         				managerGui.showView(EnumView.DonneurListe);
+         				managerGui.showView(EnumView.AccueilSecretaire);
             }) ;
 		} );
 	}

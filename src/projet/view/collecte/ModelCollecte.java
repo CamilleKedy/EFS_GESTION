@@ -41,6 +41,8 @@ public class ModelCollecte  {
 	private Collecte		selection;
 
 	private  FilteredList<Personnel> personnelCollecteFiltre = new FilteredList<>(courant.getPersonnel(), s -> true);
+	
+	
 
 	@Inject
 	private IMapper		mapper;

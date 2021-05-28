@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.site_de_collecte.ControllerSite_de_collecteListe">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.site_de_collecte.ControllerSite_de_collecteListe">
    <children>
       <HBox prefHeight="108.0" prefWidth="600.0" style="-fx-background-color: #ffffff;">
          <children>
@@ -27,7 +27,7 @@
             </ImageView>
             <VBox alignment="CENTER_RIGHT" prefHeight="112.0" prefWidth="423.0">
                <children>
-                  <Label alignment="TOP_CENTER" styleClass="titre-vue" text="SITE DE COLLECTE" textFill="#162c53">
+                  <Label alignment="TOP_CENTER" text="SITES DE COLLECTE" textFill="#162c53">
                      <font>
                         <Font name="Rockwell Bold" size="30.0" />
                      </font>
@@ -72,6 +72,14 @@
                <font>
                   <Font name="Trebuchet MS" size="15.0" />
                </font></Button>
+            <Button layoutX="358.0" layoutY="32.0" mnemonicParsing="false" onAction="#doRetour" prefHeight="40.0" prefWidth="98.0" style="-fx-background-color: #ea302b;" text="Retour" textFill="WHITE">
+               <font>
+                  <Font name="Trebuchet MS" size="15.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="100.0" />
+               </HBox.margin>
+            </Button>
          </children>
       </HBox>
    </children>

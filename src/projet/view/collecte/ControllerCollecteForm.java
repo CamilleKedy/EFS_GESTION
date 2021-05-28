@@ -9,6 +9,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import jfox.javafx.util.ConverterInteger;
 import jfox.javafx.util.ConverterLocalDate;
 import jfox.javafx.util.ConverterLocalTime;
@@ -121,8 +123,7 @@ public class ControllerCollecteForm extends Controller {
 		modelSite.actualiserListe();
 		modelProfession.actualiserListe();
 		modelCollecte.actualiserCourant();	
-	 
-		configurerQte();
+	//	configurerQte();
 		
 	}
 	
@@ -155,6 +156,7 @@ public class ControllerCollecteForm extends Controller {
 	@FXML
 	private void doAjouterPersonnel() {
 		modelCollecte.ajouterPersonnel(listViewPersonnel.getSelectionModel().getSelectedItems());
+		configBoutonAjout();
 	}
 	
 	
@@ -192,6 +194,7 @@ public class ControllerCollecteForm extends Controller {
 	        {
 	            switch ( comboBoxProfession.getValue().getLibelle() ) {
 	            case "Secrétaire":
+	            	System.out.println( modelCollecte.getCourant().getNbre_secretaire());
 	                textFieldQtePersonnel.setText( modelCollecte.getCourant().getNbre_secretaire().toString() );
 	                break;
 	            case "Infirmière":
@@ -204,6 +207,8 @@ public class ControllerCollecteForm extends Controller {
 	                textFieldQtePersonnel.setText( modelCollecte.getCourant().getNbre_agents_collation().toString() );
 	                break;
 	            }
+	            
+	            configBoutonAjout();	           
 	        }
 		else
 		{
@@ -211,5 +216,20 @@ public class ControllerCollecteForm extends Controller {
 			textFieldQtePersonnel.setText(" ");
 		}
 	}
+
+	private void configBoutonAjout()
+	{
+		 // configure le bouton d'ajout d'un personnel à une collecte en fonction de la quantité max.
+        if (listViewPersonnelCollecte.getItems().size()== Integer.parseInt(textFieldQtePersonnel.getText()))
+        {
+        	System.out.println("toto");
+        	buttonAjouterPersonnel.setDisable(true);
+        }
+       /* else
+        {
+        	buttonAjouterPersonnel.setDisable(false);
+        }*/
+	}
+	
 
 }

@@ -17,7 +17,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.connexion.ControllerConnexionForm">
    <children>
-      <HBox alignment="CENTER" layoutY="5.0" prefHeight="239.0" prefWidth="600.0">
+      <HBox alignment="CENTER" layoutY="5.0" prefWidth="600.0">
          <children>
             <ImageView fitHeight="200.0" fitWidth="236.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -26,7 +26,7 @@
             </ImageView>
          </children>
       </HBox>
-      <VBox alignment="CENTER" fillWidth="false" layoutX="119.0" layoutY="201.0" prefHeight="401.0" prefWidth="600.0" spacing="30.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="201.0">
+      <VBox alignment="CENTER" fillWidth="false" layoutX="119.0" layoutY="201.0" prefWidth="600.0" spacing="30.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="201.0">
          <children>
             <HBox alignment="CENTER" prefHeight="32.0" prefWidth="600.0">
                <children>
@@ -37,7 +37,7 @@
                   </Text>
                </children>
                <VBox.margin>
-                  <Insets top="20.0" />
+                  <Insets />
                </VBox.margin>
             </HBox>
             <GridPane prefHeight="130.0" prefWidth="349.0">
@@ -59,18 +59,21 @@
                      </font></PasswordField>
                </children>
             </GridPane>
-            <HBox alignment="CENTER" prefHeight="95.0" prefWidth="600.0" spacing="20.0">
+            <HBox alignment="CENTER" prefHeight="98.0" prefWidth="600.0" spacing="20.0">
                <children>
-                  <Button defaultButton="true" mnemonicParsing="false" onAction="#doConnexion" prefHeight="51.0" prefWidth="127.0" style="-fx-background-color: #162c53;" text="Connexion" textFill="WHITE">
+                  <Button defaultButton="true" mnemonicParsing="false" onAction="#doConnexion" prefHeight="51.0" prefWidth="165.0" style="-fx-background-color: #162c53;" text="Connexion" textFill="WHITE">
                      <font>
                         <Font name="Trebuchet MS" size="20.0" />
                      </font></Button>
-                  <Button defaultButton="true" layoutX="127.0" layoutY="15.0" mnemonicParsing="false" onAction="#doConnexion" prefHeight="51.0" prefWidth="127.0" style="-fx-background-color: #ea302b;" text="Annuler" textFill="WHITE">
+                  <Button defaultButton="true" layoutX="127.0" layoutY="15.0" mnemonicParsing="false" onAction="#doConnexion" prefHeight="51.0" prefWidth="165.0" style="-fx-background-color: #ea302b;" text="Annuler" textFill="WHITE">
                      <font>
                         <Font name="Trebuchet MS" size="20.0" />
                      </font>
                   </Button>
                </children>
+               <padding>
+                  <Insets bottom="30.0" />
+               </padding>
             </HBox>
          </children>
       </VBox>
