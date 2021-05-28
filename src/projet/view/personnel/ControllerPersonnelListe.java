@@ -99,7 +99,10 @@ public class ControllerPersonnelListe extends Controller {
 			refresh();
 		}
 	}
-	
+	@FXML
+	private void doRetour() {
+		managerGui.showView( EnumView.AccueilGestionnaire );
+	}
 	
 	// Gestion des évènements
 

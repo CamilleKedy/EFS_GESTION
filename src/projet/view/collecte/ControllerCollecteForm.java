@@ -9,6 +9,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import jfox.javafx.util.ConverterInteger;
 import jfox.javafx.util.ConverterLocalDate;
 import jfox.javafx.util.ConverterLocalTime;
@@ -168,9 +170,10 @@ public class ControllerCollecteForm extends Controller {
 		modelSite.actualiserListe();
 		modelProfession.actualiserListe();
 		modelCollecte.actualiserCourant();	
+
 		modelMateriel.actualiserListe();
 		configurerQte();
-		
+
 	}
 	
 	
@@ -202,6 +205,7 @@ public class ControllerCollecteForm extends Controller {
 	@FXML
 	private void doAjouterPersonnel() {
 		modelCollecte.ajouterPersonnel(listViewPersonnel.getSelectionModel().getSelectedItems());
+		configBoutonAjout();
 	}
 	
 	@FXML
@@ -256,31 +260,48 @@ public class ControllerCollecteForm extends Controller {
 	}
 	
 	private void configurerQte() {
-		if (comboBoxProfession.getValue()!=null)
-		{
-			//System.out.println(comboBoxProfession.getValue().getLibelle());
-			if (comboBoxProfession.getValue().getLibelle().equals( "Secrétaire"))
-			{
-				bindBidirectional( textFieldQtePersonnel, modelCollecte.getCourant().nbre_secretaireProperty(), new ConverterInteger() );
-			}
-			else if (comboBoxProfession.getValue().getLibelle().equals("Infirmière") )
-			{
-				bindBidirectional( textFieldQtePersonnel, modelCollecte.getCourant().nbre_infirmiersProperty(), new ConverterInteger() );
-			}
-			else if (comboBoxProfession.getValue().getLibelle().equals("Médecin") )
-			{
-				bindBidirectional( textFieldQtePersonnel, modelCollecte.getCourant().nbre_medecinsProperty(), new ConverterInteger() );
-			}
-			else if (comboBoxProfession.getValue().getLibelle().equals( "Agent de collation"))
-			{
-				bindBidirectional( textFieldQtePersonnel, modelCollecte.getCourant().nbre_agents_collationProperty(), new ConverterInteger() );
-			}
-		}
+
+		 if (comboBoxProfession.getValue()!=null)
+	        {
+	            switch ( comboBoxProfession.getValue().getLibelle() ) {
+	            case "Secrétaire":
+	            	System.out.println( modelCollecte.getCourant().getNbre_secretaire());
+	                textFieldQtePersonnel.setText( modelCollecte.getCourant().getNbre_secretaire().toString() );
+	                break;
+	            case "Infirmière":
+	                textFieldQtePersonnel.setText( modelCollecte.getCourant().getNbre_infirmiers().toString() );
+	                break;
+	            case "Médecin":
+	                textFieldQtePersonnel.setText( modelCollecte.getCourant().getNbre_medecins().toString() );
+	                break;
+	            case "Agent de collation":
+	                textFieldQtePersonnel.setText( modelCollecte.getCourant().getNbre_agents_collation().toString() );
+	                break;
+	            }
+	            
+	            configBoutonAjout();	           
+	        }
+
 		else
 		{
 			System.out.println("Valeur combobox profession nulle");
 			textFieldQtePersonnel.setText(" ");
 		}
 	}
+
+	private void configBoutonAjout()
+	{
+		 // configure le bouton d'ajout d'un personnel à une collecte en fonction de la quantité max.
+        if (listViewPersonnelCollecte.getItems().size()== Integer.parseInt(textFieldQtePersonnel.getText()))
+        {
+        	System.out.println("toto");
+        	buttonAjouterPersonnel.setDisable(true);
+        }
+       /* else
+        {
+        	buttonAjouterPersonnel.setDisable(false);
+        }*/
+	}
+	
 
 }

@@ -81,6 +81,14 @@
                <font>
                   <Font name="Trebuchet MS" size="15.0" />
                </font></Button>
+            <Button layoutX="166.0" layoutY="32.0" mnemonicParsing="false" onAction="#doRetour" prefHeight="40.0" prefWidth="85.0" style="-fx-background-color: #ea352b;" text="Retour" textFill="WHITE">
+               <font>
+                  <Font name="Trebuchet MS" size="15.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="120.0" />
+               </HBox.margin>
+            </Button>
          </children>
       </HBox>
    </children>

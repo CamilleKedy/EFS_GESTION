@@ -13,6 +13,7 @@ public enum EnumView implements IEnumView {
 	Info				( "connexion/ViewInfo.fxml" ),
 	Connexion			( "connexion/ViewConnexionForm.fxml" ),
 	AccueilSecretaire	( "systeme/ViewAccueilSecretaire.fxml" ),
+	AccueilGestionnaire	( "systeme/ViewAccueilGestionnaire.fxml" ),
 	CompteListe			( "compte/ViewCompteListe.fxml" ),
 	CompteForm			( "compte/ViewCompteForm.fxml" ),
 	CategorieListe		( "personne/ViewCategorieListe.fxml" ),
@@ -38,6 +39,8 @@ public enum EnumView implements IEnumView {
 	Site_de_collecteForm		("site_de_collecte/ViewSite_de_collecteForm.fxml"),
 	PersonnelListe		("personnel/ViewPersonnelListe.fxml"),
 	PersonnelForm		("personnel/ViewPersonnelForm.fxml"),
+	RdvListe			("rdv/ViewRdvListe.fxml"),
+	RdvForm				("rdv/ViewRdvForm.fxml"),
 
 	;
 
