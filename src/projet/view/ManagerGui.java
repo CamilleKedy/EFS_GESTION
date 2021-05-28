@@ -77,7 +77,7 @@ public class ManagerGui extends ManagerGuiAbstract {
 	    	        stage.setHeight(value);
 	    	    }
 	    	};	
-	    	
+	    	 
 	    	Timeline timeline = new Timeline();
 		    timeline.getKeyFrames().addAll(
 	    	        new KeyFrame( new Duration(20), 

@@ -35,7 +35,7 @@ public class ControllerCollecteForm extends Controller {
 
 	
 	// Composants de la vue
-	
+	 
 	@FXML
 	private TextField		textFieldId;
 	@FXML

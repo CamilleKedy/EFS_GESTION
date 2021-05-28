@@ -22,7 +22,7 @@ public class Appli extends Application {
 	// Champs
 	
 	private IContext context;
-	
+	 
 	
 	// Actions
 	
