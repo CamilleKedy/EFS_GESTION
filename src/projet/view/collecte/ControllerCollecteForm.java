@@ -35,7 +35,7 @@ public class ControllerCollecteForm extends Controller {
 
 	
 	// Composants de la vue
-	
+	 
 	@FXML
 	private TextField		textFieldId;
 	@FXML
@@ -70,8 +70,8 @@ public class ControllerCollecteForm extends Controller {
 	private Button			buttonSupprimerMateriel;
 	@FXML
 	private TextField		textFieldQteMaterielAj;
-	@FXML
-	private TextField		textFieldQteMaterielRes;
+	//@FXML
+	//private TextField		textFieldQteMaterielRes;
 	
 	// Autres champs
 	
@@ -126,7 +126,7 @@ public class ControllerCollecteForm extends Controller {
 		
 		//TabPlane3
 	     listViewMateriel.setItems( modelMateriel.getListe() );
-	     UtilFX.setCellFactory( listViewMateriel, item -> item.getQuantite_materiel() + " "+  item.getNom_materiel() );
+	     UtilFX.setCellFactory( listViewMateriel, item -> item.toString());
 
 	        
 	       listViewMaterielCollecte.setItems( courant.getMateriel() );
@@ -155,11 +155,11 @@ public class ControllerCollecteForm extends Controller {
 					configurerBoutons();
 		});
 		
-		listViewMateriel.getSelectionModel().selectedItemProperty().addListener(
-				(obs, oldVal, newVal) -> {
-			        textFieldQteMaterielRes.setText(listViewMateriel.getSelectionModel().getSelectedItem().getQuantite_materiel().toString());
+		//listViewMateriel.getSelectionModel().selectedItemProperty().addListener(
+		//		(obs, oldVal, newVal) -> {
+			        //textFieldQteMaterielRes.setText(listViewMateriel.getSelectionModel().getSelectedItem().getQuantite_materiel().toString());
 
-		});
+		//});
 		
 		configurerBoutons();
 		//configurerQte();

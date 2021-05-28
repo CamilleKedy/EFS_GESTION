@@ -12,7 +12,8 @@ import projet.commun.Roles;
 import projet.data.Compte;
 import projet.report.EnumReport;
 import projet.report.ManagerReport;
-import projet.view.systeme.ModelConnexion;
+import projet.view.connexion.ModelConnexionForm;
+
 
 
 public class MenuBarAppli extends MenuBar {
@@ -34,7 +35,7 @@ public class MenuBarAppli extends MenuBar {
 	@Inject
 	private ManagerReport	managerReport;
 	@Inject
-	private ModelConnexion	modelConnexion;	
+	private ModelConnexionForm modelConnexion;
 	
 	
 	// Initialisation
@@ -42,6 +43,7 @@ public class MenuBarAppli extends MenuBar {
 	@PostConstruct
 	public void init() {
 
+		//la méthode est aappelée avant que l'utilisateur ne soit connecté, c'est pourquoi ca marche pas
 		
 		// Variables de travail
 		Menu menu;
@@ -82,10 +84,10 @@ public class MenuBarAppli extends MenuBar {
 		menu.getItems().add( item );
 		itemCategories = item;
 		
-		/*item = new MenuItem( "Comptes" );
+		item = new MenuItem( "Comptes" );
 		item.setOnAction(  e -> managerGui.showView( EnumView.CompteListe )  );
 		menu.getItems().add( item );
-		itemComptes = item;*/
+		itemComptes = item;
 
 		
 		// Manu Etats
@@ -131,12 +133,14 @@ public class MenuBarAppli extends MenuBar {
 
 
 		// Configuration initiale du menu
-		//configurerMenu( modelConnexion.getCompteActif() );
+		configurerMenu( modelConnexion.getCompteActif() );
 
 		// Le changement du compte connecté modifie automatiquement le menu
 		modelConnexion.compteActifProperty().addListener( (obs) -> {
+			
 					Platform.runLater( () -> configurerMenu( modelConnexion.getCompteActif() ) );
-				}
+					System.out.println("Yo");
+		}
 			); 
 		
 	}
@@ -146,6 +150,7 @@ public class MenuBarAppli extends MenuBar {
 	
 	private void configurerMenu( Compte compteActif  ) {
 
+		System.out.println("12");
 		itemDeconnecter.setDisable(true);
 		
 		menuDonneur.setVisible(false);
@@ -156,13 +161,15 @@ public class MenuBarAppli extends MenuBar {
 		menuEtats.setVisible( false );
 		
 		if( compteActif != null ) {
+			
 			itemDeconnecter.setDisable(false);
-			if( compteActif.isInRole( Roles.UTILISATEUR) ) {
+			if( compteActif.isInRole( Roles.SECRETAIRE) ) {
 				menuDonneur.setVisible(true);
 				menuEtats.setVisible(true);
 			}
-			if( compteActif.isInRole( Roles.ADMINISTRATEUR ) ) {
-				menuDonneur.setVisible(true);
+			if( compteActif.isInRole( Roles.GESTIONAIRE ) ) {
+				System.out.println(compteActif.getRoles());
+				menuDonneur.setVisible(false);
 				itemCategories.setVisible(true);
 				itemComptes.setVisible(true);
 				menuTests.setVisible(true);
