@@ -39,11 +39,6 @@ public class ManagerGui extends ManagerGuiAbstract {
 
 		// Configure le stage
 		stage.setTitle( "EFS Gestion" );
-
-		/*
-		 * stage.setWidth(600); stage.setHeight(600); stage.setMinWidth(400);
-		 * stage.setMinHeight(300);
-		 */
 		stage.getIcons().add(new Image(getClass().getResource("/projet/images/Logo-ESF_Gestion blanc.png").toExternalForm()));
 		
 		// Configuration par défaut pour les boîtes de dialogue
@@ -80,7 +75,7 @@ public class ManagerGui extends ManagerGuiAbstract {
 	    	        stage.setHeight(value);
 	    	    }
 	    	};	
-	    	
+	    	 
 	    	Timeline timeline = new Timeline();
 		    timeline.getKeyFrames().addAll(
 	    	        new KeyFrame( new Duration(20), 

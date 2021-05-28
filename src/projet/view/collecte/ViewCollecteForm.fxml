@@ -22,9 +22,9 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.collecte.ControllerCollecteForm">
    <children>
-      <HBox alignment="CENTER" layoutX="59.0" layoutY="118.0" prefHeight="412.0" prefWidth="600.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="118.0">
+      <HBox alignment="CENTER" layoutX="59.0" layoutY="118.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="118.0">
          <children>
-            <TabPane prefHeight="412.0" prefWidth="538.0" style="-fx-border-color: lightgray;">
+            <TabPane style="-fx-border-color: lightgray;">
                <tabs>
                   <Tab closable="false" text="Détails">
                      <content>
@@ -120,7 +120,7 @@
                   </Tab>
                   <Tab closable="false" text="Matériel">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0">
                            <children>
                               <HBox layoutX="22.0" layoutY="25.0" prefHeight="267.0" prefWidth="504.0">
                                  <children>
@@ -146,18 +146,13 @@
                                     </GridPane>
                                  </children>
                               </HBox>
-                              <HBox layoutX="20.0" layoutY="320.0" prefHeight="44.0" prefWidth="493.0" spacing="30.0">
+                              <HBox alignment="TOP_CENTER" layoutX="20.0" layoutY="320.0" prefHeight="44.0" prefWidth="493.0" spacing="30.0">
                                  <children>
                                     <Label text="Quantité à ajouter :">
                                        <padding>
                                           <Insets top="7.0" />
                                        </padding></Label>
                                     <TextField fx:id="textFieldQteMaterielAj" prefHeight="31.0" prefWidth="75.0" />
-                                    <Label alignment="BOTTOM_LEFT" text="Quantité restante :">
-                                       <padding>
-                                          <Insets top="7.0" />
-                                       </padding></Label>
-                                    <TextField fx:id="textFieldQteMaterielRes" prefHeight="31.0" prefWidth="75.0" />
                                  </children>
                               </HBox>
                            </children>
