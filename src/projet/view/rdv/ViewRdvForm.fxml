@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.memo.ControllerMemoForm">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.rdv.ControllerRdvForm">
    <children>
       <VBox layoutX="21.600000381469727" layoutY="118.0">
          <children>
@@ -26,8 +26,8 @@
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="96.20001220703125" minWidth="6.00003280639649" prefWidth="35.800038528442386" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="380.79998779296875" minWidth="10.0" prefWidth="354.19996147155763" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="143.20001220703125" minWidth="10.0" prefWidth="64.19999999999999" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="109.79998779296875" minWidth="10.0" prefWidth="97.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="143.20001220703125" minWidth="10.0" prefWidth="72.39997558593751" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="109.79998779296875" minWidth="10.0" prefWidth="70.00002441406247" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -38,18 +38,18 @@
                <children>
                   <Label text="Site :" />
                   <Label text="Id collecte :" GridPane.columnIndex="2" />
-                  <TextField GridPane.columnIndex="1">
+                  <TextField fx:id="textFieldSiteDeCollecte" editable="false" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="15.0" top="5.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField GridPane.columnIndex="3" />
+                  <TextField fx:id="textFieldIdCollecte" editable="false" GridPane.columnIndex="3" />
                </children>
             </GridPane>
             <GridPane>
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="451.199951171875" minWidth="10.0" prefWidth="415.199951171875" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.800048828125" minWidth="10.0" prefWidth="140.800048828125" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="500.0" minWidth="10.0" prefWidth="500.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
@@ -57,9 +57,9 @@
                <children>
                   <HBox alignment="CENTER" fillHeight="false" prefHeight="374.0" prefWidth="456.0">
                      <children>
-                        <GridPane maxWidth="1.7976931348623157E308" prefHeight="316.0" prefWidth="416.0">
+                        <GridPane maxWidth="1.7976931348623157E308" prefHeight="323.0" prefWidth="355.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="147.99999389648437" minWidth="100.0" prefWidth="141.6" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.80001220703124" minWidth="100.0" prefWidth="141.6" />
                               <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="191.99999999999997" />
                            </columnConstraints>
                            <rowConstraints>
@@ -70,22 +70,25 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
                               <Label text="Id rendez-vous :" />
-                              <Label text="Prénom donneur * :" GridPane.rowIndex="2" />
-                              <Label text="Date de rendez-vous * :" GridPane.rowIndex="3" />
-                              <Label text="Heure * :" GridPane.rowIndex="4" />
-                              <Label text="Prise de sang * :" GridPane.rowIndex="5" />
-                              <TextField prefHeight="31.0" prefWidth="68.0" GridPane.columnIndex="1" />
-                              <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <TextField prefHeight="31.0" prefWidth="70.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <TextField prefHeight="31.0" prefWidth="70.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                              <Label text="Quantité de sang donnée :" GridPane.rowIndex="6" />
-                              <ComboBox prefHeight="26.0" prefWidth="70.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                              <Label text="Nom donneur * :" GridPane.rowIndex="1" />
-                              <TextField prefHeight="31.0" prefWidth="194.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField prefHeight="31.0" prefWidth="194.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label text="Prénom donneur * :" GridPane.rowIndex="3" />
+                              <Label text="Date de rendez-vous * :" GridPane.rowIndex="4" />
+                              <Label text="Heure * :" GridPane.rowIndex="5" />
+                              <Label text="Prise de sang * :" GridPane.rowIndex="6" />
+                              <TextField fx:id="textFieldId" editable="false" prefHeight="31.0" prefWidth="68.0" GridPane.columnIndex="1" />
+                              <DatePicker fx:id="datePickerDdRdv" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField fx:id="textFieldHeure" prefHeight="31.0" prefWidth="70.0" promptText="HH:MM" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <TextField fx:id="textFieldQuantiteSang" prefHeight="31.0" prefWidth="70.0" promptText="en mL" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <Label text="Quantité de sang donnée :" GridPane.rowIndex="7" />
+                              <ComboBox fx:id="comboBoxPriseSang" prefHeight="26.0" prefWidth="70.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <Label text="Nom donneur * :" GridPane.rowIndex="2" />
+                              <TextField fx:id="textFieldNom" prefHeight="31.0" prefWidth="194.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="textFieldPrenom" prefHeight="31.0" prefWidth="194.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label text="Id donneur * :" GridPane.rowIndex="1" />
+                              <TextField fx:id="textFieldIdDonneur" prefHeight="31.0" prefWidth="68.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            </children>
                            <padding>
                               <Insets left="5.0" />
@@ -99,7 +102,7 @@
       </VBox>
       <HBox alignment="CENTER" prefHeight="71.0" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Button defaultButton="true" mnemonicParsing="false" onAction="#doValider" prefHeight="38.0" prefWidth="75.0" style="-fx-background-color: #162c53;" text="OK" textFill="WHITE" />
+            <Button fx:id="buttonEnregistrerRdv" defaultButton="true" mnemonicParsing="false" onAction="#doValider" prefHeight="38.0" prefWidth="75.0" style="-fx-background-color: #162c53;" text="OK" textFill="WHITE" />
             <Button fx:id="buttonAnnuler" cancelButton="true" mnemonicParsing="false" onAction="#doAnnuler" prefHeight="38.0" prefWidth="90.0" style="-fx-background-color: #ea302b;" text="Annuler" textFill="WHITE" />
          </children>
       </HBox>

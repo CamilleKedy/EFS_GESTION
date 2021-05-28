@@ -39,7 +39,7 @@ public class ManagerGui extends ManagerGuiAbstract {
 
 
 
-		showView( EnumView.CollecteListe);
+		showView( EnumView.RdvListe);
 
 
 		// Configure le stage
