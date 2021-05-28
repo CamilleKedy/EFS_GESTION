@@ -14,7 +14,7 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import jfox.jdbc.UtilJdbc;
-import projet.data.RDV;
+import projet.data.Rdv;
 
 public class DaoRdv {
 	
@@ -26,7 +26,7 @@ public class DaoRdv {
 	private DaoCollecte daoCollecte;
 	
 
-	public int inserer( RDV rdv ) {
+	public int inserer( Rdv rdv ) {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -35,7 +35,7 @@ public class DaoRdv {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "INSERT INTO RDV ( heure_rdv, prise_de_sang, date_rdv, qte_sang_donne,id_collecte, id_donneur ) VALUES( ?, ?, ?, ?, ?, ?) ";
+			sql = "INSERT INTO RDV ( heure_rdv, prise_de_sang, date_rdv, qte_sang_donnee,id_collecte, id_donneur ) VALUES( ?, ?, ?, ?, ?, ?) ";
 			stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS );
 			stmt.setObject( 1, rdv.getHeure_rdv());
 			stmt.setObject( 2, rdv.getPrise_de_sang());
@@ -60,7 +60,7 @@ public class DaoRdv {
 		return rdv.getId();
 	}
 
-	public int modifier( RDV rdv ) {
+	public int modifier( Rdv rdv ) {
 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
@@ -69,7 +69,7 @@ public class DaoRdv {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "UPDATE RDV SET  heure_rdv =?, prise_de_sang=?, date_rdv=?, qte_sang_donne=?,id_collecte =?, id_donneur =? WHERE id_rdv = ? ";
+			sql = "UPDATE RDV SET  heure_rdv =?, prise_de_sang=?, date_rdv=?, qte_sang_donnee=?,id_collecte =?, id_donneur =? WHERE id_rdv = ? ";
 			stmt = cn.prepareStatement( sql );
 			stmt.setObject( 1, rdv.getHeure_rdv());
 			stmt.setObject( 2, rdv.getPrise_de_sang());
@@ -110,7 +110,7 @@ public class DaoRdv {
 		}
 	}
 
-	public RDV retrouver( int id_rdv ) {
+	public Rdv retrouver( int id_rdv ) {
 
 		Connection			cn 		= null;
 		PreparedStatement	stmt	= null;
@@ -136,7 +136,7 @@ public class DaoRdv {
 		}
 	}
 	
-	public List<RDV> listerTout() {
+	public List<Rdv> listerTout() {
 
 		Connection			cn 		= null;
 		PreparedStatement	stmt 	= null;
@@ -149,7 +149,7 @@ public class DaoRdv {
 			stmt = cn.prepareStatement( sql );
 			rs = stmt.executeQuery();
 
-			List<RDV> rdv = new ArrayList<>();
+			List<Rdv> rdv = new ArrayList<>();
 			while (rs.next()) {
 				rdv.add( construireRDV( rs, true ) );
 			}
@@ -162,13 +162,13 @@ public class DaoRdv {
 		}
 	}
 	
-	private RDV construireRDV( ResultSet rs,  boolean flagComplet ) throws SQLException {
-		RDV rdv = new RDV();
+	private Rdv construireRDV( ResultSet rs,  boolean flagComplet ) throws SQLException {
+		Rdv rdv = new Rdv();
 		rdv.setId( rs.getObject( "id_rdv", Integer.class ) );
 		rdv.setHeure_rdv( rs.getObject( "heure_rdv", LocalTime.class ) );
 		rdv.setPrise_de_sang(rs.getObject("prise_de_sang", String.class ) );
 		rdv.setDate_rdv(rs.getObject("date_rdv", LocalDate.class ) );
-		rdv.setQte_sang( rs.getObject( "qte_sang_donne", Double.class ) );
+		rdv.setQte_sang( rs.getObject( "qte_sang_donnee", Integer.class ) );
 		if ( flagComplet ) {
 			rdv.setCollecte( daoCollecte.retrouver( rs.getObject("id_collecte", Integer.class) ) );
 			rdv.setDonneur( daoDonneur.retrouver( rs.getObject("id_donneur", Integer.class) ) );

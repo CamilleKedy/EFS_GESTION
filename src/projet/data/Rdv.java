@@ -9,22 +9,22 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class RDV {
+public class Rdv {
 	
 	private final Property<Integer> id = new SimpleObjectProperty<>();
 	private final Property<LocalDate> date_rdv = new SimpleObjectProperty<>();
-	private final Property<Double> qte_sang = new SimpleObjectProperty<>();
+	private final Property<Integer> qte_sang = new SimpleObjectProperty<>();
 	private final Property<LocalTime> heure_rdv = new SimpleObjectProperty<>();
 	private final StringProperty prise_de_sang = new SimpleStringProperty();
 	private final Property<Collecte> collecte = new SimpleObjectProperty<>();
 	private final Property<Donneur> donneur = new SimpleObjectProperty<>();
 	
 	
-	public RDV() {
+	public Rdv() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public RDV( int id, LocalDate date, LocalTime heure, String prise, Double qte, Donneur donneur, Collecte collecte ) {
+	public Rdv( int id, LocalDate date, LocalTime heure, String prise, int qte, Donneur donneur, Collecte collecte ) {
 		setId(id);
 		setDate_rdv(date);
 		setHeure_rdv(heure);
@@ -50,7 +50,7 @@ public class RDV {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RDV other = (RDV) obj;
+		Rdv other = (Rdv) obj;
 		return Objects.equals(id.getValue(), other.id.getValue() );
 	}
 
@@ -84,17 +84,17 @@ public class RDV {
 	}
 	
 
-	public final Property<Double> qte_sangProperty() {
+	public final Property<Integer> qte_sangProperty() {
 		return this.qte_sang;
 	}
 	
 
-	public final Double getQte_sang() {
+	public final Integer getQte_sang() {
 		return this.qte_sangProperty().getValue();
 	}
 	
 
-	public final void setQte_sang(final Double qte_sang) {
+	public final void setQte_sang(final Integer qte_sang) {
 		this.qte_sangProperty().setValue(qte_sang);
 	}
 	
