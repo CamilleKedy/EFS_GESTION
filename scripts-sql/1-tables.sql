@@ -107,7 +107,7 @@ CREATE TABLE RDV(
    heure_rdv TIME NOT NULL,
    prise_de_sang CHAR(3) NOT NULL,
    date_rdv DATE NOT NULL,
-   qte_sang_donnee DECIMAL(15,2),
+   qte_sang_donnee INT,
    id_collecte INT /*NOT NULL*/,
    id_donneur INT /*NOT NULL*/,
    PRIMARY KEY(id_rdv),

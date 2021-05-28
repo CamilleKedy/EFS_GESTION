@@ -14,6 +14,7 @@ import projet.data.Memo;
 import projet.data.Personne;
 import projet.data.Personnel;
 import projet.data.Profession;
+import projet.data.Rdv;
 import projet.data.Service;
 import projet.data.Site_de_collecte;
 
@@ -50,4 +51,5 @@ public interface IMapper {
 	
 	Site_de_collecte update( @MappingTarget Site_de_collecte target, Site_de_collecte source  );
 	
+	Rdv update( @MappingTarget Rdv target, Rdv source);
 }
