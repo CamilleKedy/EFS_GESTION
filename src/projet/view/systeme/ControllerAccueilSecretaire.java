@@ -9,7 +9,7 @@ import javafx.scene.input.MouseEvent;
 import jfox.javafx.view.IManagerGui;
 import projet.view.EnumView;
 
-public class ControllerAccueileSectaire {
+public class ControllerAccueilSecretaire {
 	
 	@FXML
     private Button btnDonneur;

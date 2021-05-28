@@ -27,7 +27,7 @@ public class Collecte  {
 	private final Property<LocalTime>	horaire_fin	= new SimpleObjectProperty<>();
 	private final Property<Site_de_collecte>	site_de_collecte		= new SimpleObjectProperty<>();
 	private final ObservableList<Personnel> personnel = FXCollections.observableArrayList();
-	
+	private final ObservableList<Materieldecollecte> materiel = FXCollections.observableArrayList();
 	
 	// Constructeurs
 	
@@ -216,6 +216,10 @@ public class Collecte  {
 	
 	public ObservableList<Personnel> getPersonnel() {
 		return personnel;
+	}
+	
+	public ObservableList<Materieldecollecte> getMateriel() {
+		return materiel;
 	}
 	
 	

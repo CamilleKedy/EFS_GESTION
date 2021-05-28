@@ -93,7 +93,10 @@ tableView.setItems(  modelSite_de_collecte.getListe() );
 		}
 	}
 	
-	
+	@FXML
+	private void doRetour() {
+		managerGui.showView( EnumView.AccueilGestionnaire );
+	}
 	// Gestion des évènements
 
 	// Clic sur la liste

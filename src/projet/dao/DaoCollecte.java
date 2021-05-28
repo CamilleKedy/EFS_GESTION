@@ -15,6 +15,8 @@ import javax.sql.DataSource;
 
 import jfox.jdbc.UtilJdbc;
 import projet.data.Collecte;
+import projet.data.Materiel;
+import projet.data.Materieldecollecte;
 import projet.data.Collecte;
 import projet.data.Personne;
 import projet.data.Personnel;
@@ -31,8 +33,10 @@ public class DaoCollecte {
 	private DaoSite_de_collecte daoSite_de_collecte;
 	@Inject
 	private DaoPersonnel daoPersonnel;
+	@Inject
+	private DaoMaterieldecollecte daoMateriel;
 
-
+	Materieldecollecte materieldecollecte;
 	
 	// Actions
 
@@ -65,6 +69,7 @@ public class DaoCollecte {
 			collecte.setId_collecte( rs.getObject( 1, Integer.class) );
 			
 			insererPersonnelDeCollecte(collecte);
+			daoMateriel.insererPourCollecte(collecte);
 	
 		} catch ( SQLException e ) {
 			throw new RuntimeException(e);
@@ -101,7 +106,10 @@ public class DaoCollecte {
 			
 			supprimerPersonnelDeCollecte( collecte.getId_collecte() );
 			insererPersonnelDeCollecte( collecte );
-
+			
+			daoMateriel.supprimerPourCollecte(collecte.getId_collecte());
+			daoMateriel.insererPourCollecte(collecte);
+			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
@@ -117,6 +125,7 @@ public class DaoCollecte {
 		String				sql;
 
 		try {
+			daoMateriel.supprimerPourCollecte(id_collecte);
 			supprimerPersonnelDeCollecte(id_collecte);
 			
 			cn = dataSource.getConnection();
@@ -124,7 +133,9 @@ public class DaoCollecte {
 			stmt = cn.prepareStatement( sql );
 			stmt.setObject( 1, id_collecte );
 			stmt.executeUpdate();
+			
 
+			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
@@ -227,6 +238,8 @@ public class DaoCollecte {
 		if ( flagComplet ) {
 			collecte.setSite_de_collecte( daoSite_de_collecte.retrouver( rs.getObject("id_site", Integer.class) ) );
 			collecte.getPersonnel().setAll(daoPersonnel.listerParCollecte( collecte.getId_collecte() ) );
+			collecte.getMateriel().setAll(daoMateriel.listerParCollecte( collecte ));
+
 		}
 
 		return collecte;
@@ -254,6 +267,8 @@ public class DaoCollecte {
 		}
 	}
 	
+	
+	
 	private void supprimerPersonnelDeCollecte( int idCollecte ) {
 
 		Connection			cn 		= null;
@@ -273,4 +288,24 @@ public class DaoCollecte {
 			UtilJdbc.close( stmt, cn );
 		}
 	}
+
+private void supprimerMaterielDeCollecte( int idCollecte ) {
+
+	Connection			cn 		= null;
+	PreparedStatement	stmt 	= null;
+	String				sql;
+
+	try {
+		cn = dataSource.getConnection();
+		sql = "DELETE FROM materieldecollecte WHERE id_collecte = ? ";
+		stmt = cn.prepareStatement( sql );
+		stmt.setObject( 1, idCollecte );
+		stmt.executeUpdate();
+
+	} catch (SQLException e) {
+		throw new RuntimeException(e);
+	} finally {
+		UtilJdbc.close( stmt, cn );
+	}
+}
 }

@@ -9,6 +9,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import jfox.javafx.util.ConverterInteger;
 import jfox.javafx.util.ConverterLocalDate;
 import jfox.javafx.util.ConverterLocalTime;
@@ -16,7 +18,8 @@ import jfox.javafx.util.UtilFX;
 import jfox.javafx.view.Controller;
 import jfox.javafx.view.IManagerGui;
 import projet.data.Collecte;
-
+import projet.data.Materiel;
+import projet.data.Materieldecollecte;
 import projet.data.Personnel;
 import projet.data.Profession;
 
@@ -57,7 +60,18 @@ public class ControllerCollecteForm extends Controller {
 	private Button			buttonSupprimerPersonnel;
 	@FXML
 	private TextField		textFieldQtePersonnel;
-	
+	@FXML
+	private ListView<Materiel>	listViewMateriel;
+	@FXML
+	private ListView<Materieldecollecte>	listViewMaterielCollecte;
+	@FXML
+	private Button			buttonAjouterMateriel;
+	@FXML
+	private Button			buttonSupprimerMateriel;
+	@FXML
+	private TextField		textFieldQteMaterielAj;
+	@FXML
+	private TextField		textFieldQteMaterielRes;
 	
 	// Autres champs
 	
@@ -71,14 +85,21 @@ public class ControllerCollecteForm extends Controller {
 	private ModelProfession	modelProfession;
 	@Inject
 	private ModelPersonnel	modelPersonnel;
+	@Inject
+	private ModelMateriel	modelMateriel;
+	@Inject
+	private ModelMateriel_de_collecte	modelMaterieldecollecte;
+	
 
 
+	
 	// Initialisation du Controller
 
 	@FXML
 	private void initialize() {
-		
+		Materiel courant1 = modelMateriel.getCourant();
 		Collecte courant = modelCollecte.getCourant();
+		
 
 		// Data binding
 		// TabPane 1
@@ -103,7 +124,19 @@ public class ControllerCollecteForm extends Controller {
         UtilFX.setCellFactory( listViewPersonnelCollecte, item -> item.toString() );
 		listViewPersonnelCollecte.getSelectionModel().setSelectionMode( SelectionMode.MULTIPLE );
 		
-		// Configuration des boutons
+		//TabPlane3
+	     listViewMateriel.setItems( modelMateriel.getListe() );
+	     UtilFX.setCellFactory( listViewMateriel, item -> item.getQuantite_materiel() + " "+  item.getNom_materiel() );
+
+	        
+	       listViewMaterielCollecte.setItems( courant.getMateriel() );
+	        UtilFX.setCellFactory( listViewMaterielCollecte, item -> item.toString() );
+	        
+	        //Afficher la quantité
+			//bindBidirectional( textFieldQteMaterielAj, , new ConverterInteger() );
+			
+		
+		// Con1figuration des boutons
 		listViewPersonnel.getSelectionModel().selectedItemProperty().addListener(
 				(obs, oldVal, newVal) -> {
 					configurerBoutons();
@@ -112,6 +145,22 @@ public class ControllerCollecteForm extends Controller {
 				(obs, oldVal, newVal) -> {
 					configurerBoutons();
 		});
+		
+		listViewMateriel.getSelectionModel().selectedItemProperty().addListener(
+				(obs, oldVal, newVal) -> {
+					configurerBoutons();
+		});
+		listViewMaterielCollecte.getSelectionModel().selectedItemProperty().addListener(
+				(obs, oldVal, newVal) -> {
+					configurerBoutons();
+		});
+		
+		listViewMateriel.getSelectionModel().selectedItemProperty().addListener(
+				(obs, oldVal, newVal) -> {
+			        textFieldQteMaterielRes.setText(listViewMateriel.getSelectionModel().getSelectedItem().getQuantite_materiel().toString());
+
+		});
+		
 		configurerBoutons();
 		//configurerQte();
 		
@@ -121,9 +170,10 @@ public class ControllerCollecteForm extends Controller {
 		modelSite.actualiserListe();
 		modelProfession.actualiserListe();
 		modelCollecte.actualiserCourant();	
-	 
+
+		modelMateriel.actualiserListe();
 		configurerQte();
-		
+
 	}
 	
 	
@@ -155,9 +205,19 @@ public class ControllerCollecteForm extends Controller {
 	@FXML
 	private void doAjouterPersonnel() {
 		modelCollecte.ajouterPersonnel(listViewPersonnel.getSelectionModel().getSelectedItems());
+		configBoutonAjout();
 	}
 	
+	@FXML
+	private void doSupprimerMateriel() {
+		modelCollecte.supprimerMateriel( listViewMaterielCollecte.getSelectionModel().getSelectedItem() );
+	}
 	
+	@FXML
+	private void doAjouterMateriel() {
+		System.out.println("Ajouter materiel");
+		modelCollecte.ajouterMateriel(listViewMateriel.getSelectionModel().getSelectedItem(), textFieldQteMaterielAj.getText());
+	}
 	
 	@FXML
 	private void doAnnuler() {
@@ -185,13 +245,27 @@ public class ControllerCollecteForm extends Controller {
 		} else {
 			buttonSupprimerPersonnel.setDisable(false);
 		}
+    	
+    	if( listViewMateriel.getSelectionModel().getSelectedItems().isEmpty() ) {
+			buttonAjouterMateriel.setDisable(true);
+		} else {
+			buttonAjouterMateriel.setDisable(false);
+		}
+    	
+    	if( listViewMaterielCollecte.getSelectionModel().getSelectedItems().isEmpty() ) {
+			buttonSupprimerMateriel.setDisable(true);
+		} else {
+			buttonSupprimerMateriel.setDisable(false);
+		}
 	}
 	
 	private void configurerQte() {
+
 		 if (comboBoxProfession.getValue()!=null)
 	        {
 	            switch ( comboBoxProfession.getValue().getLibelle() ) {
 	            case "Secrétaire":
+	            	System.out.println( modelCollecte.getCourant().getNbre_secretaire());
 	                textFieldQtePersonnel.setText( modelCollecte.getCourant().getNbre_secretaire().toString() );
 	                break;
 	            case "Infirmière":
@@ -204,12 +278,30 @@ public class ControllerCollecteForm extends Controller {
 	                textFieldQtePersonnel.setText( modelCollecte.getCourant().getNbre_agents_collation().toString() );
 	                break;
 	            }
+	            
+	            configBoutonAjout();	           
 	        }
+
 		else
 		{
 			System.out.println("Valeur combobox profession nulle");
 			textFieldQtePersonnel.setText(" ");
 		}
 	}
+
+	private void configBoutonAjout()
+	{
+		 // configure le bouton d'ajout d'un personnel à une collecte en fonction de la quantité max.
+        if (listViewPersonnelCollecte.getItems().size()== Integer.parseInt(textFieldQtePersonnel.getText()))
+        {
+        	System.out.println("toto");
+        	buttonAjouterPersonnel.setDisable(true);
+        }
+       /* else
+        {
+        	buttonAjouterPersonnel.setDisable(false);
+        }*/
+	}
+	
 
 }

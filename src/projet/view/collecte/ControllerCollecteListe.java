@@ -116,6 +116,10 @@ public class ControllerCollecteListe extends Controller {
 		}
 	}
 	
+	@FXML
+	private void doRetour() {
+		managerGui.showView( EnumView.AccueilGestionnaire );
+	}
 	
 	// Gestion des évènements
 

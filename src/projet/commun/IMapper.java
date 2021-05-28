@@ -10,6 +10,8 @@ import projet.data.Collecte;
 import projet.data.Compte;
 import projet.data.Donneur;
 import projet.data.DossierMedical;
+import projet.data.Materiel;
+import projet.data.Materieldecollecte;
 import projet.data.Memo;
 import projet.data.Personne;
 import projet.data.Personnel;
@@ -51,5 +53,12 @@ public interface IMapper {
 	
 	Site_de_collecte update( @MappingTarget Site_de_collecte target, Site_de_collecte source  );
 	
+
 	Rdv update( @MappingTarget Rdv target, Rdv source);
+
+	Materiel update( @MappingTarget Materiel target, Materiel source);
+	
+	Materieldecollecte update( @MappingTarget Materieldecollecte target, Materieldecollecte source);
+	
+
 }
