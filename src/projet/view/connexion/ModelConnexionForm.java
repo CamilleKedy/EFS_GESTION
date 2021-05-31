@@ -11,6 +11,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import jfox.exception.ExceptionValidation;
 import projet.dao.DaoCompte;
 import projet.data.Compte;
+import projet.data.Site_de_collecte;
 
 
 public class ModelConnexionForm {
@@ -75,6 +76,11 @@ public class ModelConnexionForm {
 
 	public void fermerSessionUtilisateur() {
 		compteActif.setValue( null );
+	}
+	
+	public Site_de_collecte retrouverSite(int idCompte) {
+		Site_de_collecte site = daoCompte.retrouverInfoSurSiteDeCollecte(courant.getId());
+		return site;
 	}
 
 }
