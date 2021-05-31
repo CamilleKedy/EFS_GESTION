@@ -49,8 +49,6 @@ public class Collecte  {
 	}
 	
 	
-	
-	
 	// Getters et Setters
 
 	public final Property<Integer> id_collecteProperty() {
