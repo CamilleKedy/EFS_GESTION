@@ -13,6 +13,7 @@ import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoDonneur;
 import projet.data.Donneur;
+import projet.data.Site_de_collecte;
 
 
 public class ModelDonneur {
@@ -79,8 +80,12 @@ public class ModelDonneur {
 		
 		}
 	
-	public void actualiserListe() { 
-		liste.setAll( daoDonneur.listerTout() );
+	public void actualiserListe(Site_de_collecte site) { 
+		if(site == null) {
+			liste.setAll( daoDonneur.listerTout() );
+		}else {
+			liste.setAll( daoDonneur.listerPourSite(site) );
+		}
 	}
 	 
 

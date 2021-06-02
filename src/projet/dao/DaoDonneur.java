@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 
 import jfox.jdbc.UtilJdbc;
 import projet.data.Donneur;
+import projet.data.Site_de_collecte;
 
 
 public class DaoDonneur {
@@ -183,6 +184,34 @@ public class DaoDonneur {
 		}
 	}
 	
+	public List<Donneur> listerPourSite(Site_de_collecte site)   {
+
+		Connection			cn		= null;
+		PreparedStatement	stmt	= null;
+		ResultSet 			rs 		= null;
+		String				sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			sql ="select d.* from ((donneur d inner join rdv r on d.id_donneur = r.id_donneur) "
+					+ "inner join collecte c on r.id_collecte = c.id_collecte) where  c.id_site = ?";
+			stmt = cn.prepareStatement(sql);
+			stmt.setObject(1, site.getId_site_de_collecte());
+			rs = stmt.executeQuery();
+			
+			List<Donneur> donneurs = new ArrayList<>();
+			while (rs.next()) {
+				donneurs.add( construireDonneur(rs, false) );
+			}
+			return donneurs;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( rs, stmt, cn );
+		}
+	}
 	
 	// Méthodes auxiliaires
 	

@@ -1,5 +1,6 @@
 package projet.data;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 import javafx.beans.property.Property;
@@ -58,7 +59,7 @@ public class Personneldecollecte  {
 	}
 	
 
-	
+
 	
 	
 	// hashCode() & equals()
@@ -79,7 +80,6 @@ public class Personneldecollecte  {
 		Personneldecollecte other = (Personneldecollecte) obj;
 		return Objects.equals(id_personnel.getValue(), other.id_collecte.getValue() );
 	}
-
 
 	
 }

@@ -15,10 +15,7 @@ import javax.sql.DataSource;
 
 import jfox.jdbc.UtilJdbc;
 import projet.data.Collecte;
-import projet.data.Materiel;
 import projet.data.Materieldecollecte;
-import projet.data.Collecte;
-import projet.data.Personne;
 import projet.data.Personnel;
 
 
@@ -253,13 +250,14 @@ public class DaoCollecte {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "INSERT INTO personnelDeCollecte ( id_collecte, id_personnel ) VALUES( ?, ? ) ";
+			sql = "INSERT INTO personnelDeCollecte ( id_collecte, id_personnel , date_collecte) VALUES( ?, ?, ? ) ";
 			stmt = cn.prepareStatement( sql );
 			stmt.setObject( 1, collecte.getId_collecte() );
 			for ( Personnel personnel : collecte.getPersonnel() ) {
 				stmt.setObject( 2, personnel.getId() );
 				stmt.executeUpdate();
 			}
+			stmt.setObject(3, collecte.getDate_debut());
 		} catch ( SQLException e ) {
 			throw new RuntimeException(e);
 		} finally {
@@ -289,7 +287,7 @@ public class DaoCollecte {
 		}
 	}
 
-private void supprimerMaterielDeCollecte( int idCollecte ) {
+public void supprimerMaterielDeCollecte( int idCollecte ) {
 
 	Connection			cn 		= null;
 	PreparedStatement	stmt 	= null;

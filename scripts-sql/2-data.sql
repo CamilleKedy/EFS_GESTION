@@ -41,12 +41,12 @@ ALTER TABLE Personnel ALTER COLUMN id_personnel RESTART WITH 6;
 
 -- Donneur
 
-INSERT INTO Donneur (id_donneur, nom_donneur, prenom_donneur, date_naissance, ville_donneur, adresse_donneur, demande_carte) VALUES 
-  ( 1, 'DUTROUDET', 'Camille',    {d '1996-06-17' }, 'Limoges',     '96 avenue GHR',  'oui' ),
-  ( 2, 'LACAN',     'Bérangère',  {d '1983-07-30' }, 'Rouen',       '11 avenue KHK',  'non' ),
-  ( 3, 'LENORMAND', 'Robin',      {d '1972-10-02' }, 'Montpellier', '6 rue VB',       'oui' ),
-  ( 4, 'FONDRAT',   'Karin',      {d '1990-06-17' }, 'Paris',       '20 rue ALG',     'non' ),
-  ( 5, 'TRUDEAU',   'Blandine',   {d '1985-11-16' }, 'Brest',       '32 rue RR',      'oui' );
+INSERT INTO Donneur (id_donneur, nom_donneur, prenom_donneur, date_naissance,sexe_donneur, telephone_donneur,email_donneur , ville_donneur, adresse_donneur, demande_carte) VALUES 
+  ( 1, 'DUTROUDET', 'Camille',    {d '1996-06-17' },'Masculin','0766584820','moi@moi', 'Limoges',     '96 avenue GHR',  'oui' ),
+  ( 2, 'LACAN',     'Bérangère',  {d '1983-07-30' },'Masculin','0766584820','moi@moi', 'Rouen',       '11 avenue KHK',  'non' ),
+  ( 3, 'LENORMAND', 'Robin',      {d '1972-10-02' },'Masculin','0766584820','moi@moi', 'Montpellier', '6 rue VB',       'oui' ),
+  ( 4, 'FONDRAT',   'Karin',      {d '1990-06-17' }, 'Masculin','0766584820','moi@moi','Paris',       '20 rue ALG',     'non' ),
+  ( 5, 'TRUDEAU',   'Blandine',   {d '1985-11-16' },'Masculin','0766584820','moi@moi', 'Brest',       '32 rue RR',      'oui' );
 
 ALTER TABLE Donneur ALTER COLUMN id_donneur RESTART WITH 6;
 
@@ -105,18 +105,19 @@ ALTER TABLE Materiel ALTER COLUMN id_materiel RESTART WITH 4;
 
 INSERT INTO Collecte (id_collecte, qte_collation, date_debut, date_fin, nbre_infirmiers, nbre_medecins, nbre_secretaire, nbre_agents_collation, horaire_debut, horaire_fin, id_site) VALUES 
   ( 1, 100, {d '2022-01-03'}, {d '2022-01-31'}, 1, 1, 1, 1, '8:00:00', '17:30:00', 1 ),
-  ( 2, 200, {d '2022-04-07'}, {d '2022-05-10'}, 5, 2, 4, 2, '9:00:00', '17:30:00', 3 );
+  ( 2, 200, {d '2022-04-07'}, {d '2022-05-10'}, 5, 2, 4, 2, '9:00:00', '17:30:00', 3 ),
+  ( 3, 400, {d '2022-08-17'}, {d '2022-09-10'}, 7, 2, 1, 3, '9:00:00', '17:30:00', 2 );
 
-ALTER TABLE Collecte ALTER COLUMN id_collecte RESTART WITH 3;
+ALTER TABLE Collecte ALTER COLUMN id_collecte RESTART WITH 4;
 
 
 -- RDV
 
 INSERT INTO RDV ( id_rdv, heure_rdv, prise_de_sang, date_rdv, qte_sang_donnee, id_collecte, id_donneur ) VALUES 
   ( 1, '08:00:00', 'oui', {d '2022-01-04' }, 450, 1, 1),
-  ( 2, '09:00:00', 'oui', {d '2022-01-04' }, 420, 1, 2),
+  ( 2, '09:00:00', 'oui', {d '2022-01-04' }, 420, 2, 2),
   ( 3, '15:00:00', 'non', {d '2022-01-13' }, NULL, 1, 5),
-  ( 4, '08:00:00', 'oui', {d '2022-01-05' }, 480, 1, 3);
+  ( 4, '08:00:00', 'oui', {d '2022-01-05' }, 480, 2, 3);
 
 ALTER TABLE RDV ALTER COLUMN id_rdv RESTART WITH 5;
 
