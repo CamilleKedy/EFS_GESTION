@@ -41,6 +41,8 @@ public class ControllerDonneurListe {
 	@FXML
 	private Button			buttonModifier;
 	@FXML
+	private Button 			buttonRdv;
+	@FXML
 	private Button			buttonSupprimer;
 
 	// Autres champs
@@ -103,6 +105,14 @@ public class ControllerDonneurListe {
 		modelDossierMedical.setSelectionParDonneur(tableView.getSelectionModel().getSelectedItem());
 		managerGui.showView( EnumView.DonneurForm );
 	}
+	
+
+    @FXML
+    void doAjouterRdv() {
+    	modelDonneur.setSelection( tableView.getSelectionModel().getSelectedItem() );
+    	managerGui.showView( EnumView.RdvForm );
+    }
+
 
 	@FXML
 	private void doSupprimer() {
@@ -137,9 +147,11 @@ public class ControllerDonneurListe {
 		if( tableView.getSelectionModel().getSelectedItems().isEmpty() ) {
 			buttonModifier.setDisable(true);
 			buttonSupprimer.setDisable(true);
+			buttonRdv.setDisable(true);
 		} else {
 			buttonModifier.setDisable(false);
 			buttonSupprimer.setDisable(false);
+			buttonRdv.setDisable(false);
 		}
 	}
 }

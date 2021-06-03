@@ -30,7 +30,7 @@ public class ModelRdv  {
 	private final ObservableList<String> critereRecherche = FXCollections.observableArrayList();  // Liste des filtres de recherche
 	private final ObservableList<Donneur> personnel = FXCollections.observableArrayList();
 	private final FilteredList<Donneur> personnelFiltre = new FilteredList<>(personnel, s -> true);
-	private final FilteredList<Rdv> collecteFiltre = new FilteredList<>(liste, s -> true);// Liste filtrée de collectes. C'est cette liste qui sera affichée
+	private final FilteredList<Rdv> rdvFiltre = new FilteredList<>(liste, s -> true);// Liste filtrée de collectes. C'est cette liste qui sera affichée
 	
 	
 	
@@ -41,7 +41,7 @@ public class ModelRdv  {
 	
 	// Autres champs
 	
-	private Rdv		selection;
+	private Rdv		selection = new Rdv();
 
 //	private  FilteredList<Donneur> personnelRdvFiltre = new FilteredList<>(courant.getDonneur(), s -> true);
 
@@ -62,7 +62,7 @@ public class ModelRdv  {
 	// Initialisations
    @PostConstruct
 	public void init() {
-		critereRecherche.addAll("Date", "Heure", "Collecte", "Prise de sang effectuée");
+		critereRecherche.addAll("Nom donneur","Site de collecte", "Prise de sang effectuée","Date", "Heure");
 		listePriseSang.addAll("non", "oui");
    }
 	
@@ -97,7 +97,7 @@ public class ModelRdv  {
 	}
 */	
 	public FilteredList<Rdv> getRdvFiltre() {
-		return collecteFiltre;
+		return rdvFiltre;
 	}
 	
 	public Rdv getSelection() {
@@ -125,19 +125,23 @@ public class ModelRdv  {
 		{
 			if (categorie.equals("Date"))
 			{
-				collecteFiltre.setPredicate(s-> filtre != null ?  s.getId().toString().toUpperCase().contains(filtre.toUpperCase()) : true);
+				rdvFiltre.setPredicate(s-> filtre != null ?  s.getDate_rdv().toString().contains(filtre) : true);
 			}
 			else if (categorie.equals("Heure"))
 			{
-				collecteFiltre.setPredicate(s-> filtre != null ?  s.getHeure_rdv().toString().toUpperCase().contains(filtre.toUpperCase()) : true);
+				rdvFiltre.setPredicate(s-> filtre != null ?  s.getHeure_rdv().toString().toUpperCase().contains(filtre.toUpperCase()) : true);
 			}
-			else if (categorie.equals("Collecte"))
+			else if (categorie.equals("Site de collecte"))
 			{
-				collecteFiltre.setPredicate(s-> filtre != null ?  s.getCollecte().toString().toUpperCase().contains(filtre.toUpperCase()) : true);
+				rdvFiltre.setPredicate(s-> filtre != null ?  s.getCollecte().getSite_de_collecte().getVille().toString().toUpperCase().contains(filtre.toUpperCase()) : true);
+			}
+			else if (categorie.equals("Nom donneur"))
+			{
+				rdvFiltre.setPredicate(s-> filtre != null ?  s.getDonneur().getNom().toString().toUpperCase().contains(filtre.toUpperCase()) : true);
 			}
 			else if (categorie.equals("Prise de sang effectuée"))
 			{
-				collecteFiltre.setPredicate(s-> filtre != null ?  s.getPrise_de_sang().toString().toUpperCase().contains(filtre.toUpperCase()) : true);
+				rdvFiltre.setPredicate(s-> filtre != null ?  s.getPrise_de_sang().toString().toUpperCase().contains(filtre.toUpperCase()) : true);
 			}
 			
 		}	
@@ -212,7 +216,7 @@ public class ModelRdv  {
 		}
 		
 		if( courant.getPrise_de_sang() != null  ) {
-			if( courant.getQte_sang() < 420 || courant.getQte_sang() > 480 ) {
+			if(courant.getQte_sang()!=null && ( courant.getQte_sang() < 420 || courant.getQte_sang() > 480) ) {
 				message.append( "\nLa quantité de sang aà prélever doir respecter les normes médicales (Entre 420ml et 480ml)" );
 			}
 		}

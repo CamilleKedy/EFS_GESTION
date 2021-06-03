@@ -43,7 +43,7 @@
                         <Insets bottom="5.0" left="5.0" right="15.0" top="5.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="textFieldIdCollecte" editable="false" GridPane.columnIndex="3" />
+                  <TextField fx:id="textFieldIdCollecte" GridPane.columnIndex="3" />
                </children>
             </GridPane>
             <GridPane>
@@ -83,7 +83,7 @@
                               <TextField fx:id="textFieldHeure" prefHeight="31.0" prefWidth="70.0" promptText="HH:MM" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                               <TextField fx:id="textFieldQuantiteSang" prefHeight="31.0" prefWidth="70.0" promptText="en mL" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                               <Label text="Quantité de sang donnée :" GridPane.rowIndex="7" />
-                              <ComboBox fx:id="comboBoxPriseSang" prefHeight="26.0" prefWidth="70.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <ComboBox fx:id="comboBoxPriseSang" onAction="#enableQteSang" prefHeight="26.0" prefWidth="70.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                               <Label text="Nom donneur * :" GridPane.rowIndex="2" />
                               <TextField fx:id="textFieldNom" prefHeight="31.0" prefWidth="194.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <TextField fx:id="textFieldPrenom" prefHeight="31.0" prefWidth="194.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />

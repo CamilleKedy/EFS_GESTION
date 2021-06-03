@@ -97,6 +97,11 @@ public class ControllerRdvForm extends Controller {
 		bindBidirectional( textFieldNom, courantDonneur.nomProperty() );
 		bindBidirectional( textFieldPrenom, courantDonneur.prenomProperty() );
 		bindBidirectional( textFieldIdDonneur, courantDonneur.idProperty(), new ConverterInteger() );
+//		bindBidirectional( textFieldIdCollecte, courant.getCollecte().id_collecteProperty(), new ConverterInteger() );
+//		bindBidirectional( textFieldNom, courant.getDonneur().nomProperty() );
+//		bindBidirectional( textFieldPrenom, courant.getDonneur().prenomProperty() );
+//		bindBidirectional( textFieldIdDonneur, courant.getDonneur().idProperty(), new ConverterInteger() );
+//		
 		
 		// Date de Rdv
 		bindBidirectional( datePickerDdRdv, courant.date_rdvProperty(), new ConverterLocalDate() );
@@ -107,10 +112,11 @@ public class ControllerRdvForm extends Controller {
 		//comboBoxPriseSang.getSelectionModel().selectFirst();
 		
 		bindBidirectional( textFieldQuantiteSang, courant.qte_sangProperty(), new ConverterInteger() );
-		textFieldQuantiteSang.setDisable(true);
+		
 		
 		//Lieu du RDV
-		//bindBidirectional(textFieldSiteDeCollecte, )
+//		bindBidirectional(textFieldSiteDeCollecte, courant.getCollecte().getSite_de_collecte().villeProperty());
+//		bindBidirectional(textFieldIdCollecte, courant.getCollecte().id_collecteProperty(), new ConverterInteger());
 		
 		// dossier Medical
 		
@@ -133,17 +139,15 @@ public class ControllerRdvForm extends Controller {
 	
 	
 	// Actions
-/*	
-	 @FXML
-	 void aptitudeOn(ActionEvent event) {
-		 if(comboBoxPriseSang.is) {
-			 textAreaInaptitude.setDisable(false);
-		 }
-		 else {
-			  textAreaInaptitude.setDisable(true);
-		 }		
-	 }
-*/
+
+    @FXML
+    void enableQteSang(ActionEvent event) {
+    		if(comboBoxPriseSang.getValue().toString().toLowerCase().equals("oui")) {
+    			textFieldQuantiteSang.setDisable(false);
+    		}
+    		else textFieldQuantiteSang.setDisable(true);
+    		System.out.println(comboBoxPriseSang.getValue());
+    }
 	 
 	@FXML
 	private void doAnnuler() {
