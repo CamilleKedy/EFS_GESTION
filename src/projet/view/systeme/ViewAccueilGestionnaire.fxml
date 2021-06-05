@@ -58,7 +58,7 @@
                   <Insets bottom="50.0" left="30.0" right="30.0" />
                </BorderPane.margin>
                <children>
-                  <Label contentDisplay="CENTER" prefHeight="18.0" prefWidth="540.0" text="Bienvenue cher Administrateur" textAlignment="CENTER" textFill="#162c53">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="540.0" text="Bienvenue cher Administrateur" textAlignment="CENTER" textFill="#162c53">
                      <VBox.margin>
                         <Insets bottom="30.0" />
                      </VBox.margin>
@@ -85,15 +85,15 @@
                            <font>
                               <Font name="Trebuchet MS Bold" size="18.0" />
                            </font></Button>
-                        <Button fx:id="btnGestionCollecte" mnemonicParsing="false" onAction="#doCollecte" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" prefHeight="150.0" prefWidth="178.0" style="-fx-background-color: #ea302b; -fx-border-radius: 10;" text="Gestion des collectes" textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.rowIndex="1">
+                        <Button fx:id="btnGestionCollecte" mnemonicParsing="false" onAction="#doCollecte" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" prefHeight="150.0" prefWidth="178.0" style="-fx-background-color: #ea302b; -fx-border-radius: 10;" text="Gestion des collectes" textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.columnIndex="2">
                            <font>
                               <Font name="Trebuchet MS Bold" size="18.0" />
                            </font></Button>
-                        <Button fx:id="btnStats" mnemonicParsing="false" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" prefHeight="150.0" prefWidth="178.0" style="-fx-background-color: #ea302b; -fx-border-radius: 10;" text="Statistiques" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Button fx:id="btnStats" mnemonicParsing="false" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" prefHeight="150.0" prefWidth="178.0" style="-fx-background-color: #ea302b; -fx-border-radius: 10;" text="Statistiques" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="1">
                            <font>
                               <Font name="Trebuchet MS Bold" size="18.0" />
                            </font></Button>
-                        <Button fx:id="btnCommunication" mnemonicParsing="false" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" prefHeight="150.0" prefWidth="184.0" style="-fx-background-color: #ea302b; -fx-border-radius: 10;" text="Communication" textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.columnIndex="2">
+                        <Button fx:id="btnCommunication" mnemonicParsing="false" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" prefHeight="150.0" prefWidth="184.0" style="-fx-background-color: #ea302b; -fx-border-radius: 10;" text="Communication" textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <font>
                               <Font name="Trebuchet MS Bold" size="18.0" />
                            </font></Button>

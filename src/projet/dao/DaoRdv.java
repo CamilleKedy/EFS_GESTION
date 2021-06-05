@@ -35,14 +35,14 @@ public class DaoRdv {
 
 		try {
 			cn = dataSource.getConnection();/*,id_collecte, id_donneur*//*, ?, ?*/
-			sql = "INSERT INTO RDV ( heure_rdv, prise_de_sang, date_rdv, qte_sang_donnee ) VALUES( ?, ?, ?, ?) ";
+			sql = "INSERT INTO RDV ( heure_rdv, prise_de_sang, date_rdv, qte_sang_donnee ,id_collecte , id_donneur) VALUES( ?, ?, ?, ?,?,?) ";
 			stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS );
 			stmt.setObject( 1, rdv.getHeure_rdv());
 			stmt.setObject( 2, rdv.getPrise_de_sang());
 			stmt.setObject( 3, rdv.getDate_rdv());
 			stmt.setObject( 4, rdv.getQte_sang());
-			//stmt.setObject( 5, rdv.getCollecte().getId_collecte());
-			//stmt.setObject( 6, rdv.getDonneur().getId());
+			stmt.setObject( 5, rdv.getCollecte().getId_collecte());
+			stmt.setObject( 6, rdv.getDonneur().getId());
 	
 			stmt.executeUpdate();
 

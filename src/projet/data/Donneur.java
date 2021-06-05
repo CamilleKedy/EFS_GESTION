@@ -17,6 +17,9 @@ public class Donneur  {
 	private final Property<Integer>	id			= new SimpleObjectProperty<>();
 	private final StringProperty	nom		= new SimpleStringProperty();
 	private final StringProperty	prenom	= new SimpleStringProperty();
+	private final StringProperty	sexe	= new SimpleStringProperty();
+	private final StringProperty	email	= new SimpleStringProperty();
+	private final StringProperty	telephone	= new SimpleStringProperty();
 	private final Property<LocalDate> dateNaissance = new SimpleObjectProperty<>();
 	private final StringProperty 	ville = new SimpleStringProperty();
 	private final StringProperty 	adresse = new SimpleStringProperty();
@@ -170,6 +173,51 @@ public class Donneur  {
 	public final void setDemandeCarte(final String demandeCarte) {
 		this.demandeCarteProperty().setValue(demandeCarte);
 	}
+
+	public final StringProperty sexeProperty() {
+		return this.sexe;
+	}
+	
+
+	public final String getSexe() {
+		return this.sexeProperty().get();
+	}
+	
+
+	public final void setSexe(final String sexe) {
+		this.sexeProperty().set(sexe);
+	}
+	
+
+	public final StringProperty emailProperty() {
+		return this.email;
+	}
+	
+
+	public final String getEmail() {
+		return this.emailProperty().get();
+	}
+	
+
+	public final void setEmail(final String email) {
+		this.emailProperty().set(email);
+	}
+	
+
+	public final StringProperty telephoneProperty() {
+		return this.telephone;
+	}
+	
+
+	public final String getTelephone() {
+		return this.telephoneProperty().get();
+	}
+	
+
+	public final void setTelephone(final String telephone) {
+		this.telephoneProperty().set(telephone);
+	}
+	
 
 
 	

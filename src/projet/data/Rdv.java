@@ -24,6 +24,7 @@ public class Rdv {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
 	public Rdv( int id, LocalDate date, LocalTime heure, String prise, int qte, Donneur donneur, Collecte collecte ) {
 		setId(id);
 		setDate_rdv(date);

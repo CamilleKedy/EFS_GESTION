@@ -57,10 +57,11 @@ public class ControllerConnexionForm extends Controller {
 	private void doConnexion() {
 		managerGui.execTask( () -> {
 			modelConnexion.ouvrirSessionUtilisateur();
+			
 			Platform.runLater( () -> {
 
          			if (modelConnexion.getCompteActif().getRoles().contains("GESTIONNAIRE"))
-         				managerGui.showView(EnumView.CollecteListe);
+         				managerGui.showView(EnumView.AccueilGestionnaire);
          			else 
          				managerGui.showView(EnumView.AccueilSecretaire);
             }) ;

@@ -7,6 +7,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -24,26 +26,23 @@ public class ModelRdv  {
 	
 	
 	// Données observables 
-	private final Rdv	courant = new Rdv();
+	
+	private Property<String> priseSang = new SimpleObjectProperty<>("non");
 	private final ObservableList<Rdv> liste = FXCollections.observableArrayList(); 
 	private final ObservableList<String> listePriseSang = FXCollections.observableArrayList(); 
 	private final ObservableList<String> critereRecherche = FXCollections.observableArrayList();  // Liste des filtres de recherche
-	private final ObservableList<Donneur> personnel = FXCollections.observableArrayList();
-	private final FilteredList<Donneur> personnelFiltre = new FilteredList<>(personnel, s -> true);
+	private final ObservableList<Donneur> donneur = FXCollections.observableArrayList();
+	private final FilteredList<Donneur> donneurFiltre = new FilteredList<>(donneur, s -> true);
 	private final FilteredList<Rdv> rdvFiltre = new FilteredList<>(liste, s -> true);// Liste filtrée de collectes. C'est cette liste qui sera affichée
 	
 	
 	
-	
-	/*private final ObservableList<Personne> personnesPourDialogAjout = FXCollections.observableArrayList();
-	*/
-
-	
 	// Autres champs
 	
 	private Rdv		selection = new Rdv();
+	private  Rdv	courant = new Rdv();
 
-//	private  FilteredList<Donneur> personnelRdvFiltre = new FilteredList<>(courant.getDonneur(), s -> true);
+//	private  FilteredList<Donneur> donneurRdvFiltre = new FilteredList<>(courant.getDonneur(), s -> true);
 
 	@Inject
 	private IMapper		mapper;
@@ -52,12 +51,7 @@ public class ModelRdv  {
 
    @Inject
     private DaoDonneur	daoDonneur;
-   /*
-    @Inject
-    private ModelConfig	modelConfig;
-    
-	private boolean flagModifSchema;*/
-    
+  
 	
 	// Initialisations
    @PostConstruct
@@ -66,43 +60,6 @@ public class ModelRdv  {
 		listePriseSang.addAll("non", "oui");
    }
 	
-	// Getters & Setters
-	
-	public ObservableList<Rdv> getListe() {
-		return liste;
-	}
-	
-	public ObservableList<String> getCritereRecherche() {
-		return critereRecherche;
-	}
-	
-	public Rdv getCourant() {
-		return courant;
-	}
-	
-	public ObservableList<String> getListePriseSang() {
-		return listePriseSang;
-	}
-
-	public ObservableList<Donneur> getDonneur() {
-		return personnel;
-	}
-	
-	public FilteredList<Donneur> getDonneurFiltre() {
-		return personnelFiltre;
-	}
-/*	
-	public FilteredList<Donneur> getDonneurRdvFiltre() {
-		return personnelRdvFiltre;
-	}
-*/	
-	public FilteredList<Rdv> getRdvFiltre() {
-		return rdvFiltre;
-	}
-	
-	public Rdv getSelection() {
-		return selection;
-	}
 	
 	public void setSelection( Rdv selection ) {
 		if ( selection == null ) {
@@ -148,21 +105,11 @@ public class ModelRdv  {
 	
 	}
 	
-	/*
-	public void filtreDonneurParProfession(String filtre) {
-		personnelFiltre.setPredicate(s-> filtre != null ?  s.getProfession().getLibelle().equals(filtre) : true);
-	
-	}
-	
-	public void filtreDonneurRdvParProfession(String filtre) {
-		personnelRdvFiltre.setPredicate(s-> filtre != null ?  s.getProfession().getLibelle().equals(filtre) : true);	
-		
-	}
-	*/
+
 	
 	public void actualiserDonneurListe() {
-		personnel.setAll(daoDonneur.listerTout());
-		personnel.removeAll(courant.getDonneur());
+		donneur.setAll(daoDonneur.listerTout());
+		donneur.removeAll(courant.getDonneur());
 		
 	}
 	
@@ -179,21 +126,7 @@ public class ModelRdv  {
 		// Vérifie la validité des données
 		
 		StringBuilder message = new StringBuilder();
-		/*
-		if( courant.getTitre() == null || courant.getTitre().isEmpty() ) {
-			message.append( "\nLe titre ne doit pas être vide." );
-		} else  if ( courant.getTitre().length()> 50 ) {
-			message.append( "\nLe titre est trop long : 50 maxi." );
-		}
-
-		if( courant.getEffectif() != null  ) {
-			if( courant.getEffectif() < 0  ) {
-				message.append( "\nL'effectif ne peut pas être inférieur à zéro." );
-			} else  if ( courant.getEffectif() > 1000 ) {
-				message.append( "\nEffectif trop grand : 1000 maxi." );
-			}
-		}
-*/
+		
 		if( courant.getHeure_rdv() != null  ) {
 		
 			  if ( courant.getHeure_rdv().isAfter( LocalTime.of(18, 0))) {
@@ -256,7 +189,46 @@ public class ModelRdv  {
 	}
 */	
 	
-	// Métodes auxiliaires
+	// Getters & Setters
 	
+		public ObservableList<Rdv> getListe() {
+			return liste;
+		}
+		
+		public ObservableList<String> getCritereRecherche() {
+			return critereRecherche;
+		}
+		
+		public Rdv getCourant() {
+			return courant;
+		}
+		
+		public ObservableList<String> getListePriseSang() {
+			return listePriseSang;
+		}
+
+		public ObservableList<Donneur> getDonneur() {
+			return donneur;
+		}
+		
+		public FilteredList<Donneur> getDonneurFiltre() {
+			return donneurFiltre;
+		}
+	/*	
+		public FilteredList<Donneur> getDonneurRdvFiltre() {
+			return donneurRdvFiltre;
+		}
+	*/	
+		public FilteredList<Rdv> getRdvFiltre() {
+			return rdvFiltre;
+		}
+		
+		public Rdv getSelection() {
+			return selection;
+		}
+		
+		public Property<String> priseSangProperty() {
+			return priseSang;
+		}
 	
 }

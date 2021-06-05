@@ -8,8 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.util.Callback;
 import jfox.javafx.util.ConverterDouble;
 import jfox.javafx.util.ConverterInteger;
 import jfox.javafx.util.ConverterLocalDate;
@@ -17,6 +19,7 @@ import jfox.javafx.util.ConverterLocalTime;
 import jfox.javafx.view.Controller;
 import jfox.javafx.view.IManagerGui;
 import projet.data.Rdv;
+import projet.data.Site_de_collecte;
 import projet.data.Collecte;
 import projet.data.Donneur;
 import projet.data.DossierMedical;
@@ -24,6 +27,7 @@ import projet.view.EnumView;
 import projet.view.collecte.ModelCollecte;
 import projet.view.donneur.ModelDonneur;
 import projet.view.site_collecte.ModelSiteCollecte;
+import projet.view.site_de_collecte.ModelSite_de_collecte;
 
 
 public class ControllerRdvForm extends Controller {
@@ -52,15 +56,7 @@ public class ControllerRdvForm extends Controller {
 	@FXML
 	private TextField		textFieldSiteDeCollecte;
 	@FXML
-	private TextField		textFieldIdCollecte;
-//	@FXML
-//	private ComboBox<String>	comboBoxGSanguin;
-//	@FXML
-//	private ComboBox<String>	comboBoxRhesus;
-//	@FXML
-//	private CheckBox		checkBoxAptitude;
-//	@FXML
-//	private TextArea		textAreaInaptitude;
+	private ComboBox<Collecte>		comboBoxIdCollecte;
 	@FXML
 	private Button			buttonEnregistrerRdv;
 	@FXML
@@ -78,6 +74,8 @@ public class ControllerRdvForm extends Controller {
 	@Inject
 	private ModelCollecte	modelCollecte;
 	@Inject
+	private ModelSite_de_collecte	modelSite;
+	@Inject
 	private ModelDonneur modelDonneur;
 	 
 
@@ -89,7 +87,8 @@ public class ControllerRdvForm extends Controller {
 		
 		Rdv courant = modelRdv.getCourant();
 		Donneur courantDonneur = modelDonneur.getCourant();
-		Collecte courantCollecte = modelCollecte.getCourant();
+		Collecte courantCollecte = modelCollecte.getSelection();
+		Site_de_collecte site = modelSite.getSelection();
 
 		// Data binding
 
@@ -97,11 +96,7 @@ public class ControllerRdvForm extends Controller {
 		bindBidirectional( textFieldNom, courantDonneur.nomProperty() );
 		bindBidirectional( textFieldPrenom, courantDonneur.prenomProperty() );
 		bindBidirectional( textFieldIdDonneur, courantDonneur.idProperty(), new ConverterInteger() );
-//		bindBidirectional( textFieldIdCollecte, courant.getCollecte().id_collecteProperty(), new ConverterInteger() );
-//		bindBidirectional( textFieldNom, courant.getDonneur().nomProperty() );
-//		bindBidirectional( textFieldPrenom, courant.getDonneur().prenomProperty() );
-//		bindBidirectional( textFieldIdDonneur, courant.getDonneur().idProperty(), new ConverterInteger() );
-//		
+		bindBidirectional( textFieldSiteDeCollecte, site.adresseProperty() );
 		
 		// Date de Rdv
 		bindBidirectional( datePickerDdRdv, courant.date_rdvProperty(), new ConverterLocalDate() );
@@ -113,19 +108,11 @@ public class ControllerRdvForm extends Controller {
 		
 		bindBidirectional( textFieldQuantiteSang, courant.qte_sangProperty(), new ConverterInteger() );
 		
-		
-		//Lieu du RDV
-//		bindBidirectional(textFieldSiteDeCollecte, courant.getCollecte().getSite_de_collecte().villeProperty());
-//		bindBidirectional(textFieldIdCollecte, courant.getCollecte().id_collecteProperty(), new ConverterInteger());
-		
-		// dossier Medical
-		
-//		comboBoxGSanguin.setItems(modelDossierMedical.getListeGroupeSanguin());
-//		comboBoxGSanguin.valueProperty().bindBidirectional(courantDossier.groupeSanguinProperty());
-//		
-//		comboBoxRhesus.setItems(modelDossierMedical.getListeRhesus());
-//		comboBoxRhesus.valueProperty().bindBidirectional(courantDossier.rhesusProperty());
-		
+
+		//ComboBox Collecte
+		comboBoxIdCollecte.setItems(modelCollecte.getListe());
+		bindBidirectional(comboBoxIdCollecte, courant.collecteProperty());
+		setCellFactory(comboBoxIdCollecte, item -> item.getDate_debut().toString());
 		
 		
 	}
@@ -134,7 +121,7 @@ public class ControllerRdvForm extends Controller {
 	public void refresh() {
 		modelRdv.actualiserCourant();
 		modelDonneur.actualiserCourant();
-		modelCollecte.actualiserListe();		
+		modelCollecte.actualiserListePourSite(modelSite.getSelection().getId_site_de_collecte());	
 	}
 	
 	
@@ -158,6 +145,22 @@ public class ControllerRdvForm extends Controller {
 	private void doValider() {
 		modelRdv.validerMiseAJour();
 		managerGui.showView( EnumView.RdvListe );
+	}
+	
+	public static <T> void setCellFactory( ComboBox<T> comboBox, Callback< T, String > extractor ) {
+		comboBox.setCellFactory( param -> new ListCell<T>() {
+		    @Override
+		    protected void updateItem(T item, boolean empty) {
+		        super.updateItem(item, empty);
+		        if (empty || item == null ) {
+		            setText(null);
+		        } else {
+		            setText( extractor.call( item ) );
+		        }
+		    }
+		});	
+		
+		comboBox.setButtonCell(comboBox.getCellFactory().call(null));
 	}
 /*	
 	@FXML

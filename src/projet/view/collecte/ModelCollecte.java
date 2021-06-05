@@ -140,6 +140,10 @@ public class ModelCollecte  {
 		
  	}
 	
+	public void actualiserListePourSite(int id_site) {
+		liste.setAll( daoCollecte.listerPourSite(id_site) );
+ 	}
+	
 	// Fonction permettant de filtre la liste de collecte en fonction de la catégorie à filtrer et le contenu du texte, passés en paramètres
 	public void filtreListeCollecte(String categorie, String filtre) {
 		if (categorie!=null)

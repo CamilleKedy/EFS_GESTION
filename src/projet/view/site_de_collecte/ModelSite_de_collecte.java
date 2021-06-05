@@ -1,5 +1,6 @@
 package projet.view.site_de_collecte;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import javafx.collections.FXCollections;
@@ -7,7 +8,9 @@ import javafx.collections.ObservableList;
 import jfox.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
+import projet.dao.DaoCollecte;
 import projet.dao.DaoSite_de_collecte;
+import projet.data.Collecte;
 import projet.data.Site_de_collecte;
 
 
@@ -16,7 +19,8 @@ public class ModelSite_de_collecte  {
 	
 	// Données observables 
 	
-	private final ObservableList<Site_de_collecte> liste = FXCollections.observableArrayList(); 
+	private final ObservableList<Site_de_collecte> liste = FXCollections.observableArrayList();
+	private final ObservableList<Collecte> listeCollecte = FXCollections.observableArrayList();
 	
 	private final Site_de_collecte	courant = new Site_de_collecte();
 
@@ -29,21 +33,13 @@ public class ModelSite_de_collecte  {
 	private IMapper			mapper;
     @Inject
 	private DaoSite_de_collecte	daoSite_de_collecte;
+    @Inject
+	private DaoCollecte	daoCollecte;
 	
-	
-	// Getters & Setters
-	
-	public ObservableList<Site_de_collecte> getListe() {
-		return liste;
-	}
-	
-	public Site_de_collecte getCourant() {
-		return courant;
-	}
-	
-	public Site_de_collecte getSelection() {
-		return selection;
-	}
+    @PostConstruct
+	public void init() {
+		listeCollecte.addAll(daoCollecte.listerTout());
+   }
 	
 	public void setSelection( Site_de_collecte selection ) {
 		if ( selection == null ) {
@@ -52,6 +48,7 @@ public class ModelSite_de_collecte  {
 			this.selection = daoSite_de_collecte.retrouver( selection.getId_site_de_collecte() );
 		}
 	}
+	
 	
 	
 	// Actions
@@ -111,5 +108,23 @@ public class ModelSite_de_collecte  {
 	}
 
 
+	// Getters & Setters
+	
+	public ObservableList<Site_de_collecte> getListe() {
+		return liste;
+	}
+	
+	public Site_de_collecte getCourant() {
+		return courant;
+	}
+	
+	public Site_de_collecte getSelection() {
+		return selection;
+	}
+
+	public ObservableList<Collecte> getListeCollecte() {
+		return listeCollecte;
+	}
+	
 	
 }

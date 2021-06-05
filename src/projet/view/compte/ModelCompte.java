@@ -20,7 +20,7 @@ public class ModelCompte {
 	private final ObservableList<Compte> liste = FXCollections.observableArrayList(); 
 	
 	private final Compte	courant = new Compte();
-	
+
 	
 	// Autres champs
 	
@@ -118,5 +118,6 @@ public class ModelCompte {
 		daoCompte.supprimer( item.getId() );
 		selection = UtilFX.findNext( liste, item );
 	}
-
+	
+	
 }

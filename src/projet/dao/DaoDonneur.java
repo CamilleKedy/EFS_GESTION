@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 
 import jfox.jdbc.UtilJdbc;
 import projet.data.Donneur;
+import projet.data.Site_de_collecte;
 
 
 public class DaoDonneur {
@@ -38,15 +39,18 @@ public class DaoDonneur {
 			cn = dataSource.getConnection();
 
 			// Insère le donneur
-			sql = "INSERT INTO Donneur ( nom_donneur, prenom_donneur, date_naissance, ville_donneur, adresse_donneur, demande_carte) VALUES ( ?, ?, ?, ?, ?, ?)";
+			sql = "INSERT INTO Donneur ( nom_donneur, prenom_donneur, date_naissance,sexe_donneur, telephone_donneur,email_donneur, ville_donneur, adresse_donneur, demande_carte) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS  );
 //			stmt.setObject(	1, donneur.getId() );
 			stmt.setObject(	1, donneur.getNom() );
 			stmt.setObject(	2, donneur.getPrenom() );
 			stmt.setObject(	3, donneur.getDateNaissance() );
-			stmt.setObject(	4, donneur.getVille() );
-			stmt.setObject(	5, donneur.getAdresse() );
-			stmt.setObject(	6, donneur.getDemandeCarte() );
+			stmt.setObject(	4, donneur.getSexe() );
+			stmt.setObject(	5, donneur.getTelephone());
+			stmt.setObject(	6, donneur.getEmail() );
+			stmt.setObject(	7, donneur.getVille() );
+			stmt.setObject(	8, donneur.getAdresse() );
+			stmt.setObject(	9, donneur.getDemandeCarte() );
 			stmt.executeUpdate();
 
 			// Récupère l'identifiant généré par le SGBD
@@ -76,15 +80,18 @@ public class DaoDonneur {
 			cn = dataSource.getConnection();
 
 			// Modifie le donneur
-			sql = "UPDATE donneur SET nom_donneur = ?, prenom_donneur = ?, date_naissance = ?, ville_donneur = ?, adresse_donneur = ?, demande_carte = ? WHERE id_donneur =  ?";
+			sql = "UPDATE donneur SET nom_donneur = ?, prenom_donneur = ?, date_naissance = ?,sexe_donneur = ?, telephone_donneur=?,email_donneur= ?, ville_donneur = ?, adresse_donneur = ?, demande_carte = ? WHERE id_donneur =  ?";
 			stmt = cn.prepareStatement( sql );
 			stmt.setObject( 1, donneur.getNom() );
 			stmt.setObject( 2, donneur.getPrenom() );
 			stmt.setObject( 3, donneur.getDateNaissance() );
-			stmt.setObject( 4, donneur.getVille() );
-			stmt.setObject( 5, donneur.getAdresse() );
-			stmt.setObject( 6, donneur.getDemandeCarte() );
-			stmt.setObject( 7, donneur.getId() );
+			stmt.setObject(	4, donneur.getSexe() );
+			stmt.setObject(	5, donneur.getTelephone());
+			stmt.setObject(	6, donneur.getEmail() );
+			stmt.setObject(	7, donneur.getVille() );
+			stmt.setObject(	8, donneur.getAdresse() );
+			stmt.setObject(	9, donneur.getDemandeCarte() );
+			stmt.setObject( 10, donneur.getId() );
 			stmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -149,112 +156,6 @@ public class DaoDonneur {
 		}
 	}
 	
-	public Donneur retrouverParNom( String nom )  {
-
-		Connection			cn		= null;
-		PreparedStatement	stmt	= null;
-		ResultSet 			rs 		= null;
-		String				sql;
-
-		try {
-			cn = dataSource.getConnection();
-
-			sql = "SELECT * FROM donneur WHERE nom_donneur LIKE '?%' ";
-            stmt = cn.prepareStatement(sql);
-            stmt.setObject( 1, nom);
-            rs = stmt.executeQuery();
-
-            if ( rs.next() ) {
-                return construireDonneur(rs, true );
-            } else {
-            	return null;
-            }
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			UtilJdbc.close( rs, stmt, cn );
-		}
-	}
-	public Donneur retrouverParPrenom( String prenom )  {
-
-		Connection			cn		= null;
-		PreparedStatement	stmt	= null;
-		ResultSet 			rs 		= null;
-		String				sql;
-
-		try {
-			cn = dataSource.getConnection();
-
-			sql = "SELECT * FROM donneur WHERE prenom_donneur LIKE ?";
-            stmt = cn.prepareStatement(sql);
-            stmt.setObject( 1, prenom);
-            rs = stmt.executeQuery();
-
-            if ( rs.next() ) {
-                return construireDonneur(rs, true );
-            } else {
-            	return null;
-            }
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			UtilJdbc.close( rs, stmt, cn );
-		}
-	}
-	
-	public Donneur retrouverParAdresse( String adresse )  {
-
-		Connection			cn		= null;
-		PreparedStatement	stmt	= null;
-		ResultSet 			rs 		= null;
-		String				sql;
-
-		try {
-			cn = dataSource.getConnection();
-
-			sql = "SELECT * FROM donneur WHERE adresse_donneur LIKE '%?%'";
-            stmt = cn.prepareStatement(sql);
-            stmt.setObject( 1, adresse);
-            rs = stmt.executeQuery();
-
-            if ( rs.next() ) {
-                return construireDonneur(rs, true );
-            } else {
-            	return null;
-            }
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			UtilJdbc.close( rs, stmt, cn );
-		}
-	}
-	public Donneur retrouverParVille( String ville )  {
-
-		Connection			cn		= null;
-		PreparedStatement	stmt	= null;
-		ResultSet 			rs 		= null;
-		String				sql;
-
-		try {
-			cn = dataSource.getConnection();
-
-			sql = "SELECT * FROM donneur WHERE ville_donneur LIKE ville '%?%'";
-            stmt = cn.prepareStatement(sql);
-            stmt.setObject( 1, ville);
-            rs = stmt.executeQuery();
-
-            if ( rs.next() ) {
-                return construireDonneur(rs, true );
-            } else {
-            	return null;
-            }
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			UtilJdbc.close( rs, stmt, cn );
-		}
-	}
-
 	
 	public List<Donneur> listerTout()   {
 
@@ -283,6 +184,34 @@ public class DaoDonneur {
 		}
 	}
 	
+	public List<Donneur> listerPourSite(Site_de_collecte site)   {
+
+		Connection			cn		= null;
+		PreparedStatement	stmt	= null;
+		ResultSet 			rs 		= null;
+		String				sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			sql ="select d.* from ((donneur d inner join rdv r on d.id_donneur = r.id_donneur) "
+					+ "inner join collecte c on r.id_collecte = c.id_collecte) where  c.id_site = ?";
+			stmt = cn.prepareStatement(sql);
+			stmt.setObject(1, site.getId_site_de_collecte());
+			rs = stmt.executeQuery();
+			
+			List<Donneur> donneurs = new ArrayList<>();
+			while (rs.next()) {
+				donneurs.add( construireDonneur(rs, false) );
+			}
+			return donneurs;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( rs, stmt, cn );
+		}
+	}
 	
 	// Méthodes auxiliaires
 	
@@ -292,6 +221,9 @@ public class DaoDonneur {
 		donneur.setId(rs.getObject( "id_donneur", Integer.class ));
 		donneur.setNom(rs.getObject( "nom_donneur", String.class ));
 		donneur.setPrenom(rs.getObject( "prenom_donneur", String.class ));
+		donneur.setSexe(rs.getObject( "sexe_donneur", String.class ));
+		donneur.setTelephone(rs.getObject( "telephone_donneur", String.class ));
+		donneur.setEmail(rs.getObject( "email_donneur", String.class ));
 		donneur.setVille(rs.getObject( "ville_donneur", String.class ));
 		donneur.setAdresse(rs.getObject( "adresse_donneur", String.class ));
 

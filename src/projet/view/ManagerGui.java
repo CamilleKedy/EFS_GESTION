@@ -39,7 +39,8 @@ public class ManagerGui extends ManagerGuiAbstract {
 
 
 
-		showView( EnumView.DonneurListe);
+		showView( EnumView.Connexion);
+
 
 
 		// Configure le stage

@@ -1,5 +1,6 @@
 package projet.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +13,9 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import jfox.jdbc.UtilJdbc;
+import projet.data.Collecte;
 import projet.data.Compte;
+import projet.data.Site_de_collecte;
 
 
 public class DaoCompte {
@@ -26,6 +29,10 @@ public class DaoCompte {
 	private DaoRole			daoRole;
 	@Inject
 	private DaoPersonnel	daoPersonnel;
+	@Inject
+	private DaoCollecte 	daoCollecte;
+	@Inject
+	private DaoSite_de_collecte 	daoSite;
 
 	
 	// Actions
@@ -254,4 +261,56 @@ public class DaoCompte {
 		return compte;
 	}
 	
+	private Collecte retrouverInfoSurCollecte(int idCompte) {
+		Compte compte = new Compte();
+		compte = retrouver(idCompte);
+		
+		Connection			cn		= null;
+		CallableStatement	stmt	= null;
+		ResultSet 			rs 		= null;
+		String				sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			sql = "{CALL personnel_retrouver_collecte(?)}";
+			stmt = cn.prepareCall( sql );
+			stmt.setObject(	1, compte.getPersonnel().getId() );
+			rs = stmt.executeQuery();
+
+			return daoCollecte.retrouver(rs.getObject("id_collecte", Integer.class));
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( rs, stmt, cn );
+		}
+		
+	}
+	
+	public Site_de_collecte retrouverInfoSurSiteDeCollecte(int idCompte) {
+		
+		Connection			cn		= null;
+		CallableStatement	stmt	= null;
+		ResultSet 			rs 		= null;
+		String				sql;
+
+		try {
+			
+			cn = dataSource.getConnection();
+			Collecte collecte =retrouverInfoSurCollecte(idCompte);
+			sql = "{CALL personnel_retrouver_site_collecte(?)}";
+			stmt = cn.prepareCall( sql );
+			stmt.setObject(	1, collecte.getId_collecte());
+			rs = stmt.executeQuery();
+
+			return daoSite.retrouver(rs.getObject("id_site", Integer.class)) ;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( rs, stmt, cn );
+		}
+		
+	}
 }

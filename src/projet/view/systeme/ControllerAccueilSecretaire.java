@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import jfox.javafx.view.IManagerGui;
 import projet.view.EnumView;
+import projet.view.site_de_collecte.ModelSite_de_collecte;
 
 public class ControllerAccueilSecretaire {
 	
@@ -22,10 +23,15 @@ public class ControllerAccueilSecretaire {
 
     @Inject
 	private IManagerGui		managerGui;
+    @Inject
+   	private ModelSite_de_collecte modelSite;
 
     @FXML
     void doDonneur(ActionEvent event) {
-    	managerGui.showView( EnumView.DonneurListe );
+    	if(modelSite.getSelection() == null) 
+    		managerGui.showView( EnumView.Site_de_collecteListeChoix );
+    	else 
+    		managerGui.showView( EnumView.DonneurListe );
     }
 
     @FXML

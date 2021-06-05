@@ -13,6 +13,8 @@ import javafx.scene.input.MouseEvent;
 import jfox.javafx.view.IManagerGui;
 import projet.data.Donneur;
 import projet.view.EnumView;
+import projet.view.rdv.ModelRdv;
+import projet.view.site_de_collecte.ModelSite_de_collecte;
 
 public class ControllerDonneurListe {
 	
@@ -52,6 +54,10 @@ public class ControllerDonneurListe {
 	@Inject
 	private ModelDonneur 	modelDonneur;
 	@Inject
+	private ModelSite_de_collecte	modelSite;
+	@Inject
+	private ModelRdv	modelRdv;
+	@Inject
 	private ModelDossierMedical modelDossierMedical;
 	
 	// Initialisation du Controller
@@ -85,7 +91,7 @@ public class ControllerDonneurListe {
 	}
 	
 	public void refresh() {
-		modelDonneur.actualiserListe();
+		modelDonneur.actualiserListe(modelSite.getSelection());
 		modelDossierMedical.actualiserCourant();
 		tableView.requestFocus();
 	}
@@ -110,6 +116,7 @@ public class ControllerDonneurListe {
     @FXML
     void doAjouterRdv() {
     	modelDonneur.setSelection( tableView.getSelectionModel().getSelectedItem() );
+    	modelRdv.getSelection().setDonneur(tableView.getSelectionModel().getSelectedItem());
     	managerGui.showView( EnumView.RdvForm );
     }
 
@@ -121,7 +128,11 @@ public class ControllerDonneurListe {
 			refresh();
 		}
 	}
-	
+	@FXML
+	void doRetour() {
+		managerGui.showView( EnumView.AccueilSecretaire );
+	}
+
 		
 	// Gestion des évènements
 
