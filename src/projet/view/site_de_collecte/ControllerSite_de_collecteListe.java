@@ -4,8 +4,10 @@ import javax.inject.Inject;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import jfox.javafx.view.Controller;
@@ -34,6 +36,10 @@ public class ControllerSite_de_collecteListe extends Controller {
 	private TableColumn<Site_de_collecte, Integer> columnNbr_lits;
 	@FXML
 	private TableColumn<Site_de_collecte, String> columnAdresse;
+	@FXML
+	private TextField			textFieldRecherche;
+	@FXML
+	private ComboBox<String>			comboBoxFiltres;
 
 	// Autres champs
 	
@@ -49,7 +55,7 @@ public class ControllerSite_de_collecteListe extends Controller {
 	private void initialize() {
 
 		// Data binding
-tableView.setItems(  modelSite_de_collecte.getListe() );
+tableView.setItems(  modelSite_de_collecte.getSite_de_collecteFiltre() );
 		
 		columnId_site_de_collecte.setCellValueFactory( t -> t.getValue().id_site_de_collecteProperty() );
 		columnVille.setCellValueFactory( t -> t.getValue().villeProperty() );
@@ -62,6 +68,13 @@ tableView.setItems(  modelSite_de_collecte.getListe() );
 					configurerBoutons();
 		});
 		configurerBoutons();
+		
+		// Gestion de la comboBox des filtres de recherche
+		comboBoxFiltres.setItems(modelSite_de_collecte.getListeRecherche());
+		textFieldRecherche.textProperty().addListener(obs ->{
+			String filtre = textFieldRecherche.getText();
+			modelSite_de_collecte.filtreListeSite_de_collecte(comboBoxFiltres.getValue(), filtre);
+		});
 	}
 	
 	public void refresh() {

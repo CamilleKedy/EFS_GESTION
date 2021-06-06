@@ -5,8 +5,10 @@ import javax.inject.Inject;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import jfox.javafx.view.Controller;
@@ -36,7 +38,11 @@ public class ControllerPersonnelListe extends Controller {
 	private TableColumn<Personnel, String> columnAdresse;
 	@FXML
 	private TableColumn<Personnel, String> columnProfession;
-
+	@FXML
+	private TextField			textFieldRecherche;
+	@FXML
+	private ComboBox<String>			comboBoxFiltres;
+	
 	// Autres champs
 	
 	@Inject
@@ -54,7 +60,7 @@ public class ControllerPersonnelListe extends Controller {
 
 		Personnel courant = modelPersonnel.getCourant();
 		// Data binding
-		tableView.setItems(  modelPersonnel.getListe() );
+		tableView.setItems(  modelPersonnel.getPersonnelFiltre() );
 		
 		columnId_personnel.setCellValueFactory( t -> t.getValue().idProperty() );
 		columnNom.setCellValueFactory( t -> t.getValue().nomProperty() );
@@ -68,6 +74,13 @@ public class ControllerPersonnelListe extends Controller {
 					configurerBoutons();
 		});
 		configurerBoutons();
+		
+		// Gestion de la comboBox des filtres de recherche
+		comboBoxFiltres.setItems(modelPersonnel.getListeRecherche());
+		textFieldRecherche.textProperty().addListener(obs ->{
+			String filtre = textFieldRecherche.getText();
+			modelPersonnel.filtreListePersonnel(comboBoxFiltres.getValue(), filtre);
+		});
 		
 	}
 	

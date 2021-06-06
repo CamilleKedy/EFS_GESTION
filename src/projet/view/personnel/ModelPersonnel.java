@@ -1,15 +1,18 @@
 package projet.view.personnel;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import jfox.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoPersonnel;
 import projet.dao.DaoPersonne;
 import projet.data.Personnel;
+import projet.data.Site_de_collecte;
 
 
 public class ModelPersonnel  {
@@ -18,8 +21,9 @@ public class ModelPersonnel  {
 	// Données observables 
 	
 	private final ObservableList<Personnel> liste = FXCollections.observableArrayList(); 
-	
+	private final ObservableList<String> listeRecherche = FXCollections.observableArrayList();
 	private final Personnel	courant = new Personnel();
+	private final FilteredList<Personnel> PersonnelFiltre = new FilteredList<>(liste, s -> true);
 
 	
 	// Autres champs
@@ -32,13 +36,28 @@ public class ModelPersonnel  {
 	private DaoPersonnel	daoPersonnel;
 
 	
-	
+    @PostConstruct
+ 	public void init() {
+ 		listeRecherche.addAll("Numéro", "Nom", "Prenom", "Adresse", "Profession");
+ 		//niveau.addListener( obs -> chargerImages() );
+ 	}
+    
 	// Getters & Setters
+    
+    
 	
 	public ObservableList<Personnel> getListe() {
 		return liste;
 	}
 	
+	public ObservableList<String> getListeRecherche() {
+		return listeRecherche;
+	}
+
+	public FilteredList<Personnel> getPersonnelFiltre() {
+		return PersonnelFiltre;
+	}
+
 	public Personnel getCourant() {
 		return courant;
 	}
@@ -71,6 +90,34 @@ public class ModelPersonnel  {
 	
 	public void actualiserCourant() {
 		mapper.update( courant, selection );
+	}
+	
+	public void filtreListePersonnel(String categorie, String filtre) {
+		if (categorie!=null)
+		{
+			if (categorie.equals("Numéro"))
+			{
+				PersonnelFiltre.setPredicate(s-> filtre != null ?  s.getId().toString().toUpperCase().contains(filtre.toUpperCase()) : true);
+			}
+			else if (categorie.equals("Nom")) 
+			{
+				PersonnelFiltre.setPredicate(s-> filtre != null ?  s.getNom().toString().toUpperCase().contains(filtre.toUpperCase()) : true);
+			}
+			else if (categorie.equals("Prenom"))
+			{
+				PersonnelFiltre.setPredicate(s-> filtre != null ?  s.getPrenom().toString().toUpperCase().contains(filtre.toUpperCase()) : true);
+			}
+			else if (categorie.equals("Adresse"))
+			{
+				PersonnelFiltre.setPredicate(s-> filtre != null ?  s.getAdresse().toString().toUpperCase().contains(filtre.toUpperCase()) : true);
+			}
+			else if (categorie.equals("Profession"))
+			{
+				PersonnelFiltre.setPredicate(s-> filtre != null ?  s.getProfession().getLibelle().toString().toUpperCase().contains(filtre.toUpperCase()) : true);
+			}
+			
+		}	
+	
 	}
 	
 	public void validerMiseAJour() {
