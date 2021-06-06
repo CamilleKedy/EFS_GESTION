@@ -42,6 +42,7 @@ public class ManagerGui extends ManagerGuiAbstract {
 		showView( EnumView.Connexion);
 
 
+
 		// Configure le stage
 		stage.setTitle( "EFS Gestion" );
 		stage.getIcons().add(new Image(getClass().getResource("/projet/images/Logo-ESF_Gestion blanc.png").toExternalForm()));

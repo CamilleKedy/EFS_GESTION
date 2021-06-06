@@ -72,7 +72,7 @@ public class MenuBarAppli extends MenuBar {
 		menuDonneur = menu;
 		
 		item = new MenuItem( "Rendez-vous" );
-		//item.setOnAction(  e -> managerGui.showView( EnumView.RDVListe )  );
+		item.setOnAction(  e -> managerGui.showView( EnumView.RdvListe )  );
 		menu.getItems().add( item );
 		
 		item = new MenuItem( "Rechercher un donneur" );
@@ -80,9 +80,9 @@ public class MenuBarAppli extends MenuBar {
 		menu.getItems().add( item );
 		
 		item = new MenuItem( "Retour" );
-		item.setOnAction(  e -> managerGui.showView( EnumView.Connexion )  );
+		item.setOnAction(  e -> managerGui.showView( EnumView.AccueilSecretaire )  );
 		menu.getItems().add( item );
-		itemCategories = item;
+		
 		
 		item = new MenuItem( "Comptes" );
 		item.setOnAction(  e -> managerGui.showView( EnumView.CompteListe )  );
@@ -104,33 +104,10 @@ public class MenuBarAppli extends MenuBar {
 		item.setOnAction(  e -> managerGui.showView( EnumView.Site_de_collecteListe )  );
 		menu.getItems().add( item );
 
-		item = new MenuItem( "" );
-		item.setOnAction(  e -> managerGui.showView( EnumView.PersonneEtatParCategorie ) );
+		item = new MenuItem( "Liste du Personnel" );
+		item.setOnAction(  e -> managerGui.showView( EnumView.PersonnelListe ) );
 		menu.getItems().add( item );
 		
-		item = new MenuItem( "Annuaire" );
-		item.setOnAction(  e -> managerReport.openFilePdf( EnumReport.Annuaire, null) );
-		menu.getItems().add( item );
-		
-		
-		// Manu Tests
-		
-		menu =  new Menu( "Tests" );;
-		this.getMenus().add(menu);
-		menuTests = menu;
-		
-		item = new MenuItem( "DaoCategorie" );
-		item.setOnAction(  e -> managerGui.showView( EnumView.TestDaoCategorie )  );
-		menu.getItems().add( item );
-		
-		item = new MenuItem( "DaoMemo" );
-		item.setOnAction(  e -> managerGui.showView( EnumView.TestDaoMemo )  );
-		menu.getItems().add( item );
-		
-		item = new MenuItem( "DaoService" );
-		item.setOnAction(  e -> managerGui.showView( EnumView.TestDaoService )  );
-		menu.getItems().add( item );
-
 
 		// Configuration initiale du menu
 		configurerMenu( modelConnexion.getCompteActif() );
@@ -154,10 +131,6 @@ public class MenuBarAppli extends MenuBar {
 		itemDeconnecter.setDisable(true);
 		
 		menuDonneur.setVisible(false);
-		itemCategories.setVisible(false);
-		itemComptes.setVisible(false);
-		menuTests.setVisible(false);
-		
 		menuCollecte.setVisible( false );
 		
 		if( compteActif != null ) {
@@ -165,15 +138,10 @@ public class MenuBarAppli extends MenuBar {
 			itemDeconnecter.setDisable(false);
 			if( compteActif.isInRole( Roles.SECRETAIRE) ) {
 				menuDonneur.setVisible(true);
-				
 			}
 			if( compteActif.isInRole( Roles.GESTIONAIRE ) ) {
 				System.out.println(compteActif.getRoles());
 				menuCollecte.setVisible(true);
-				menuDonneur.setVisible(false);
-				itemCategories.setVisible(true);
-				itemComptes.setVisible(true);
-				menuTests.setVisible(true);
 			}
 		}
 	}

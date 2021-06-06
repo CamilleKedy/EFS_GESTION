@@ -15,10 +15,7 @@ import javax.sql.DataSource;
 
 import jfox.jdbc.UtilJdbc;
 import projet.data.Collecte;
-import projet.data.Materiel;
 import projet.data.Materieldecollecte;
-import projet.data.Collecte;
-import projet.data.Personne;
 import projet.data.Personnel;
 
 
@@ -197,6 +194,33 @@ public class DaoCollecte {
 		}
 	}
 	
+	public List<Collecte> listerPourSite(int id_site) {
+
+		Connection			cn 		= null;
+		PreparedStatement	stmt 	= null;
+		ResultSet 			rs		= null;
+		String				sql;
+
+		try {
+			cn = dataSource.getConnection();
+			sql = "SELECT * FROM collecte WHERE id_site = ? ORDER BY id_collecte";
+			stmt = cn.prepareStatement( sql );
+			stmt.setObject(1, id_site);
+			rs = stmt.executeQuery();
+
+			List<Collecte> collectes = new ArrayList<>();
+			while (rs.next()) {
+				collectes.add( construireCollecte( rs, true ) );
+			}
+			return collectes;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( rs, stmt, cn );
+		}
+	}
+	
 	  public int compterPourSite( int id_site ) {
 	    	
 			Connection			cn		= null;
@@ -253,13 +277,14 @@ public class DaoCollecte {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "INSERT INTO personnelDeCollecte ( id_collecte, id_personnel ) VALUES( ?, ? ) ";
+			sql = "INSERT INTO personnelDeCollecte ( id_collecte, id_personnel , date_collecte) VALUES( ?, ?, ? ) ";
 			stmt = cn.prepareStatement( sql );
 			stmt.setObject( 1, collecte.getId_collecte() );
 			for ( Personnel personnel : collecte.getPersonnel() ) {
 				stmt.setObject( 2, personnel.getId() );
 				stmt.executeUpdate();
 			}
+			stmt.setObject(3, collecte.getDate_debut());
 		} catch ( SQLException e ) {
 			throw new RuntimeException(e);
 		} finally {
@@ -289,7 +314,7 @@ public class DaoCollecte {
 		}
 	}
 
-private void supprimerMaterielDeCollecte( int idCollecte ) {
+public void supprimerMaterielDeCollecte( int idCollecte ) {
 
 	Connection			cn 		= null;
 	PreparedStatement	stmt 	= null;

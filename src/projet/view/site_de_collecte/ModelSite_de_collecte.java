@@ -9,6 +9,7 @@ import javafx.collections.transformation.FilteredList;
 import jfox.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
+import projet.dao.DaoCollecte;
 import projet.dao.DaoSite_de_collecte;
 import projet.data.Collecte;
 import projet.data.Site_de_collecte;
@@ -23,6 +24,7 @@ public class ModelSite_de_collecte  {
 	private final ObservableList<String> listeRecherche = FXCollections.observableArrayList();
 	private final Site_de_collecte	courant = new Site_de_collecte();
 	private final FilteredList<Site_de_collecte> site_de_collecteFiltre = new FilteredList<>(liste, s -> true);
+	private final ObservableList<Collecte> listeCollecte = FXCollections.observableArrayList();
 
 	
 	// Autres champs
@@ -33,10 +35,13 @@ public class ModelSite_de_collecte  {
 	private IMapper			mapper;
     @Inject
 	private DaoSite_de_collecte	daoSite_de_collecte;
+    @Inject
+	private DaoCollecte	daoCollecte;
 	
 	// Initialisations
     @PostConstruct
  	public void init() {
+ 		listeCollecte.addAll(daoCollecte.listerTout());
  		listeRecherche.addAll("Numéro", "Ville", "Nombre de lits", "Adresse");
  		//niveau.addListener( obs -> chargerImages() );
  	}

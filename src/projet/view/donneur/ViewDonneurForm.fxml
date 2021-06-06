@@ -54,7 +54,7 @@
                               <TextField fx:id="textFieldSexe" />
                               <TextField fx:id="textFieldTelephone" />
                               <TextField fx:id="textFieldEmail" layoutX="10.0" layoutY="60.0" />
-                              <TextField fx:id="textFieldPrenom21" />
+                              <TextField fx:id="textFieldVille" />
                               <TextField fx:id="textFieldAdresse" layoutX="10.0" layoutY="85.0" prefHeight="25.0" prefWidth="263.0" />
                               <DatePicker fx:id="datePickerDdn" />
                               <ComboBox fx:id="comboBoxCarte" layoutX="20.0" layoutY="158.0" prefHeight="25.0" prefWidth="84.0" />

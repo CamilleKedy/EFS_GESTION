@@ -13,6 +13,8 @@ import javafx.scene.input.MouseEvent;
 import jfox.javafx.view.IManagerGui;
 import projet.data.Donneur;
 import projet.view.EnumView;
+import projet.view.rdv.ModelRdv;
+import projet.view.site_de_collecte.ModelSite_de_collecte;
 
 public class ControllerDonneurListe {
 	
@@ -41,6 +43,8 @@ public class ControllerDonneurListe {
 	@FXML
 	private Button			buttonModifier;
 	@FXML
+	private Button 			buttonRdv;
+	@FXML
 	private Button			buttonSupprimer;
 
 	// Autres champs
@@ -49,6 +53,10 @@ public class ControllerDonneurListe {
 	private IManagerGui		managerGui;
 	@Inject
 	private ModelDonneur 	modelDonneur;
+	@Inject
+	private ModelSite_de_collecte	modelSite;
+	@Inject
+	private ModelRdv	modelRdv;
 	@Inject
 	private ModelDossierMedical modelDossierMedical;
 	
@@ -83,7 +91,7 @@ public class ControllerDonneurListe {
 	}
 	
 	public void refresh() {
-		modelDonneur.actualiserListe();
+		modelDonneur.actualiserListe(modelSite.getSelection());
 		modelDossierMedical.actualiserCourant();
 		tableView.requestFocus();
 	}
@@ -103,6 +111,15 @@ public class ControllerDonneurListe {
 		modelDossierMedical.setSelectionParDonneur(tableView.getSelectionModel().getSelectedItem());
 		managerGui.showView( EnumView.DonneurForm );
 	}
+	
+
+    @FXML
+    void doAjouterRdv() {
+    	modelDonneur.setSelection( tableView.getSelectionModel().getSelectedItem() );
+    	modelRdv.getSelection().setDonneur(tableView.getSelectionModel().getSelectedItem());
+    	managerGui.showView( EnumView.RdvForm );
+    }
+
 
 	@FXML
 	private void doSupprimer() {
@@ -111,7 +128,11 @@ public class ControllerDonneurListe {
 			refresh();
 		}
 	}
-	
+	@FXML
+	void doRetour() {
+		managerGui.showView( EnumView.AccueilSecretaire );
+	}
+
 		
 	// Gestion des évènements
 
@@ -137,9 +158,11 @@ public class ControllerDonneurListe {
 		if( tableView.getSelectionModel().getSelectedItems().isEmpty() ) {
 			buttonModifier.setDisable(true);
 			buttonSupprimer.setDisable(true);
+			buttonRdv.setDisable(true);
 		} else {
 			buttonModifier.setDisable(false);
 			buttonSupprimer.setDisable(false);
+			buttonRdv.setDisable(false);
 		}
 	}
 }

@@ -72,10 +72,6 @@
       </VBox>
       <HBox alignment="CENTER" layoutY="263.0" prefHeight="84.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Button fx:id="buttonAjouter" mnemonicParsing="false" onAction="#doAjouter" prefHeight="40.0" prefWidth="85.0" style="-fx-background-color: #162c53;" text="Ajouter" textFill="WHITE">
-               <font>
-                  <Font name="Trebuchet MS" size="15.0" />
-               </font></Button>
             <Button fx:id="buttonModifier" mnemonicParsing="false" onAction="#doModifier" prefHeight="40.0" prefWidth="85.0" style="-fx-background-color: #162c53;" text="Modifier" textFill="WHITE">
                <font>
                   <Font name="Trebuchet MS" size="15.0" />
