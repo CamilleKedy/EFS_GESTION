@@ -194,7 +194,9 @@ public class DaoDonneur {
 		try {
 			cn = dataSource.getConnection();
 
-			sql ="select d.* from ((donneur d inner join rdv r on d.id_donneur = r.id_donneur) "
+			//sql ="select distinct d.* from ((donneur d inner join rdv r on d.id_donneur = r.id_donneur) "
+			//		+ "inner join collecte c on r.id_collecte = c.id_collecte) where  c.id_site = ?";
+			sql ="select distinct d.* from ((donneur d left join rdv r on d.id_donneur = r.id_donneur) "
 					+ "inner join collecte c on r.id_collecte = c.id_collecte) where  c.id_site = ?";
 			stmt = cn.prepareStatement(sql);
 			stmt.setObject(1, site.getId_site_de_collecte());
