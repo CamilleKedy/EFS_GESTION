@@ -50,7 +50,7 @@ public class ControllerAccueilGestionnaire {
     
     @FXML
     void doCommunication(ActionEvent event) {
-    	managerReport.showViewer( EnumReport.DonneurParCollecte, null );
+    	managerGui.showView( EnumView.ChoixSite );
     }
 
 

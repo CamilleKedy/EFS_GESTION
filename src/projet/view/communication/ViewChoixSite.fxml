@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -14,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.site_de_collecte.ControllerSite_de_collecteListeChoix">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.communication.ControllerChoixSite">
    <children>
       <HBox prefHeight="108.0" prefWidth="600.0" style="-fx-background-color: #ffffff;">
          <children>
@@ -26,9 +25,9 @@
                   <Insets left="15.0" />
                </HBox.margin>
             </ImageView>
-            <VBox alignment="CENTER_RIGHT" onDragDetected="#doDonneur" prefHeight="112.0" prefWidth="423.0">
+            <VBox alignment="CENTER_RIGHT"  prefHeight="112.0" prefWidth="423.0">
                <children>
-                  <Label alignment="TOP_CENTER" text="DONNEURS" textFill="#162c53">
+                  <Label alignment="TOP_CENTER" text="COMMUNICATION" textFill="#162c53">
                      <font>
                         <Font name="Rockwell Bold" size="30.0" />
                      </font>
@@ -47,9 +46,9 @@
             </VBox>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutY="218.0" prefHeight="299.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="83.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="218.0">
+      <HBox alignment="CENTER" layoutY="164.0" prefHeight="353.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="83.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="164.0">
          <children>
-            <TableView fx:id="tableView" prefHeight="296.0" prefWidth="534.0">
+            <TableView fx:id="tableView" prefHeight="336.0" prefWidth="534.0">
               <columns>
                 <TableColumn fx:id="columnId_site_de_collecte" prefWidth="87.0" text="Id" />
                 <TableColumn fx:id="columnVille" prefWidth="152.0" text="Ville" />
@@ -61,7 +60,7 @@
       </HBox>
       <HBox alignment="CENTER_RIGHT" layoutY="263.0" prefHeight="79.0" prefWidth="568.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="32.0">
          <children>
-            <Button fx:id="buttonDonneur" mnemonicParsing="false" onAction="#doDonneur" prefHeight="40.0" prefWidth="102.0" style="-fx-background-color: #162c53;" text="Suivant" textFill="WHITE">
+            <Button fx:id="buttonDonneur" mnemonicParsing="false" onAction="#doValider" prefHeight="40.0" prefWidth="102.0" style="-fx-background-color: #162c53;" text="Suivant" textFill="WHITE">
                <font>
                   <Font name="Trebuchet MS" size="15.0" />
                </font></Button>
@@ -76,16 +75,13 @@
          </children>
       </HBox>
       <HBox layoutX="13.0" layoutY="167.0" prefHeight="40.0" prefWidth="538.0" spacing="15.0">
-         <children>
-            <ComboBox fx:id="comboBoxCollecte" onAction="#setSelectionCollecte" prefHeight="31.0" prefWidth="276.0" promptText="Date de collecte" />
-         </children>
          <padding>
             <Insets left="20.0" />
          </padding>
       </HBox>
       <HBox layoutX="36.0" layoutY="121.0" prefHeight="37.0" prefWidth="534.0">
          <children>
-            <Label prefHeight="37.0" prefWidth="540.0" text="Veuillez sélectionner la collecte pour laquelle vous voulez afficher les donneurs" wrapText="true" />
+            <Label prefHeight="37.0" prefWidth="540.0" text="Veuillez sélectionner le site de collecte pour lequel afficher les donneurs" wrapText="true" />
          </children>
       </HBox>
    </children>

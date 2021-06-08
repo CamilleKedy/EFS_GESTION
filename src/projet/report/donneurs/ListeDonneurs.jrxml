@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListeDonneurs" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="13acf49e-4913-4d1b-bccc-113817ad15d1">
-	<property name="com.jaspersoft.studio.data.sql.tables">
-		<![CDATA[cmR2IEFTICwzMjYsMTE5LGU1ZWE0MmVhLWRlMmMtNGQ0Ny04OTI4LWVkMTUzMzQyOGYyNDtjb2xs
-ZWN0ZSBBUyAsMzE2LDQxNCw4Mjk2YzI3OC04NjhlLTRmMWQtYjM3NC1hZGRjMmI0ZWE2NWI7ZG9u
-bmV1ciBBUyAsMTQyLDU5LDk1NDgzOTJlLWUyMmEtNGU0Ni1hOGM1LWRiOTFhOTNkYjZiNzs=]]>
-	</property>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="PostgreSQL - devappli"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
@@ -17,15 +13,22 @@ bmV1ciBBUyAsMTQyLDU5LDk1NDgzOTJlLWUyMmEtNGU0Ni1hOGM1LWRiOTFhOTNkYjZiNzs=]]>
 			<style mode="Opaque" backcolor="#F0EFEF"/>
 		</conditionalStyle>
 	</style>
+	<parameter name="idSite" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
 	<queryString language="SQL">
-		<![CDATA[SELECT d.*
+		<![CDATA[SELECT d.*,
+	site_de_collecte.ville,
+	site_de_collecte.adresse
 FROM donneur d
 	inner join rdv r ON 
 	 d.id_donneur = r.id_donneur 
 	inner join collecte c ON 
 	 r.id_collecte = c.id_collecte 
+	INNER JOIN site_de_collecte ON 
+	 c.id_site = site_de_collecte.id_site 
 WHERE 
-	 c.id_site = 1]]>
+	 $X{EQUAL,c.id_site,idSite}]]>
 	</queryString>
 	<field name="id_donneur" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="id_donneur"/>
@@ -72,6 +75,21 @@ WHERE
 		<property name="com.jaspersoft.studio.field.label" value="adresse_donneur"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="donneur"/>
 	</field>
+	<field name="demande_carte" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="demande_carte"/>
+		<property name="com.jaspersoft.studio.field.label" value="demande_carte"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="donneur"/>
+	</field>
+	<field name="ville" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ville"/>
+		<property name="com.jaspersoft.studio.field.label" value="ville"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="site_de_collecte"/>
+	</field>
+	<field name="adresse" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="adresse"/>
+		<property name="com.jaspersoft.studio.field.label" value="adresse"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="site_de_collecte"/>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -79,13 +97,33 @@ WHERE
 		<band height="132" splitType="Stretch">
 			<frame>
 				<reportElement mode="Opaque" x="0" y="100" width="555" height="32" forecolor="#000000" backcolor="#CC0000" uuid="e3c14156-5b51-4201-918b-97fdc012e5d4"/>
-				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement x="401" y="6" width="144" height="20" forecolor="#FFFFFF" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8"/>
-					<textElement textAlignment="Right">
+				<textField>
+					<reportElement x="186" y="8" width="100" height="30" forecolor="#FFFFFF" uuid="3950a1e1-5076-4a46-b34f-9a55d9efc588"/>
+					<box>
+						<pen lineWidth="1.0" lineColor="rgba(0, 0, 0, 0.0)"/>
+					</box>
+					<textElement>
 						<font fontName="Trebuchet MS" size="12"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{ville}]]></textFieldExpression>
 				</textField>
+				<textField>
+					<reportElement x="290" y="8" width="100" height="30" forecolor="#FFFFFF" uuid="c72f0279-b4df-409c-ae99-2e7e9510fb5f"/>
+					<box>
+						<pen lineWidth="1.0" lineColor="rgba(0, 0, 0, 0.0)"/>
+					</box>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{adresse}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="9" y="7" width="170" height="20" forecolor="#FFFFFF" uuid="dcb0d337-7995-41fe-b95d-52ee06e33d19"/>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12"/>
+					</textElement>
+					<text><![CDATA[Site de collecte :]]></text>
+				</staticText>
 			</frame>
 			<image>
 				<reportElement mode="Opaque" x="43" y="0" width="103" height="90" uuid="fe8b63ae-c11c-467a-a1a1-60333ec8d66e"/>

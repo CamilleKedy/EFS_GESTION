@@ -15,11 +15,10 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="687.0" prefWidth="622.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.donneur.ControllerDonneurListe">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.donneur.ControllerDonneurListe">
 
    <children>
-      <HBox layoutX="16.0" layoutY="6.0" prefHeight="108.0" prefWidth="600.0" style="-fx-background-color: #ffffff;">
+      <HBox layoutX="16.0" layoutY="6.0" prefHeight="112.0" prefWidth="581.0" style="-fx-background-color: #ffffff;">
          <children>
             <ImageView fitHeight="112.0" fitWidth="172.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -31,7 +30,7 @@
             </ImageView>
             <VBox alignment="CENTER_RIGHT" prefHeight="112.0" prefWidth="423.0">
                <children>
-                  <Label alignment="TOP_CENTER" styleClass="titre-vue" text="DONNEURS" textFill="#162c53">
+                  <Label alignment="TOP_CENTER" text="DONNEURS" textFill="#162c53">
                      <font>
                         <Font name="Rockwell Bold" size="30.0" />
                      </font>
@@ -51,19 +50,19 @@
             </VBox>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="16.0" layoutY="183.0" prefHeight="391.0" prefWidth="600.0" style="-fx-background-color: #ffffff;">
+      <HBox alignment="CENTER" layoutX="-3.0" layoutY="183.0" prefHeight="332.0" prefWidth="600.0" style="-fx-background-color: #ffffff;">
          <children>
-            <TableView fx:id="tableView" prefHeight="375.0" prefWidth="499.0">
+            <TableView fx:id="tableView" prefHeight="370.0" prefWidth="536.0">
                <columns>
-                  <TableColumn fx:id="columnNom" prefWidth="122.0" text="NOM" />
-                  <TableColumn fx:id="columnPrenom" prefWidth="115.0" text="PRENOM" />
-                  <TableColumn fx:id="columnAdresse" prefWidth="128.0" text="ADRESSE" />
-                  <TableColumn fx:id="columnVille" minWidth="3.0" prefWidth="133.0" text="VILLE" />
+                  <TableColumn fx:id="columnNom" prefWidth="122.0" text="Nom" />
+                  <TableColumn fx:id="columnPrenom" prefWidth="115.0" text="Prénom" />
+                  <TableColumn fx:id="columnAdresse" prefWidth="128.0" text="Adresse" />
+                  <TableColumn fx:id="columnVille" minWidth="3.0" prefWidth="133.0" text="Ville" />
                </columns>
             </TableView>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="11.0" layoutY="574.0" prefHeight="84.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: #ffffff;">
+      <HBox alignment="CENTER" layoutX="-9.0" layoutY="516.0" prefHeight="86.0" prefWidth="610.0" spacing="10.0" style="-fx-background-color: #ffffff;">
          <children>
             <Button fx:id="buttonAjouter" mnemonicParsing="false" onAction="#doAjouter" prefHeight="40.0" prefWidth="85.0" style="-fx-background-color: #162c53;" text="Ajouter" textFill="WHITE">
                <font>
@@ -92,10 +91,10 @@
             </Button>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="67.0" layoutY="115.0" prefHeight="57.0" prefWidth="499.0" spacing="10.0">
+      <HBox alignment="CENTER" layoutX="147.0" layoutY="115.0" prefHeight="57.0" prefWidth="419.0" spacing="10.0">
          <children>
-            <ComboBox fx:id="recherche" prefHeight="25.0" prefWidth="188.0" promptText="Critère de Recherche" />
-            <TextField fx:id="rechercher" alignment="CENTER" prefHeight="25.0" prefWidth="297.0" promptText="Rechercher" />
+            <ComboBox fx:id="recherche" prefHeight="25.0" prefWidth="188.0" promptText="Filtre de Recherche" />
+            <TextField fx:id="rechercher" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="297.0" promptText="Rechercher" />
          </children>
       </HBox>
    </children>
