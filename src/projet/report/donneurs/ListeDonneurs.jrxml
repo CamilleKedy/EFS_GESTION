@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListeDonneurs" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="13acf49e-4913-4d1b-bccc-113817ad15d1">
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[cmR2IEFTICwzMjYsMTE5LGU1ZWE0MmVhLWRlMmMtNGQ0Ny04OTI4LWVkMTUzMzQyOGYyNDtjb2xs
+ZWN0ZSBBUyAsMzE2LDQxNCw4Mjk2YzI3OC04NjhlLTRmMWQtYjM3NC1hZGRjMmI0ZWE2NWI7ZG9u
+bmV1ciBBUyAsMTQyLDU5LDk1NDgzOTJlLWUyMmEtNGU0Ni1hOGM1LWRiOTFhOTNkYjZiNzs=]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="PostgreSQL - devappli"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT d.*
+FROM donneur d
+	inner join rdv r ON 
+	 d.id_donneur = r.id_donneur 
+	inner join collecte c ON 
+	 r.id_collecte = c.id_collecte 
+WHERE 
+	 c.id_site = 1]]>
+	</queryString>
+	<field name="id_donneur" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id_donneur"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_donneur"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="donneur"/>
+	</field>
+	<field name="nom_donneur" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nom_donneur"/>
+		<property name="com.jaspersoft.studio.field.label" value="nom_donneur"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="donneur"/>
+	</field>
+	<field name="prenom_donneur" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="prenom_donneur"/>
+		<property name="com.jaspersoft.studio.field.label" value="prenom_donneur"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="donneur"/>
+	</field>
+	<field name="date_naissance" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="date_naissance"/>
+		<property name="com.jaspersoft.studio.field.label" value="date_naissance"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="donneur"/>
+	</field>
+	<field name="sexe_donneur" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="sexe_donneur"/>
+		<property name="com.jaspersoft.studio.field.label" value="sexe_donneur"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="donneur"/>
+	</field>
+	<field name="telephone_donneur" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="telephone_donneur"/>
+		<property name="com.jaspersoft.studio.field.label" value="telephone_donneur"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="donneur"/>
+	</field>
+	<field name="email_donneur" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="email_donneur"/>
+		<property name="com.jaspersoft.studio.field.label" value="email_donneur"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="donneur"/>
+	</field>
+	<field name="ville_donneur" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ville_donneur"/>
+		<property name="com.jaspersoft.studio.field.label" value="ville_donneur"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="donneur"/>
+	</field>
+	<field name="adresse_donneur" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="adresse_donneur"/>
+		<property name="com.jaspersoft.studio.field.label" value="adresse_donneur"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="donneur"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="100" width="555" height="32" forecolor="#000000" backcolor="#CC0000" uuid="e3c14156-5b51-4201-918b-97fdc012e5d4"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="401" y="6" width="144" height="20" forecolor="#FFFFFF" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8"/>
+					<textElement textAlignment="Right">
+						<font fontName="Trebuchet MS" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+			<image>
+				<reportElement mode="Opaque" x="43" y="0" width="103" height="90" uuid="fe8b63ae-c11c-467a-a1a1-60333ec8d66e"/>
+				<imageExpression><![CDATA["https://entreprise.pole-emploi.fr/static/img/minisite/E7moI15qiqftcNNdlmITzfVWPY79dXnV.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="170" y="10" width="342" height="70" forecolor="#162C53" uuid="a9425537-c6ef-453f-af0a-1c87eac519dc"/>
+				<textElement>
+					<font fontName="Rockwell" size="27" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Liste des donneurs à communiquer]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="35" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="5" width="555" height="25" backcolor="#162C53" uuid="fec8b082-6659-41e1-90ce-edcac54569dd">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement style="Column header" x="4" y="7" width="40" height="18" forecolor="#FFFFFF" uuid="cd82d0cd-70d2-4fc2-bf08-17b6be7032cd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="50951703-dee1-4a5d-b521-ef87c5e89e90"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Trebuchet MS" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="43" y="7" width="79" height="18" forecolor="#FFFFFF" uuid="66271fca-b07b-4b0f-ad13-fd16f2f470fb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a430b810-6337-477b-b5b6-7753fc851298"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Trebuchet MS" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Nom]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="122" y="7" width="88" height="18" forecolor="#FFFFFF" uuid="a9e7cf95-32f6-4691-a0af-c367a6baf45b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e2049a52-2b72-45c1-93a4-7d41f9a7f002"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Trebuchet MS" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Prenom]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="210" y="7" width="61" height="18" forecolor="#FFFFFF" uuid="5092b49e-5992-4324-8414-22cadee0ef76">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2f3a8b6a-a35a-4aa3-8ff9-294ff0b70bf5"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Trebuchet MS" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Sexe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="270" y="7" width="85" height="18" forecolor="#FFFFFF" uuid="9f780963-efa5-45e7-a5bf-5a6d7c8f2b46">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="341ef592-9e67-4c21-b28e-3442bc36932c"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Trebuchet MS" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Téléphone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="355" y="7" width="98" height="18" forecolor="#FFFFFF" uuid="1496c5be-b611-4ced-a56d-2887c3938f7e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0c047778-394e-48ee-b455-2dedc5bc9e9d"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Trebuchet MS" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="453" y="7" width="96" height="18" forecolor="#FFFFFF" uuid="b4f9bb7a-e4db-4e15-b1ad-e7481c72e41d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="95485abd-9a8b-4878-9cd1-ef3e9ceb78d4"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Trebuchet MS" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Adresse]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="b50221b5-8254-440b-8c6f-1f0b138c9259"/>
+				<textField textAdjust="StretchHeight">
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="40" height="18" uuid="cc457a5b-e267-48ad-bb25-ac9c6fe74336">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="50951703-dee1-4a5d-b521-ef87c5e89e90"/>
+					</reportElement>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{id_donneur}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement style="Detail" positionType="Float" x="43" y="0" width="79" height="18" uuid="0b85ec85-ff6c-4234-9a4e-939d23fb18ed">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a430b810-6337-477b-b5b6-7753fc851298"/>
+					</reportElement>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nom_donneur}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement style="Detail" positionType="Float" x="122" y="0" width="88" height="18" uuid="e2cb35ed-7b5e-44d9-a412-5edd0b8b4ab0">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e2049a52-2b72-45c1-93a4-7d41f9a7f002"/>
+					</reportElement>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{prenom_donneur}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement style="Detail" positionType="Float" x="210" y="0" width="61" height="18" uuid="f0f9a2de-5929-4883-97bb-c64122cefb91">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2f3a8b6a-a35a-4aa3-8ff9-294ff0b70bf5"/>
+					</reportElement>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{sexe_donneur}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement style="Detail" positionType="Float" x="270" y="0" width="85" height="18" uuid="b099f00d-f5bd-4211-843c-9f258fb414ad">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="341ef592-9e67-4c21-b28e-3442bc36932c"/>
+					</reportElement>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{telephone_donneur}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement style="Detail" positionType="Float" x="355" y="0" width="98" height="18" uuid="68102d93-cbde-4e35-8f8c-d055f4d6aa4a">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0c047778-394e-48ee-b455-2dedc5bc9e9d"/>
+					</reportElement>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{email_donneur}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement style="Detail" positionType="Float" x="453" y="0" width="96" height="18" uuid="ddabec12-2310-41f3-90c8-2970be8346cc">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="95485abd-9a8b-4878-9cd1-ef3e9ceb78d4"/>
+					</reportElement>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{adresse_donneur}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="1133a906-5b71-476e-9f3e-bc97c97058c1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#162C53" uuid="729c3539-f946-4d0e-a0a7-bda2815ea1b0"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="513" y="0" width="40" height="20" forecolor="#FFFFFF" uuid="4834e99c-7f6c-485a-b098-50e5187f2ab4"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Trebuchet MS" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="433" y="0" width="80" height="20" forecolor="#FFFFFF" uuid="9825b46e-76f1-469a-abb8-a1cc27aad685"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Trebuchet MS" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="1" width="197" height="20" forecolor="#FFFFFF" uuid="137d38c7-1a83-4fc5-b156-9d5f1b1a0ddc"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Trebuchet MS" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RecapCollecte" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="13acf49e-4913-4d1b-bccc-113817ad15d1">
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[cHJvZmVzc2lvbiAsMTg4LDI5Niw3ZTA3YmMzNS1jMmRjLTQxMTYtYmE1YS01MmRjMTdhMTNiODM7
+bWF0ZXJpZWwgLDUyMyw0MjQsYzIxZWY2YmYtODBiNy00ZjY0LWFmODYtZmY2YzYxNmU2OGQxO3Np
+dGVfZGVfY29sbGVjdGUgLDczMywyNjUsNGRiOGI1YTctODA3Zi00Yzk0LThjZmEtZTgwODc2Mzg1
+ZDcyO21hdGVyaWVsZGVjb2xsZWN0ZSAsMzYxLDI4MSxlY2U5MDU1Yi04NDAzLTQ1MTYtOTU1MC05
+NmMyMjVlNzAyMzg7cGVyc29ubmVsICwxNSwyNTAsNWMzYzVlMmQtMzcwOS00YzY0LTk2NjQtMDRi
+ZmE2MzAwNGFmO2NvbGxlY3RlICw1MjMsMTUsNzk3MzE0NjMtZmE1OC00ZGVjLWE4MWYtYmZkZjc2
+ZDhiYTI2Ow==]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="PostgreSQL - devappli"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT personnel.nom,
+	collecte.date_debut,
+	collecte.id_collecte,
+	collecte.date_fin,
+	collecte.horaire_debut,
+	collecte.horaire_fin,
+	collecte.id_site,
+	collecte.nbre_infirmiers,
+	collecte.nbre_medecins,
+	collecte.nbre_secretaire,
+	collecte.nbre_agents_collation,
+	personnel.prenom,
+	personnel.id_personnel,
+	personnel.id_profession,
+	profession.libelle,
+	materieldecollecte.id_materiel,
+	materieldecollecte.quantite,
+	materiel.nom_materiel,
+	site_de_collecte.ville,
+	site_de_collecte.nbr_lits,
+	site_de_collecte.adresse
+FROM personnel
+	INNER JOIN profession ON 
+	 personnel.id_profession = profession.id_profession ,
+	materieldecollecte
+	INNER JOIN collecte ON 
+	 materieldecollecte.id_collecte = collecte.id_collecte 
+	INNER JOIN site_de_collecte ON 
+	 collecte.id_site = site_de_collecte.id_site 
+	INNER JOIN materiel ON 
+	 materieldecollecte.id_materiel = materiel.id_materiel 
+ORDER BY personnel.nom ASC,
+	personnel.prenom ASC,
+	materiel.nom_materiel ASC]]>
+	</queryString>
+	<field name="nom" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nom"/>
+		<property name="com.jaspersoft.studio.field.label" value="nom"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personnel"/>
+	</field>
+	<field name="date_debut" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="date_debut"/>
+		<property name="com.jaspersoft.studio.field.label" value="date_debut"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="collecte"/>
+	</field>
+	<field name="id_collecte" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id_collecte"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_collecte"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="collecte"/>
+	</field>
+	<field name="date_fin" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="date_fin"/>
+		<property name="com.jaspersoft.studio.field.label" value="date_fin"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="collecte"/>
+	</field>
+	<field name="horaire_debut" class="java.sql.Time">
+		<property name="com.jaspersoft.studio.field.name" value="horaire_debut"/>
+		<property name="com.jaspersoft.studio.field.label" value="horaire_debut"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="collecte"/>
+	</field>
+	<field name="horaire_fin" class="java.sql.Time">
+		<property name="com.jaspersoft.studio.field.name" value="horaire_fin"/>
+		<property name="com.jaspersoft.studio.field.label" value="horaire_fin"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="collecte"/>
+	</field>
+	<field name="id_site" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id_site"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_site"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="collecte"/>
+	</field>
+	<field name="nbre_infirmiers" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="nbre_infirmiers"/>
+		<property name="com.jaspersoft.studio.field.label" value="nbre_infirmiers"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="collecte"/>
+	</field>
+	<field name="nbre_medecins" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="nbre_medecins"/>
+		<property name="com.jaspersoft.studio.field.label" value="nbre_medecins"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="collecte"/>
+	</field>
+	<field name="nbre_secretaire" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="nbre_secretaire"/>
+		<property name="com.jaspersoft.studio.field.label" value="nbre_secretaire"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="collecte"/>
+	</field>
+	<field name="nbre_agents_collation" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="nbre_agents_collation"/>
+		<property name="com.jaspersoft.studio.field.label" value="nbre_agents_collation"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="collecte"/>
+	</field>
+	<field name="prenom" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="prenom"/>
+		<property name="com.jaspersoft.studio.field.label" value="prenom"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personnel"/>
+	</field>
+	<field name="adresse" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="adresse"/>
+		<property name="com.jaspersoft.studio.field.label" value="adresse"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personnel"/>
+	</field>
+	<field name="id_personnel" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id_personnel"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_personnel"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personnel"/>
+	</field>
+	<field name="id_profession" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id_profession"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_profession"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personnel"/>
+	</field>
+	<field name="libelle" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="libelle"/>
+		<property name="com.jaspersoft.studio.field.label" value="libelle"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="profession"/>
+	</field>
+	<field name="id_materiel" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id_materiel"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_materiel"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="materieldecollecte"/>
+	</field>
+	<field name="quantite" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="quantite"/>
+		<property name="com.jaspersoft.studio.field.label" value="quantite"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="materieldecollecte"/>
+	</field>
+	<field name="nom_materiel" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nom_materiel"/>
+		<property name="com.jaspersoft.studio.field.label" value="nom_materiel"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="materiel"/>
+	</field>
+	<field name="ville" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ville"/>
+		<property name="com.jaspersoft.studio.field.label" value="ville"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="site_de_collecte"/>
+	</field>
+	<field name="nbr_lits" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="nbr_lits"/>
+		<property name="com.jaspersoft.studio.field.label" value="nbr_lits"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="site_de_collecte"/>
+	</field>
+	<group name="Group2">
+		<groupExpression><![CDATA[$F{date_fin}]]></groupExpression>
+	</group>
+	<group name="id_collecte">
+		<groupExpression><![CDATA[$F{id_collecte}]]></groupExpression>
+	</group>
+	<group name="horaire_debut">
+		<groupExpression><![CDATA[$F{horaire_debut}]]></groupExpression>
+	</group>
+	<group name="horaire_fin">
+		<groupExpression><![CDATA[$F{horaire_fin}]]></groupExpression>
+	</group>
+	<group name="ville">
+		<groupExpression><![CDATA[$F{ville}]]></groupExpression>
+	</group>
+	<group name="adresse">
+		<groupExpression><![CDATA[$F{adresse}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="99" width="550" height="26" forecolor="#000000" backcolor="#CC0000" uuid="e3c14156-5b51-4201-918b-97fdc012e5d4"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="400" y="4" width="144" height="20" forecolor="#FFFFFF" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+			<image>
+				<reportElement mode="Opaque" x="43" y="0" width="103" height="90" uuid="f2aa395c-9c0a-4df1-908a-06de244df6a5"/>
+				<imageExpression><![CDATA["D:\\Mes documents\\3iL\\POO\\WS_Framework\\g37-maxxxx\\src\\projet\\images\\Logo-ESF.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="170" y="10" width="342" height="70" forecolor="#162C53" uuid="2d439cbf-9d12-41a5-813c-a51b0bfc8e93"/>
+				<textElement>
+					<font fontName="Rockwell" size="27" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fiche descriptive de la collecte de sang]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="50">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="550" height="30" backcolor="#162C53" uuid="9aca03a6-9cc0-4207-9b1a-0b73e09d3dac"/>
+				<staticText>
+					<reportElement x="9" y="4" width="190" height="30" forecolor="#FFFFFF" uuid="9a841ae8-d59f-41cf-8a45-376e4040e275"/>
+					<textElement>
+						<font fontName="Trebuchet MS" size="15"/>
+					</textElement>
+					<text><![CDATA[Informations de base]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="-1" y="30" width="60" height="20" uuid="fc6c39f4-1446-4807-bf00-ff0437ad76db"/>
+					<text><![CDATA[Identifiant]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="59" y="30" width="80" height="20" uuid="6d3370f4-856a-4bdd-bdbc-95b5b3173445"/>
+					<text><![CDATA[Date de début]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="140" y="30" width="88" height="20" uuid="8d26b1b6-8944-4cb6-8191-4541fcc2439c"/>
+					<text><![CDATA[Date de fin]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="228" y="30" width="78" height="20" uuid="0b2c8195-1d85-4f65-b5e7-9f831d2b5535"/>
+					<text><![CDATA[Heure de début]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="307" y="30" width="70" height="20" uuid="d90effed-888b-44d0-86f3-7e93da6ea345"/>
+					<text><![CDATA[Heure de fin]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="377" y="30" width="70" height="20" uuid="129596bb-5794-478f-b277-447f3837fe75"/>
+					<text><![CDATA[Ville]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="447" y="30" width="102" height="20" uuid="5adf813f-c677-4a4e-a2bd-eb2f0867170a"/>
+					<text><![CDATA[Adresse]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="-2" width="60" height="20" uuid="a94cf399-1416-441b-aec0-5453acb9a4ae"/>
+				<textFieldExpression><![CDATA[$F{id_collecte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="-2" width="78" height="20" uuid="1030df79-2e73-4882-a32f-6d8974c99181"/>
+				<textFieldExpression><![CDATA[$F{date_debut}.toLocalDate()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="-2" width="88" height="20" uuid="b6efcc1c-6337-4c17-b321-2cdeff71c895"/>
+				<textFieldExpression><![CDATA[$F{date_fin}.toLocalDate()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="-1" width="76" height="20" uuid="7f21c6fc-12ba-4d7b-b438-43fa6c36be33"/>
+				<textFieldExpression><![CDATA[$F{horaire_debut}.toLocalTime()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="306" y="-1" width="70" height="20" uuid="1e55e266-7778-47da-b9ef-f7c90d9651fd"/>
+				<textFieldExpression><![CDATA[$F{horaire_fin}.toLocalTime()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="376" y="-1" width="70" height="20" uuid="47021719-34ff-43e3-997a-b17f2f7a8009"/>
+				<textFieldExpression><![CDATA[$F{ville}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="448" y="-1" width="100" height="20" uuid="baeae85a-5e13-4271-a224-520731a95ac5"/>
+				<textFieldExpression><![CDATA[$F{adresse}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

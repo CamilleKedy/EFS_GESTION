@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.rdv.ControllerRdvListe">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.rdv.ControllerRdvListe">
    <children>
       <HBox prefHeight="108.0" prefWidth="600.0" style="-fx-background-color: #ffffff;">
          <children>
@@ -32,7 +32,7 @@
             </ImageView>
             <VBox alignment="CENTER_RIGHT" prefHeight="112.0" prefWidth="423.0">
                <children>
-                  <Label text="LISTE DE RENDEZ-VOUS" textFill="#162c53">
+                  <Label text="RENDEZ-VOUS" textFill="#162c53">
                      <font>
                         <Font name="Rockwell Bold" size="30.0" />
                      </font>
@@ -51,16 +51,16 @@
             </VBox>
          </children>
       </HBox>
-      <VBox layoutY="184.0" prefHeight="327.0" prefWidth="600.0" AnchorPane.bottomAnchor="89.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="184.0">
+      <VBox layoutY="162.0" prefHeight="349.0" prefWidth="600.0" AnchorPane.bottomAnchor="89.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="162.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="391.0" prefWidth="600.0" style="-fx-background-color: #ffffff;">
+            <HBox alignment="CENTER" prefHeight="346.0" prefWidth="600.0" style="-fx-background-color: #ffffff;">
                <children>
-                  <TableView fx:id="tableView" prefHeight="395.0" prefWidth="500.0">
+                  <TableView fx:id="tableView" prefHeight="338.0" prefWidth="500.0">
                     <columns>
-                      <TableColumn fx:id="columnId" prefWidth="30.0" text="ID" />
-                      <TableColumn fx:id="columnDate" prefWidth="100.0" text="Date" />
-                        <TableColumn fx:id="columnHeure" minWidth="3.0" prefWidth="50.0" text="Heure" />
-                        <TableColumn fx:id="columnNom" prefWidth="140.0" text="Nom" />
+                      <TableColumn fx:id="columnId" prefWidth="58.0" text="N°" />
+                      <TableColumn fx:id="columnDate" prefWidth="70.0" text="Date" />
+                        <TableColumn fx:id="columnHeure" minWidth="3.0" prefWidth="73.0" text="Heure" />
+                        <TableColumn fx:id="columnNom" prefWidth="119.0" text="Nom" />
                         <TableColumn fx:id="columnPrenom" prefWidth="140.0" text="Prenom" />
                         <TableColumn fx:id="columnAdresse" minWidth="0.0" prefWidth="150.0" text="Adresse" />
                         <TableColumn fx:id="columnVille" minWidth="0.0" prefWidth="150.0" text="Ville" />
@@ -80,25 +80,31 @@
                <font>
                   <Font name="Trebuchet MS" size="15.0" />
                </font></Button>
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="98.0" style="-fx-background-color: #ea302b;" text="Retour" textFill="WHITE">
+               <font>
+                  <Font name="Trebuchet MS" size="15.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="200.0" />
+               </HBox.margin>
+            </Button>
          </children>
       </HBox>
-      <GridPane layoutX="16.0" layoutY="126.0" prefHeight="30.0" prefWidth="564.0">
+      <GridPane layoutX="132.0" layoutY="107.0" prefHeight="37.0" prefWidth="423.0">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.5999755859375" minWidth="10.0" prefWidth="40.8000244140625" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.2000198364258" minWidth="10.0" prefWidth="120.79997558593749" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="444.0000122070313" minWidth="10.0" prefWidth="405.8000244140625" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="158.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="444.0000122070313" minWidth="10.0" prefWidth="265.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Filtre :" />
-            <ComboBox fx:id="recherche" prefWidth="150.0" GridPane.columnIndex="1">
+            <ComboBox fx:id="recherche" prefHeight="27.0" prefWidth="139.0" promptText="Filtres de recherce">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </ComboBox>
-            <TextField fx:id="rechercher" promptText="Rechercher..." GridPane.columnIndex="2">
+            <TextField fx:id="rechercher" prefHeight="32.0" prefWidth="349.0" promptText="Rechercher..." GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>

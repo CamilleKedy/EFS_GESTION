@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import jfox.javafx.view.IManagerGui;
+import projet.report.EnumReport;
+import projet.report.ManagerReport;
 import projet.view.EnumView;
 
 public class ControllerAccueilGestionnaire {
@@ -28,6 +30,8 @@ public class ControllerAccueilGestionnaire {
     
     @Inject
 	private IManagerGui		managerGui;
+    @Inject
+	private ManagerReport		managerReport;
 
     @FXML
     void doGestionPersonnel(ActionEvent event) {
@@ -44,7 +48,10 @@ public class ControllerAccueilGestionnaire {
     	managerGui.showView( EnumView.CollecteListe );
     }
     
-
+    @FXML
+    void doCommunication(ActionEvent event) {
+    	managerReport.showViewer( EnumReport.DonneurParCollecte, null );
+    }
 
 
     @FXML

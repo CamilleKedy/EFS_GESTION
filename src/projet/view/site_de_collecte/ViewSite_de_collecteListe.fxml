@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.site_de_collecte.ControllerSite_de_collecteListe">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.site_de_collecte.ControllerSite_de_collecteListe">
    <children>
       <HBox prefHeight="108.0" prefWidth="600.0" style="-fx-background-color: #ffffff;">
          <children>
@@ -51,14 +51,14 @@
       <HBox alignment="TOP_RIGHT" layoutX="48.0" layoutY="114.0" prefHeight="37.0" prefWidth="500.0" spacing="15.0">
          <children>
             <ComboBox fx:id="comboBoxFiltres" prefHeight="34.0" prefWidth="150.0" promptText="Filtre de recherche" />
-            <TextField fx:id="textFieldRecherche" prefHeight="34.0" prefWidth="287.0" />
+            <TextField fx:id="textFieldRecherche" prefHeight="34.0" prefWidth="253.0" promptText="Rechercher" />
          </children>
       </HBox>
       <HBox alignment="CENTER" layoutY="167.0" prefHeight="347.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="86.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="167.0">
          <children>
             <TableView fx:id="tableView" prefHeight="395.0" prefWidth="500.0">
               <columns>
-                <TableColumn fx:id="columnId_site_de_collecte" prefWidth="87.0" text="Id" />
+                <TableColumn fx:id="columnId_site_de_collecte" prefWidth="87.0" text="Numéro" />
                 <TableColumn fx:id="columnVille" prefWidth="152.0" text="Ville" />
                   <TableColumn fx:id="columnNbr_lits" minWidth="3.0" prefWidth="138.0" text="Nombre de lits" />
                   <TableColumn fx:id="columnAdresse" prefWidth="197.0" text="Adresse" />
