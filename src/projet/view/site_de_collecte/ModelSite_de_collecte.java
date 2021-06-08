@@ -159,6 +159,10 @@ public class ModelSite_de_collecte  {
 		selection = UtilFX.findNext( liste, item );
 	}
 
+	public ObservableList<Collecte> getListeCollecte() {
+		return listeCollecte;
+	}
+
 
 	
 }

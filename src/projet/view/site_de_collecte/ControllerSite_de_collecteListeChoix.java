@@ -57,6 +57,7 @@ public class ControllerSite_de_collecteListeChoix extends Controller {
 	
 	// Initialisation du Controller
 
+	
 	@FXML
 	private void initialize() {
 
