@@ -52,7 +52,7 @@ public class ControllerSite_de_collecteListeChoix extends Controller {
 	@Inject
 	private ModelRdv		modelRdv;
 	@Inject
-	private ModelCollecte		modelCcollecte;
+	private ModelCollecte		modelCollecte;
 	
 	
 	// Initialisation du Controller
@@ -62,7 +62,7 @@ public class ControllerSite_de_collecteListeChoix extends Controller {
 
 		// Data binding
 		tableView.setItems(  modelSite_de_collecte.getListe() );
-		comboBoxCollecte.setItems(modelSite_de_collecte.getListeCollecte());
+		comboBoxCollecte.setItems( modelSite_de_collecte.getListeCollecte());
 		setCellFactory(comboBoxCollecte, item -> item.getDate_debut().toString());
 		
 		columnId_site_de_collecte.setCellValueFactory( t -> t.getValue().id_site_de_collecteProperty() );
@@ -94,7 +94,7 @@ public class ControllerSite_de_collecteListeChoix extends Controller {
 	}
 	@FXML
     void setSelectionCollecte() {
-		modelCcollecte.setSelection(comboBoxCollecte.getValue());
+		modelCollecte.setSelection(comboBoxCollecte.getValue());
 		modelRdv.setSelection(null);
 		modelRdv.getSelection().setCollecte(comboBoxCollecte.getValue());
     }

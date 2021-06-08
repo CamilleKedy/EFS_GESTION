@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.personnel.ControllerPersonnelListe">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.personnel.ControllerPersonnelListe">
    <children>
       <HBox prefHeight="108.0" prefWidth="600.0" spacing="15.0" style="-fx-background-color: #ffffff;">
          <children>
@@ -27,14 +27,14 @@
                   <Insets left="15.0" />
                </HBox.margin>
             </ImageView>
-            <VBox alignment="CENTER_RIGHT" prefHeight="112.0" prefWidth="423.0">
+            <VBox alignment="CENTER_RIGHT" prefHeight="112.0" prefWidth="391.0">
                <children>
                   <Label text="PERSONNEL" textFill="#162c53">
                      <font>
                         <Font name="Rockwell Bold" size="30.0" />
                      </font>
                   </Label>
-                  <Line endX="34.31304931640625" endY="-0.035762786865234375" fill="#ea302b" startX="-377.90606689453125" startY="-0.035968780517578125" stroke="#ea302b" strokeWidth="5.0">
+                  <Line endX="18.55841064453125" endY="-0.036106109619140625" fill="#ea302b" startX="-377.90606689453125" startY="-0.035968780517578125" stroke="#ea302b" strokeWidth="5.0">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin></Line>
@@ -48,10 +48,10 @@
             </VBox>
          </children>
       </HBox>
-      <HBox alignment="TOP_RIGHT" layoutX="52.0" layoutY="116.0" prefHeight="45.0" prefWidth="500.0" spacing="15.0">
+      <HBox alignment="TOP_RIGHT" layoutX="147.0" layoutY="116.0" prefHeight="45.0" prefWidth="405.0" spacing="15.0">
          <children>
             <ComboBox fx:id="comboBoxFiltres" prefHeight="35.0" prefWidth="150.0" promptText="Filtre recherche" />
-            <TextField fx:id="textFieldRecherche" prefHeight="35.0" prefWidth="263.0" />
+            <TextField fx:id="textFieldRecherche" prefHeight="35.0" prefWidth="263.0" promptText="Rechercher" />
          </children>
       </HBox>
       <HBox alignment="CENTER" layoutY="171.0" prefHeight="340.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="89.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="171.0">
