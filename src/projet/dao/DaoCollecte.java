@@ -277,14 +277,14 @@ public class DaoCollecte {
 
 		try {
 			cn = dataSource.getConnection();
-			sql = "INSERT INTO personnelDeCollecte ( id_collecte, id_personnel , date_collecte) VALUES( ?, ?, ? ) ";
+			sql = "INSERT INTO personnelDeCollecte ( id_collecte, id_personnel ) VALUES( ?, ?) ";
 			stmt = cn.prepareStatement( sql );
 			stmt.setObject( 1, collecte.getId_collecte() );
 			for ( Personnel personnel : collecte.getPersonnel() ) {
 				stmt.setObject( 2, personnel.getId() );
 				stmt.executeUpdate();
 			}
-			stmt.setObject(3, collecte.getDate_debut());
+			
 		} catch ( SQLException e ) {
 			throw new RuntimeException(e);
 		} finally {

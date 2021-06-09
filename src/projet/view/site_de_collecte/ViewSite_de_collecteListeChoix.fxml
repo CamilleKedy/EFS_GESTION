@@ -26,7 +26,7 @@
                   <Insets left="15.0" />
                </HBox.margin>
             </ImageView>
-            <VBox alignment="CENTER_RIGHT" onDragDetected="#doDonneur" prefHeight="112.0" prefWidth="423.0">
+            <VBox alignment="CENTER_RIGHT"  prefHeight="112.0" prefWidth="423.0">
                <children>
                   <Label alignment="TOP_CENTER" text="DONNEURS" textFill="#162c53">
                      <font>
@@ -61,7 +61,7 @@
       </HBox>
       <HBox alignment="CENTER_RIGHT" layoutY="263.0" prefHeight="79.0" prefWidth="568.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="32.0">
          <children>
-            <Button fx:id="buttonDonneur" mnemonicParsing="false" onAction="#doDonneur" prefHeight="40.0" prefWidth="102.0" style="-fx-background-color: #162c53;" text="Suivant" textFill="WHITE">
+            <Button fx:id="buttonDonneur" mnemonicParsing="false" onAction="#doNext" prefHeight="40.0" prefWidth="102.0" style="-fx-background-color: #162c53;" text="Suivant" textFill="WHITE">
                <font>
                   <Font name="Trebuchet MS" size="15.0" />
                </font></Button>
@@ -70,7 +70,7 @@
                   <Font name="Trebuchet MS" size="15.0" />
                </font>
                <HBox.margin>
-                  <Insets left="10.0" />
+                  <Insets left="10.0" />  
                </HBox.margin>
             </Button>
          </children>

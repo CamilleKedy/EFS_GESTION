@@ -35,6 +35,7 @@ public enum EnumView implements IEnumView {
 	EtatPersonneParCategorie2	( "personne/ViewEtatPersonneParCategorie2.fxml" ), 
 	DonneurForm 		( "donneur/ViewDonneurForm.fxml" ),
 	DonneurListe		( "donneur/ViewDonneurListe.fxml" ),
+	DonneurListeTout		( "donneur/ViewDonneurListeTout.fxml" ),
 	Site_de_collecteListe		("site_de_collecte/ViewSite_de_collecteListe.fxml"),
 	Site_de_collecteListeChoix		("site_de_collecte/ViewSite_de_collecteListeChoix.fxml"),
 	ChoixSite			("communication/ViewChoixSite.fxml"),

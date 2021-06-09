@@ -80,7 +80,7 @@
                <font>
                   <Font name="Trebuchet MS" size="15.0" />
                </font></Button>
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="98.0" style="-fx-background-color: #ea302b;" text="Retour" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#doRetour" prefHeight="40.0" prefWidth="98.0" style="-fx-background-color: #ea302b;" text="Retour" textFill="WHITE">
                <font>
                   <Font name="Trebuchet MS" size="15.0" />
                </font>

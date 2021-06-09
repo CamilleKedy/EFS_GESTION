@@ -143,13 +143,13 @@ public class ControllerDonneurForm extends Controller {
 
 	@FXML
 	private void doAnnuler() {
-		managerGui.showView( EnumView.DonneurListe );
+		managerGui.showView( EnumView.DonneurListeTout );
 	}
 
 	@FXML
 	private void doValider() {
 		modelDonneur.validerMiseAJour();
-		managerGui.showView( EnumView.DonneurListe );
+		managerGui.showView( EnumView.DonneurListeTout );
 	}
 
 	@FXML
@@ -159,7 +159,7 @@ public class ControllerDonneurForm extends Controller {
 			modelDossierMedical.affecterDonneur(modelDonneur.getCourant());
 		}
 		modelDossierMedical.validerMiseAJour();
-		managerGui.showView( EnumView.DonneurListe );
+		managerGui.showView( EnumView.DonneurListeTout );
 	}
 
 }

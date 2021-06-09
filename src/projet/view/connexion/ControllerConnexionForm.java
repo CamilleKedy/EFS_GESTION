@@ -63,7 +63,7 @@ public class ControllerConnexionForm extends Controller {
          			if (modelConnexion.getCompteActif().getRoles().contains("GESTIONNAIRE"))
          				managerGui.showView(EnumView.AccueilGestionnaire);
          			else 
-         				managerGui.showView(EnumView.AccueilSecretaire);
+         				managerGui.showView(EnumView.Site_de_collecteListeChoix);
             }) ;
 		} );
 		

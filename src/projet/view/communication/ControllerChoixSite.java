@@ -97,7 +97,6 @@ public class ControllerChoixSite extends Controller {
 	@FXML
 	private void doValider() {
 		Map<String, Object> params = new HashMap<>();
-		System.out.println(tableView.getSelectionModel().getSelectedItem().getId_site_de_collecte() );
 		params.put( "idSite", tableView.getSelectionModel().getSelectedItem().getId_site_de_collecte() );
 		managerReport.showViewer( EnumReport.DonneurParCollecte, params );
 	}

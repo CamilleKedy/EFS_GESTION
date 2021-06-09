@@ -89,9 +89,9 @@ public class ControllerSite_de_collecteListeChoix extends Controller {
 	// Actions
 	
 	@FXML
-	private void doDonneur() {
+	private void doNext() {
 		modelSite_de_collecte.setSelection( tableView.getSelectionModel().getSelectedItem() );
-		managerGui.showView( EnumView.DonneurListe );
+		managerGui.showView( EnumView.AccueilSecretaire );
 	}
 	@FXML
     void setSelectionCollecte() {

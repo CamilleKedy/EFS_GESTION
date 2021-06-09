@@ -119,6 +119,11 @@ public class ControllerRdvListe {
 //		modelCollecte.setSelection( tableView.getSelectionModel().getSelectedItem() );
 		managerGui.showView( EnumView.RdvForm );
 	}
+	
+	@FXML
+	private void doRetour() {
+		managerGui.showView( EnumView.AccueilSecretaire );
+	}
 
 	@FXML
 	private void doSupprimer() {

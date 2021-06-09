@@ -76,6 +76,7 @@ public class ModelDonneur {
 				{
 					donneurFiltre.setPredicate(s-> filtre != null ?  s.getVille().toLowerCase().contains(filtre.toLowerCase()) : true);
 				}
+				
 			}	
 		
 		}
@@ -87,9 +88,12 @@ public class ModelDonneur {
 			liste.setAll( daoDonneur.listerPourSite(site) );
 		}
 	}
+	
+	public void actualiserListe() { 
+		liste.setAll( daoDonneur.listerTout() );
+	}
 	 
 
-	
 	public void actualiserCourant() {
 		mapper.update( courant, selection );
 	}

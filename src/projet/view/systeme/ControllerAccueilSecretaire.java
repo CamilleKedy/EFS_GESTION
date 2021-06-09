@@ -23,20 +23,16 @@ public class ControllerAccueilSecretaire {
 
     @Inject
 	private IManagerGui		managerGui;
-    @Inject
-   	private ModelSite_de_collecte modelSite;
+  
 
     @FXML
-    void doDonneur(ActionEvent event) {
-    	if(modelSite.getSelection() == null) 
-    		managerGui.showView( EnumView.Site_de_collecteListeChoix );
-    	else 
-    		managerGui.showView( EnumView.DonneurListe );
+    void doDonneur(ActionEvent event) { 
+    		managerGui.showView( EnumView.DonneurListeTout );
     }
 
     @FXML
     void doRDV(ActionEvent event) {
-    	managerGui.showView( EnumView.CollecteListe );
+    	managerGui.showView( EnumView.RdvListe );
     }
 
     @FXML
