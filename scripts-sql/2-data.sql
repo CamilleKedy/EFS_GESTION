@@ -34,9 +34,26 @@ INSERT INTO Personnel (id_personnel, nom, prenom, adresse, id_profession ) VALUE
   (2, 'KEDY', 'Albert', '18 rue JAB', 2 ),
   (3, 'TANKEU', 'Ange', '92 rue GDG', 3 ),
   (4, 'TCHAMGOUE', 'Yvana', '21 rue JFK', 4 ),
-  (5, 'NGABMEN', 'Benjamin', '16 rue JAB', 5 );
+  (5, 'NGABMEN', 'Benjamin', '16 rue JAB', 5 ),
+  (6, 'NGOUAMENE', 'Maxence', '16 rue KFK', 2 ),
+  (7, 'MOUAFFO', 'Zidane', '18 rue JAB', 3 ),
+  (8, 'TAKOUMBO', 'Benzema', '4 rue UML', 1 ),
+  (9, 'NTOLO', 'Udonis', '26 rue JBC', 5 ),
+  (10, 'PONCE', 'Pilate', '96 rue LMD', 2 ),
+  (11, 'CHRISTIANO', 'Ronaldo', '109 rue MCD', 2 ),
+  (12, 'AZAMBO', 'Zacharie', '54 rue RIO', 3 ),
+  (13, 'ADJOUFACK', 'Jordane', '32 rue UFC', 3 ),
+  (14, 'EMMANUEL', 'Amblard', '10 rue POI', 1 ),
+  (15, 'BRIANT', 'Aristidie', '7 rue JTB', 1 ),
+  (16, 'CONSTANT', 'Briand', '1 rue LBM', 4 ),
+  (17, 'BIDJACK', 'Cody', '6 rue ERT', 4 ),
+  (18, 'KENDRICK', 'Payton', '89 rue YUO', 4 ),
+  (19, 'JONES', 'Billy', '96 rue JB', 5 ),
+  (20, 'DSCHANG', 'Rugal', '255 rue QA', 2 ),
+  (21, 'GOHZE', 'Patricia', '78 rue WOR', 3 ),
+  (22, 'ZEPH', 'Nawel', '63 rue JAB', 3 );
 
-ALTER TABLE Personnel ALTER COLUMN id_personnel RESTART WITH 6;
+ALTER TABLE Personnel ALTER COLUMN id_personnel RESTART WITH 23;
 
 
 -- Donneur
