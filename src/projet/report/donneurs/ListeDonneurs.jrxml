@@ -17,9 +17,9 @@
 		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
 	</parameter>
 	<queryString language="SQL">
-		<![CDATA[SELECT d.*,
+		<![CDATA[SELECT DISTINCT d.*,
 	site_de_collecte.ville,
-	site_de_collecte.adresse
+	site_de_collecte.adresse 
 FROM donneur d
 	inner join rdv r ON 
 	 d.id_donneur = r.id_donneur 
@@ -28,7 +28,8 @@ FROM donneur d
 	INNER JOIN site_de_collecte ON 
 	 c.id_site = site_de_collecte.id_site 
 WHERE 
-	 $X{EQUAL,c.id_site,idSite}]]>
+	 $X{EQUAL,c.id_site,idSite}
+]]>
 	</queryString>
 	<field name="id_donneur" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="id_donneur"/>
